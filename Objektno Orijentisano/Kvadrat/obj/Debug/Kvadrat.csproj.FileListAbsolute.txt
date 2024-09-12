@@ -1,0 +1,10 @@
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\bin\Debug\Kvadrat.exe.config
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\bin\Debug\Kvadrat.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\bin\Debug\Kvadrat.pdb
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.csproj.AssemblyReference.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.Form1.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.Properties.Resources.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.csproj.GenerateResource.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.csproj.CoreCompileInputs.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kvadrat\obj\Debug\Kvadrat.pdb
