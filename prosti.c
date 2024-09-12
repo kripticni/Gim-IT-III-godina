@@ -131,6 +131,38 @@ void prostiCinioci(int n){
     printf("%d ", n);
 }
 
+void perfektni(int n)
+{
+    int cuvaj = n;
+    int niz[100], len=0;
+    int z,i,j;
+    for(i=0;i<100;++i){
+        niz[i]=0;
+    }
+    for(j=n;j>0;--j)
+    {
+        n=j;
+        z=0;
+        i=n/2;
+        while(i>0)
+        {
+            if(n%i==0)
+            {
+                z=z+i;
+            }
+            i--;
+        }
+        if(n==z){
+            niz[len]=n;
+            len++;
+        }
+        else printf("%i NEJE\n",n);
+    }
+    printf("Perfektni u opsegu od 0 do %i:\n", cuvaj);
+    for(--len;len>0;--len){
+            printf("%i\n", niz[len]);
+    }
+}
 //rastavljanje broja na proste cinioce
 int main(){
   int n, a, b, x, y, NZD;
