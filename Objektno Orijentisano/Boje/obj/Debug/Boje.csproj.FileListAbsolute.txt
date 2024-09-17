@@ -1,0 +1,10 @@
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\bin\Debug\Boje.exe.config
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\bin\Debug\Boje.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\bin\Debug\Boje.pdb
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.csproj.AssemblyReference.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.Form1.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.Properties.Resources.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.csproj.GenerateResource.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.csproj.CoreCompileInputs.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Boje\Boje\obj\Debug\Boje.pdb
