@@ -44,11 +44,7 @@ namespace Boje
 
         private void promeni_pozadinu(object sender, EventArgs e)
         {
-            int r = _random.Next(0, 255);
-            int g = _random.Next(0, 255);
-            int b = _random.Next(0, 255);
-
-            this.BackColor = Color.FromArgb(r, g, b);
+            this.BackColor = Color.FromArgb(_random.Next(0,255), _random.Next(0,255), _random.Next(0,255));
         }
 
         private void button4_Click(object sender, EventArgs e)
