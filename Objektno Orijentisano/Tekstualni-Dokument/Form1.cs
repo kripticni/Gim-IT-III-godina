@@ -16,19 +16,40 @@ namespace Tekstualni_Dokument
         public Form1()
         {
             InitializeComponent();
-            int brojac = 0, suma = 0;
+            /* double brojac = 0, suma = 0;
             StreamReader _read = new StreamReader("Brojevi.txt");
             while (!_read.EndOfStream)
             {
-                suma += Convert.ToInt32(_read.ReadLine());
+                suma += Convert.ToDouble(_read.ReadLine());
                 brojac++;
             }
             textBox1.Text = Convert.ToString(suma / brojac);
+            */ // Ovo moze da se doda kako bi se prosek izracunao odma pri pokretanju
+
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                double brojac = 0, suma = 0;
+                StreamReader _read = new StreamReader("Brojevi.txt");
+                while (!_read.EndOfStream)
+                {
+                    suma += Convert.ToDouble(_read.ReadLine());
+                    brojac++;
+                }
+                textBox1.Text = Convert.ToString(suma / brojac);
+            }
+            catch
+            {
+                textBox1.Text = "Pogresan unos ili nema fajla.";
+            }
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

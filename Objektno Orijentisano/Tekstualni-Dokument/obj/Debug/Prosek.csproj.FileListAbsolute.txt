@@ -8,3 +8,13 @@ C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Do
 C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Prosek.csproj.CoreCompileInputs.cache
 C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Tekstualni-Dokument.exe
 C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Tekstualni-Dokument.pdb
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\bin\Debug\Tekstualni-Dokument.exe.config
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\bin\Debug\Tekstualni-Dokument.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\bin\Debug\Tekstualni-Dokument.pdb
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Prosek.csproj.AssemblyReference.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Tekstualni_Dokument.Form1.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Tekstualni_Dokument.Properties.Resources.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Prosek.csproj.GenerateResource.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Prosek.csproj.CoreCompileInputs.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Tekstualni-Dokument.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Tekstualni-Dokument\obj\Debug\Tekstualni-Dokument.pdb
