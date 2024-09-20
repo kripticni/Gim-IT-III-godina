@@ -53,6 +53,47 @@ int prost3for(int n){
     return 1;
 }
 
+//svaki broj moze da se predstavi kao n = p1^k1 * p2^k2....
+//gde su p prosti cinioci a k eksponenti
+int sumaDelioca1(int n){
+    int i=2, s=1+n;
+    for(;i<n;i++)
+        if(n%i==0) s=s+i;
+    return s;
+}
+
+int sumaDelioca2(int n){
+    int i=2,s=1+n;
+    for(;i<n/2;i++)
+        if(n%i==0) s=s+i;
+    return s;
+}
+
+int sumaDelioca3(int n){
+    int i=1,s=0;
+    for(;i*i<=n;i++){
+        if(n%i==0){
+            s+=i;
+            if(i!=n/i){
+                s+=n/i;
+            }
+        }
+    }
+    return s;
+}
+
+int sumaDelioca4(int n){
+    int i=1,s=0;
+    for(;i*i<=n;++i){
+        if(n%i==0){
+            s+=i+n/i;
+        }
+    }
+    i--;
+    if(i*i==n) s-=n/i;
+    return s;
+}
+
 void EratostenovoSito(int n, bool* stanja){ //nalazi sve brojeve od 1 do N
   int i, p=2;
   for(;p*p<=n;p++){
@@ -95,7 +136,7 @@ int prosirenEuklidov(int a, int b, int *x, int *y){
     int x1, y1; //ovde cuvamo podatke koje dobijemo iz rekurzije
     int rec = prosirenEuklidov(b%a, a, &x1, &y1);
 
-    *x = y1 - (b/a) * x1; //nzd(a,b) = rec, iz formule ax+by = rec onda x = (rec-by)/a 
+    *x = y1 - (b/a) * x1; //nzd(a,b) = rec, iz formule ax+by = rec onda x = (rec-by)/a
     *y = x1; //ax + by iz funkcije je takodje ax+by = (b%a)x1 + ay1, sto je ax + by = a(y1 - [b/a]*x1)+bx1
              //onda sledi da je x=y1-[b/a]*x1
 
@@ -131,38 +172,9 @@ void prostiCinioci(int n){
     printf("%d ", n);
 }
 
-void perfektni(int n)
-{
-    int cuvaj = n;
-    int niz[100], len=0;
-    int z,i,j;
-    for(i=0;i<100;++i){
-        niz[i]=0;
-    }
-    for(j=n;j>0;--j)
-    {
-        n=j;
-        z=0;
-        i=n/2;
-        while(i>0)
-        {
-            if(n%i==0)
-            {
-                z=z+i;
-            }
-            i--;
-        }
-        if(n==z){
-            niz[len]=n;
-            len++;
-        }
-        else printf("%i NEJE\n",n);
-    }
-    printf("Perfektni u opsegu od 0 do %i:\n", cuvaj);
-    for(--len;len>0;--len){
-            printf("%i\n", niz[len]);
-    }
-}
+
+
+
 //rastavljanje broja na proste cinioce
 int main(){
   int n, a, b, x, y, NZD;
@@ -177,9 +189,11 @@ int main(){
   EratostenovoSito(n, prosti);
   printf("\nProsti cinioci broja %i su: ", n);
   prostiCinioci(n);
+  printf("\nSuma delioca broja %i su: %i", n, sumaDelioca3(n));
+  printf("\nSuma delioca broja %i su: %i", n, sumaDelioca4(n));
 
 
-  printf("\nPo eulerovom algoritmu,\nbroj uzajamno prostih brojeva sa N je: %i", eulerova(n));
+  printf("\nPo eulerovom algoritmu, broj uzajamno prostih brojeva sa N je: %i", eulerova(n));
 
 
   printf("\nUnesi A za euklidov algoritam: ");
