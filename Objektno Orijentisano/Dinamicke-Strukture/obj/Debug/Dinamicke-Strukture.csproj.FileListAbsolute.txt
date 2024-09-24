@@ -1,0 +1,10 @@
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\bin\Debug\Dinamicke-Strukture.exe.config
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\bin\Debug\Dinamicke-Strukture.exe
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\bin\Debug\Dinamicke-Strukture.pdb
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke-Strukture.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke_Strukture.Form1.resources
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke_Strukture.Properties.Resources.resources
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke-Strukture.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke-Strukture.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke-Strukture.exe
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Dinamicke-Strukture\obj\Debug\Dinamicke-Strukture.pdb
