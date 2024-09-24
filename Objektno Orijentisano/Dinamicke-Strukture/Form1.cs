@@ -31,6 +31,7 @@ namespace Dinamicke_Strukture
             double suma = 0;
             int brojac = 0;
             listBox1.Items.Clear();
+            listBox2.Items.Clear();
             _reader = new StreamReader("plate.txt");
             try
             {
@@ -47,6 +48,7 @@ namespace Dinamicke_Strukture
                 lista.Sort();
                 for (brojac--; brojac > 0; brojac--)
                 {
+                    listBox2.Items.Add(Convert.ToString(lista[brojac]));
                     if (lista[brojac] > prosek)
                     {
                         listBox1.Items.Add(Convert.ToString(lista[brojac]));
