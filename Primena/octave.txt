@@ -1,0 +1,111 @@
+##Aritmeticke i logicke operacije
+*, puta
+/, podeljeno
+**, na stepen
+^, isto na stepen
+
+##Okruzenje
+format bank, prikazuje svaki element zaokruzen na 2 decimale
+format, resetuje formatiranje
+who, pokazuje promenjive u trenutnom opsegu
+whos, pokazuje promenjive u globalnom opsegu
+
+nthroot
+sin, cos, tan, cot //koriste radijane
+sind, cosd, tand, cotd //koriste stepene
+deg2rad //konverzija stepen u radijan
+rad2deg //konverzija radijan u stepen
+asin, acos, atan, acot //inverzne funkcije radijani
+asind, acosd, atand, acotd //inverzne funkcije stepeni
+
+abs
+round //2.5 => 3, -2.5 => -3 
+floor //1.7 => 1, -1.7 => -2
+ceil  //1.7 => 2, -1.7 => -1
+celobrojni kolicnik moze da se dobije kao
+floor(-9/2)
+
+rem   //remainder == ostatak, rem(-9, 2) = -1
+mod   //modulus,              mod(-9, 2) = 1
+
+real  //realan deo broja
+imag  //imaginaran deo broja
+
+sqrt     //kvadratni koren
+nthroot  //koren po izboru
+
+log10 //baza 10
+log2  //baza 2
+log //koristi ojlerov broj kao bazu
+
+da bi se dobio logaritam proizvoljne baze
+log(broj-za-koj-trazimo-logaritam)/log(odabrana-baza)
+radi na principu identiteta za logaritme
+
+##Vectori
+V(:) - prikaz svih elementa
+V(m:n) - od m do n
+definise se kao
+V=[4 7 2 9 6 0 5 1 3]
+za brisanje, V(neki-index)=[]
+
+##Matrice
+M(n,:) - pokazuje sve elemente n-tog reda/vrste matrice
+M(:,n) - pokazuje sve elemente n-te kolone matrice 
+Matrica koja je 2x3 je
+0 0 0
+0 0 0
+za brisanje, M(red, kolona) = []
+
+NxM => n vrsta i m kolona
+ones(n,m) - generise matricu NxM sa sve 1
+zeroes(n,m) - isto za nule
+eye(n)    - kvadratna matrica sa 1 na glavnoj dijagonali
+
+Dodavanje i brisanje elementa
+H=[R G], pridruzuje R i G u jednoj koloni
+H=[R;G], pridruzuje R i G u dve kolone
+
+ako
+N = 
+1 1 1
+1 1 1
+M = 
+0 0 0 
+0 0 0 
+onda
+[N;M] =
+   1   1   1
+   1   1   1
+   0   0   0
+   0   0   0
+i
+[N M] = 
+   1   1   1   0   0   0
+   1   1   1   0   0   0
+
+operator transponovanja je ' 
+radi na principu
+ako
+M = [ 0 0 0; 0 0 0 ]
+M
+ans =
+0 0 0
+0 0 0
+onda
+M'
+ans = 
+0 0
+0 0
+0 0
+
+##Opsezi
+[m:q:n], ide od n do m, i svaki put se povecava za q
+for(int i=m;i<n;i+q)
+ako je q=1 onda se moze zanemariti i napisati [m:n]
+a ako je n<m, onda se mora napisati [m:-1:n]
+
+linspace(m,q,n) - generise n brojeva izmedju m i q
+ans = 10.000   12.500   15.000   17.500   20.000
+
+
