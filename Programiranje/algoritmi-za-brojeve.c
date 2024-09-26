@@ -94,17 +94,58 @@ int sumaDelioca4(int n){
     return s;
 }
 
+void sumabrojDelioca(int n, int* s, int* b){
+    int i=1;
+    *b = 2;
+    *s = 0;
+    for(;i*i<=n;++i){
+        if(n%i==0){
+            *s+=i+n/i;
+            *b=*b+1;
+        }
+    }
+    i--;
+    if(i*i==n){
+         *s-=n/i;
+         *b=*b-1;
+    }
+}
+
 void EratostenovoSito(int n, bool* stanja){ //nalazi sve brojeve od 1 do N
   int i, p=2;
+  
   for(;p*p<=n;p++){
     if(stanja[p] == false) {
       for (i =p*p; i<=n; i+=p)
         stanja[i] = true;
     }
   }
+  
   for (p = 2; p <= n; p++)
     if(!stanja[p])
       printf("%d ",p);
+}
+
+/*
+sastaviti funkciju koja ispisuje sve prosto cinioce broja N
+preko eratostenovog sita
+*/
+void EratostenovoSito_IspisProstihCinioca(int n, int* stanja){ //nalazi sve brojeve od 1 do N
+  int i, p=2;
+  for(i=0;i<n;i++)
+    stanja[i] = i;
+    
+  for(;p*p<=n;p++) {
+    if(stanja[p] == p) {
+      for (i =p*p; i<=n; i+=p)
+        stanja[i] = p;
+    }
+  }
+  
+  while(n>1){
+      printf("%i ", stanja[n]);
+      n=n/stanja[n];
+  }
 }
 
 int euklidovRec(int a, int b){
@@ -172,9 +213,6 @@ void prostiCinioci(int n){
     printf("%d ", n);
 }
 
-
-
-
 //rastavljanje broja na proste cinioce
 int main(){
   int n, a, b, x, y, NZD;
@@ -186,11 +224,17 @@ int main(){
   printf("Unesi broj do koga se traze prosti: ");
   scanf("%i", &n);
   bool* prosti = (bool*)calloc(n, sizeof(bool));
+  int* prosti_cinioci = (int*)malloc(n * sizeof(int));
   EratostenovoSito(n, prosti);
+  printf("\nProsti cinioci broja %i su: ",n);
+  EratostenovoSito_IspisProstihCinioca(n, prosti_cinioci);
   printf("\nProsti cinioci broja %i su: ", n);
   prostiCinioci(n);
-  printf("\nSuma delioca broja %i su: %i", n, sumaDelioca3(n));
+
   printf("\nSuma delioca broja %i su: %i", n, sumaDelioca4(n));
+  int br, s;
+  sumabrojDelioca(n, &s, &br);
+  printf("\nSuma delioca broja %i a broj delioca je %i\n", s, br);
 
 
   printf("\nPo eulerovom algoritmu, broj uzajamno prostih brojeva sa N je: %i", eulerova(n));
@@ -202,7 +246,6 @@ int main(){
   scanf("%i", &b);
   NZD = prosirenEuklidov(a, b, &x, &y);
   printf("\nNZD: %i\n X: %i\n y: %i", NZD, x, y);
-
 
   return 0;
 }
