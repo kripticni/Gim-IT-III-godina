@@ -37,6 +37,7 @@ nthroot  //koren po izboru
 log10 //baza 10
 log2  //baza 2
 log //koristi ojlerov broj kao bazu
+exp //stavlja ojlerov broj na zadat stepen
 
 da bi se dobio logaritam proizvoljne baze
 log(broj-za-koj-trazimo-logaritam)/log(odabrana-baza)
@@ -59,7 +60,7 @@ za brisanje, M(red, kolona) = []
 
 NxM => n vrsta i m kolona
 ones(n,m) - generise matricu NxM sa sve 1
-zeroes(n,m) - isto za nule
+zeros(n,m) - isto za nule
 eye(n)    - kvadratna matrica sa 1 na glavnoj dijagonali
 
 Dodavanje i brisanje elementa
