@@ -1,0 +1,10 @@
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\bin\Debug\Kuca.exe.config
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\bin\Debug\Kuca.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\bin\Debug\Kuca.pdb
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.csproj.AssemblyReference.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.Form1.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.Properties.Resources.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.csproj.GenerateResource.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.csproj.CoreCompileInputs.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Kuca\obj\Debug\Kuca.pdb
