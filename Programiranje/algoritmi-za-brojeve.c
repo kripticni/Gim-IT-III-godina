@@ -111,6 +111,32 @@ void sumabrojDelioca(int n, int* s, int* b){
     }
 }
 
+int EratostenovoSito_SumaDelioca(int n){
+    int i,br,j,prost[n+1],suma=1;
+    for(i=0;i<=n;i++)
+            prost[i]=1;
+
+    prost[0]=prost[1]=0;
+    
+    for(i=2;i*i<=n;i++)
+        if(prost[i]==1)
+            for(j=i*i;j<=n;j=j+i)
+                prost[j]=0;
+                
+    for(i=2;i<=n;i++)
+        if(prost[i]==1)
+            {
+            br=0;
+            while(n%i==0)
+                {
+                    n=n/i;
+                    br++;
+                }
+             suma=suma*((pow(i,br+1)-1)/(i-1));
+            }
+    return suma;
+}
+
 void EratostenovoSito(int n, bool* stanja){ //nalazi sve brojeve od 1 do N
   int i, p=2;
   
