@@ -1,0 +1,10 @@
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\bin\Debug\Pravougaonici.exe.config
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\bin\Debug\Pravougaonici.exe
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\bin\Debug\Pravougaonici.pdb
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.Form1.resources
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.Properties.Resources.resources
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.exe
+C:\Users\admin\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pravougaonici\obj\Debug\Pravougaonici.pdb
