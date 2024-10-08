@@ -1,0 +1,10 @@
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\bin\Debug\slovo-M.exe.config
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\bin\Debug\slovo-M.exe
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\bin\Debug\slovo-M.pdb
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo-M.csproj.AssemblyReference.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo_M.Form1.resources
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo_M.Properties.Resources.resources
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo-M.csproj.GenerateResource.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo-M.csproj.CoreCompileInputs.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo-M.exe
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\slovo-M\obj\Debug\slovo-M.pdb
