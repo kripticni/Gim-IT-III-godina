@@ -37,6 +37,19 @@ int sumaDelioca3(int n) {
   return s;
 }
 
+// optimalna funkcija za broj delioca
+int brojDelioca(int n) {
+  int i = 1, br = 0;
+  for (; i * i <= n; i++)
+    if (n % i == 0) {
+      if (n == i * i)
+        br++;
+      else
+        br = br + 2;
+    }
+  return br;
+}
+
 // funkcija koja vraca sumu i broj delioca sa pokazivaci,
 // ovo je moj nacin i nije od cas
 void sumabrojDelioca(int n, int *s, int *b) {
@@ -71,6 +84,11 @@ int euklidov(int a, int b) {
     a = pom;
   }
   return a;
+}
+
+// NZS algoritam zahteva i NZD
+int NZS(int a, int b) {
+  return (a * b) / euklidov(a, b); // euklidov je NZD
 }
 
 // JEDINI eulerov/ojlerov algoritam, prosireni se NE uci
