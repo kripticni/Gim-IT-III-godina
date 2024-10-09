@@ -5,7 +5,7 @@
 //
 // PREDZNANJE: Ojlerov/Eulerov algoritam trazi NZD
 //             Euklidov algoritam trazi uzajamno proste brojeve s brojem N
-int prost3(int n) {
+int prost(int n) {
   int i = 2;
   while (i * i <= n) {
     if (n % i == 0)
@@ -28,12 +28,14 @@ int prost3for(int n) {
 // najoptimalnija suma delioca jednog broja sto smo radili u skolu
 int sumaDelioca3(int n) {
   int i = 1, s = 0;
-  for (; i * i <= n; i++)
+  for (; i * i <= n; i++) {
     if (n % i == 0) {
       s += i;
-      if (i != n / i)
+      if (i != n / i) {
         s += n / i;
+      }
     }
+  }
   return s;
 }
 
@@ -77,10 +79,11 @@ int euklidov(int a, int b) {
 // koristi se za trazenje uzajamno prosti brojevi
 int eulerova(int n) {
   int rezultat = 0, i = 1;
-  for (; i <= n; i++)
-    if (euklidov(i, n) == 1)
+  for (; i <= n; i++) {
+    if (euklidov(i, n) == 1) {
       ++rezultat;
-
+    }
+  }
   return rezultat;
 }
 
@@ -92,11 +95,12 @@ void prostiCinioci(int n) {
   }
 
   int i = 3;
-  for (; i * i <= n; i = i + 2)
+  for (; i * i <= n; i = i + 2) {
     while (n % i == 0) {
       printf("%d ", i);
       n = n / i;
     }
+  }
 
   if (n > 2)
     printf("%d ", n);
@@ -106,7 +110,6 @@ void prostiCinioci(int n) {
 // svrha je napisana u ime funkciju
 int EratostenovoSito_SumaDelioca(int n) {
   int i, br, j, prost[n + 1], suma = 1;
-
   for (i = 0; i <= n; i++)
     prost[i] = 1;
 
@@ -134,9 +137,6 @@ void EratostenovoSito_IspisProstihBrojeva_od_0_do_N(
   int stanja[n + 1];
   int i, p = 2;
 
-  for (i = 0; i <= n; i++)
-    stanja[i] = 0;
-
   for (; p * p <= n; p++)
     if (stanja[p] == 0)
       for (i = p * p; i <= n; i += p)
@@ -151,7 +151,6 @@ void EratostenovoSito_IspisProstihCinioca_broja_N(
     int n) { // nalazi sve brojeve od 1 do N
   int stanja[n + 1];
   int i, p = 2;
-
   for (i = 0; i < n; i++)
     stanja[i] = i;
 
