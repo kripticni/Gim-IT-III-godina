@@ -1,0 +1,10 @@
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\bin\Debug\Brod.exe.config
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\bin\Debug\Brod.exe
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\bin\Debug\Brod.pdb
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.csproj.AssemblyReference.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.Form1.resources
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.Properties.Resources.resources
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.csproj.GenerateResource.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.csproj.CoreCompileInputs.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.exe
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Brod\obj\Debug\Brod.pdb

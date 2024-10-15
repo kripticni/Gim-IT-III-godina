@@ -1,0 +1,10 @@
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\bin\Debug\300-tacaka.exe.config
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\bin\Debug\300-tacaka.exe
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\bin\Debug\300-tacaka.pdb
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\300-tacaka.csproj.AssemblyReference.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\_300_tacaka.Form1.resources
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\_300_tacaka.Properties.Resources.resources
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\300-tacaka.csproj.GenerateResource.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\300-tacaka.csproj.CoreCompileInputs.cache
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\300-tacaka.exe
+C:\Users\Gimnazija\Desktop\Gim-IT-III-godina\Objektno Orijentisano\300-tacaka\obj\Debug\300-tacaka.pdb
