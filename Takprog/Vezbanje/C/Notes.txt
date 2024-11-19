@@ -1,0 +1,21 @@
+a header file is about declarations, and user defined types, aka the interface
+a source file, is the implementation, the logic and algorithms
+
+asserts are pretty convienient
+#include <assert.h>
+and then you can do assert(n>=0 && "N must be non-negative.");
+
+Function pointers are an interesting part of C
+if you understand assembly and lower level concepts
+you know each label has its address that you can jump to
+aka change the rip, in the same manner C functions have adresses
+int add(int a, int b) return a+b;
+has an address of &add;
+
+to create a function pointer, you'd do
+int (*func_ptr)(int, int);
+^ return type    ^ argument types
+func_ptr = &add; //to change address,
+//also works without & on most compilers since you can't dereference a function address
+func_ptr(2, 3); //to call
+
