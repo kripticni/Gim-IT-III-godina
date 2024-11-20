@@ -19,3 +19,74 @@ func_ptr = &add; //to change address,
 //also works without & on most compilers since you can't dereference a function address
 func_ptr(2, 3); //to call
 
+when comparing floating points, in both C and asm
+its pretty useful to check for the significance of the difference
+because when it comes to really similar values, we are severely
+limited when it comes to checking for equality
+
+if(fabs(float1-float2)<0.00001f){
+  printf("Considered equal.");
+}
+
+enums are pretty simple, its to use group values
+enum weekday{ mon, tues, wed, thur, fri };
+mon = 0 - fri = 4, pretty much like a macro except
+enum weekday CurrentDay = thur;
+it can be returned as a function result
+they are pretty powerful in switch statements
+
+void* is a generic pointer that can point
+to literally anything, but as a function pointer
+you call it as
+((int(*)(int,int))genericPointer)(2,5);
+so what this does is convert the void function pointer
+to an adequate function pointer for the given function
+and then gives the arguments as usual
+a define is useful for this
+
+to share a static library you just need the object file
+to get an obj file, just compile with gcc -c -I./...
+which would need to be linked against if you wanna use it
+lld will print out the dependencies for your elf for linking
+ar is used for archiving and indexing, also modifying and extracting
+practically stores file in a file
+for dynamic libraries, you'll get a shared object file (dll or dylib on other platforms)
+gcc -fPIC -shared ... -I./...
+
+using gcc you can link libraries simply with
+gcc -lm, links math.h
+the convention is that custom and other libs should
+start with lib* but with no .so at the end and when you link
+gcc -lmath
+would actually link against libmath.so
+
+you will also need to specify the LD_LIBRARY_PATH so that
+the gnu linker can link
+
+using objdump -t you can see the table of the elf
+when you make an object file of main but dont link
+it against the library, the functions in the table
+will refer that they are undefined
+
+from the C api, at runtime it uses
+void *dlopen(const char *filename, int flags);
+from dlfcn.h to link the dynamic library
+
+memory functions are located in string.h
+memcmp, memcpy, memmove, memset
+void* memset(void *s, int c, size_t n); //from address s, set n bytes to value c
+void* memcpy(void *dest, const void* src, size_t n); //memory cannot overlap, copies from src to dest n bytes
+void* memmove(void* dest, const void* src, size_t n); //same but memory can overlap, slower w temp arr
+int memcmp(const void s1[n], const void s2[n], size_t n); //compares first n bytes from addresses, returns -1 0 or 1 if lesser equal or bigger
+
+void* alloca(size_t SIZE);
+void* realloc(void *PTR, size_t NEWSIZE);
+realloc vs reallocf
+when realloc fails it returns NULL but doesn't free the memory, reallocf does free
+alloca, allocates memory on the STACK, gets reclaimed when scope leaves but stacksize is limited
+(you can see your stack parameters with ulimit, set it with -s)
+
+compiler optimizations
+https://www.https://compileroptimizations.com/
+
+
