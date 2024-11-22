@@ -1,0 +1,81 @@
+For starters, this will do, I'll likely move on another resource
+https://www.geeksforgeeks.org/cpp-programming-examples/
+https://www.geeksforgeeks.org/c-plus-plus/
+
+contsexpr is initalized and known at compile time
+const can be done at both compile and run time
+
+up qualifying means that a
+int a = 10;
+const int* p = &a;
+is allowed, even if a is not const
+the pointer will qualify
+but
+const int a = 10;
+int* p = &a;
+doesnt work, since it breaks the const guarantee
+but const int* p works
+
+Storage Classes:
+Auto is any variable with type only,
+it dies out of scope and is only visible to local scope
+Extern is a global variable initialized with a legal value, defined outside the scope its used in
+for example, referencing a global var from a function
+Static variables perserve their value even when out of scope
+Register variables have no address and are really fast since they are in the register
+Mutable instance (means in class) variables are used to declare which variables
+can be altered even when const is provided
+Thread local means a variable will be local and unconnected between threads, aka its own copy
+
+DataTypes:
+Primary: int, bool, char, float, double void, wchar_t
+Derived: functions, arrays, pointers, references
+User-Defined: class, struct, union, enum, typedef
+
+importantly, refernces are for example
+int a;
+int& b = a;
+this makes b an exact alias for a, so they mean the same
+a literal reference
+
+any kinds of literals are ready only in the data segment of the executable
+this makes string literals unchangeable
+
+Casting Operations:
+static_cast, a compile-time conversion for explicit conversions (safe)
+int a = 10;
+double b = static_cast<double>(a);
+
+dynamic_cast, mainly for converting a pointer of a base class, to a derived class
+on failure it returns null or bad_cast exception
+Dog* dogPtr = dynamic_cast<Dog*>(animalPtr);
+considering animalPtr = new Dog(); and class Dog : public Animal, this will work
+
+const_cast is used to modify const or volatile qualifiers, it can remove const
+const int a = 10;
+int* p = &a;
+would fail, but
+const int a = 10;
+int* p = const_cast<int*>(a);
+would actually work
+
+reinterpret_cast is used to convert a pointer to any type of pointer
+int number = 10;
+int* numberPointer = &number;
+char* charPointer = reinterpret_cast<char*>(numberPointer);
+now both point to the same address
+
+scope resolution operator is ::
+it can be used to access a global var, when there is a local with the same name
+::x, for global
+x, for local
+it can be used for defining a function outside a class
+void a_class::a_function(...){...}
+to access a classes static variables
+int a_class::x = 1;
+and in cases of multipul inheritance
+to refer to a base class from a derived object
+Derived obj;
+obj.Base::func();
+obj.func();
+
