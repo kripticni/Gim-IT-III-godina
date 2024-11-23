@@ -2,7 +2,8 @@ For starters, this will do, I'll likely move on another resource
 https://www.geeksforgeeks.org/cpp-programming-examples/
 https://www.geeksforgeeks.org/c-plus-plus/
 
-contsexpr is initalized and known at compile time
+constexpr is initalized and known at compile time
+constexpr functions are evaluated at compile time too
 const can be done at both compile and run time
 
 up qualifying means that a
@@ -79,3 +80,201 @@ Derived obj;
 obj.Base::func();
 obj.func();
 
+iostream stands for stdio, it includes
+cin, cout, cerr, and clog?
+iomanip are the manipulators for streams
+fstream only file stream
+bits/stdc++ includes every standard library
+
+cin.get()
+cin.getline()
+cin.ignore()
+cin.peek()
+cin.putback() //into the stream
+cin.eof() //if eof
+cin.fail() //	returns true if an input operation has failed
+cin.clear()	// clears the error flags on the input stream, allowing further operations.
+cin.sync()	// discards unread characters from the input buffer.
+cin.gcount() // Returns the number of characters extracted by the last unformatted input operation.
+cin.rdbuf() // gets or sets the associated stream buffer object
+cin.read() // reads in address x, y characters
+
+cout.write() // writes from adress x, y characters
+cout.put() // putchar
+cout.precision() // sets the decimal points
+
+input manipulators:
+cout<<setbase(16)<<100
+would print 100 in hex
+endl,
+ws (ignore whitespace in string sequence),
+ends (null character),
+flush  (forces all output to be written)
+setw(val) (used to set field width)
+setfill(val) (replaces whitespaces of setw with another char)
+setbase(val) (numeric base)
+setiosflags(flag) (format flags by parameter mask)
+resetiosflags(m)
+
+showpos (force show + on positive numbers)
+noshowpos (opposite)
+showbase (shows num base)
+uppercase
+nouppercase
+fixed (decimal notation for floats)
+scientific (exponential for floats)
+hex
+dec
+oct
+left
+right
+
+if-elses are the same
+ternary is the same
+jump statements (break continue goto return) are the same
+loops are the same
+
+for tail recursion optimizations,
+a recursive call should be the last function called
+
+a friend functionc can access private data of a class
+even if its not a member of the class, its declared within public
+
+you can set default argument values for functions
+int sum(int x, int y, int z=0, int w=0)
+works as function overloads, so this can be called
+with either 2, 3 or 4 parameters
+
+recursion:
+direct:
+a) head recursion with a call at the start of the function
+b) at the end of the function
+c) tree recursion with many calls
+indirect: it calls another function which might call this one back in return
+
+tail recursion optimization relies on the fact that
+all future states are not impacted by the past
+so in return it doesnt need new stack frames
+it will just continue the operations within
+the same stack frame and change values
+
+you achieve this by replacing the recursive call
+with a goto to the start of the function
+
+quicksort is a good example of this
+and mergesort is not tail call optimizable because
+you need to merge the two arrays after the calls
+
+function inlining
+cant be done with large functions, recursive functions
+if the storage class is extern inline
+if there is use of static variables
+if a function address is ever taken
+if there is loops
+
+__attribute__((always_inline)), forces inlining on gcc
+
+lambda expressions are inline functions which are used
+only once, and therefore dont need a name
+
+sort(v.begin(), v.end(), [](const int& a, const int& b) -> bool
+{
+  return a > b;
+});
+
+auto pushinto = [&] (int m){ //& means by reference and = by value
+  v1.push_back(m); //accesses the outer scope by reference
+  v2.push_back(m);
+};
+
+you can also declare yourself
+[&x, y]/* manually saying which variables can be accessed how*/
+(int z, float w)/* you arguments */
+-> return_type
+{ ... /* code block */ }
+
+types of pointers
+dangling, pointing to freed memory
+void, can point to literally anything
+null, pointing to nothing
+wild, not initalized to anything
+
+NULL is defined as integer constant with all zeroes
+nullptr is a keyword that can be used
+in all places a null would be
+and its a clear and typesafe way to respresent
+null pointers, as its a pointer constant
+
+passing an array by reference prevents pointer decay
+also passing a string as an obj and not c-string prevents pointer decay
+
+
+Description
+
+string functions
+length()	returns the length of the string.
+swap() 	swap the values of 2 strings.
+size() 	 find the size of string
+capacity() returns the current reallocatable capacity of str
+resize()	resize the length of the string up to the given number of characters.
+find()	 find the string which is passed in parameters
+push_back()	push the passed character at the end of the string
+pop_back() 	pop the last character from the string
+clear() 	remove all the elements of the string.
+strncmp()	compares at most the first num bytes of both passed strings.
+strncpy()	is similar to strcpy() function, except that at most n bytes of src are copied
+strrchr()	locates the last occurrence of a character in the string.
+strcat()	appends a copy of the source string to the end of the destination string
+find()	search for a certain substring inside a string and returns the position of the first character of the substring.
+replace()	replace each element in the range [first, last) that is equal to old value with new value.
+substr()	create a substring from a given string.
+compare()	compare two strings and returns the result in the form of an integer.
+erase()	remove a certain part of a string.
+shrink_to_fit() reallocates with capacity equal to length
+at() access a character at specific index
+append(), or + operator, for concating
+compare(), or == operator
+substr(), finding a substr in str
+replace(), modify part of a str
+insert(), adds an str at specific position
+c_str(), returns a c style string from the object
+
+c_strings use all the string.h functions
+
+
+
+iterator functions
+begin()	 returns an iterator pointing to the beginning of the string.
+end()	 returns an iterator that points to the end of the string.
+rfind()	  find the string’s last occurrence.
+rbegin()	 returns a reverse iterator pointing to the end of the string.
+rend()	 returns a reverse iterator pointing to the beginning of the string.
+cbegin()	 returns a const_iterator pointing to the beginning of the string.
+cend() 	 returns a const_iterator pointing to the end of the string.
+crbegin() 	 returns a const_reverse_iterator pointing to the end of the string.
+crend()	 returns a const_reverse_iterator pointing to the beginning of the string.
+
+you can tokenize using strtok or the stringstream class
+there is also std::sregex_token_iterator
+
+for cstrings
+char* str[5]
+char str[5][5]
+
+for strings
+string str[5];
+vector<string> str; //vectors are pretty important
+array<string,5> str; //array as a class
+
+structs are the same as in C
+typedef is also the same
+
+unions allow for classes and constructors/destructors
+unions are useful when you dont know which type is passed to the function
+since a union contains all possible data types
+obviously all the same applies for classes
+bitfields are also the same
+
+enums are the same, except there is also scoped enums or enum class type
+for this type you need static casts to convert them
+you can specify the underlying type of an enum in C++11 and older
