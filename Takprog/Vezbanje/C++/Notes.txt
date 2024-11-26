@@ -744,3 +744,34 @@ hash_function()– This hash function is a unary function that takes a single ar
 max_bucket_count()– Returns the maximum number of buckets that the unordered multimap container can have.
 
 scanf is faster than cin, incase syncing is enabled
+
+
+
+Iterators
+iterators are an object (pretty much a pointer) that is used to move through the
+contents of the container
+
+Supported Iterators:
+vector - random access
+list - bidirectional
+deque - random access
+map - bidirectional
+multimap - bidirectional
+set - bidirectional
+multiset - bidirectional
+stack - no iterator supported
+queue - no iterator supported
+priority_queue - no iterator supported
+
+Types of iterators:
+- Input: reading only in a one time pass
+- Output: writing only in a one time pass
+- Forward: read and write, one time pass
+- Bidirectional: it can move in both directions
+- Random-Access: not limited to moving sequentially
+
+vector<int>::iterator i;
+for (i = v.begin(); i != v.end(); ++i)
+{
+  cout << *i << " ";
+}
