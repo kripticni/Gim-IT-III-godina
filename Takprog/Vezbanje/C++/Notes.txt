@@ -775,3 +775,107 @@ for (i = v.begin(); i != v.end(); ++i)
 {
   cout << *i << " ";
 }
+
+Multithreading
+std::thread thread_object (callable);
+std::thread thread_object (callable, parameters_for_the_callable);
+callable means any code and its address, so:
+function pointer
+lambda expression
+function object
+non-Static member function
+static member function
+
+Smart pointers
+A wrapper class over a pointer aka <T>*
+except they can allocate and free memory
+and they do it when their destructor gets called
+aka when they get out of scope
+
+auto_ptr DEPRECATED in turn of unique_ptr
+These pointers are used when you want to make sure
+there is only one pointer to some memory
+but you also want to change the pointer to the same memory
+lets say a dynamic array
+if auto_ptr1 is pointing to it
+and auto_ptr2 asks to point to it
+auto_ptr1 will hand over the ownership to auto_ptr2
+auto_ptr1 is now NULL, and auto_ptr2 holds the address
+they cannot be copied, and no arrays
+
+unique_ptr
+when you want to ensure that
+there is only a single owner of memory
+and that only if it chooses to remove itself
+another pointer can take its place
+you can use move to change the ownership explicitly
+unique_ptr<T> unique_ptr1(new T(..));
+unique_ptr<T> unique_ptr2;
+unique_ptr2 = move(unique_ptr1);
+
+shared_ptr
+is a shared pointer between many objects
+and it only gets deallocated after all
+references to it are out of scope
+it accomplishes this by keeping a count
+
+weak_ptr
+a pointer that can point to memory
+without holding any ownership over it
+it provides access to an object that is owned
+by one or more shared_ptr instances
+it is also used to break cyclic dependency
+but does not participate in reference counting
+
+Passing a function to a function
+passing as pointer
+using std::function<>
+using lambdas
+
+in definition:
+int (*func)(int, int)
+function<int(int, int)> func
+
+when calling:
+&func
+[](int x, int y) -> int {return x + y;});
+
+Templates
+they are pretty much macros for anything and everything
+
+template <typename T>
+T myMax(T x, T y)
+{
+    return (x > y) ? x : y;
+}
+
+template <typename T>
+class Array {
+private:
+    T* ptr;
+    int size;
+
+public:
+    Array(T arr[], int s);
+    void print();
+};
+
+template <typename T>
+Array<T>::Array(T arr[], int s)
+{
+    ptr = new T[s];
+    size = s;
+    for (int i = 0; i < size; i++)
+        ptr[i] = arr[i];
+}
+
+template <typename T>
+void Array<T>::print()
+{
+    for (int i = 0; i < size; i++)
+        cout << " " << *(ptr + i);
+    cout << endl;
+}
+
+you can also declare multipul classes, types, structs...
+template <class T, class U>
