@@ -1,0 +1,147 @@
+Staro:
+inv(A), A^-1 - kreira inverznu matricu
+uslov, det(A) != 0
+provera za nxn, A*inv(A) == eye(n)
+
+Deljenje nizova/matrica:
+1) sleva
+A*x=B -> x=A^-1 * B -> x=A\B == inv(A)*B
+2) sdesna
+x*A=B -> x=B * A^-1 -> x=B/A == B*inv(A)
+
+4x-2y+6z=8
+2x+8y+2z=4
+6x+10y+3z=0
+
+1) sleva, resenja u kolonu
+A = [ 4 -2 6; 2 8 2; 6 10 3];
+B = [ 8 4 0 ]
+x = A\B
+ili x = inv(A)*B
+
+2) sdesna, resenja u vrstu
+A = [ 4 2 6; -2 8 10; 6 2 3];
+B = [8 4 0]
+x = B/A
+ili x = B*inv(A)
+
+Obrada nizova/matrica:
+length(), kolone
+width(), redovi
+size(), oba
+diag(V), od vektor pravi matricu sa svi na diagonalu
+diag(M), od m pravi vektor sa svi elementi sa diagonale
+mean(), srednja vrednost svake kolone
+max(), za svaku kolonu ili vektor
+min(), za svaku kolonu ili vektor
+sum(), za svaku kolonu ili vektor
+sort(), za svaku kolonu ili vektor
+prod(), prozivod ...
+dot(), sklarni proizvod vektora
+
+Standardni izlaz:
+disp(x) - prikazuje promenjivu x
+disp('x') - prikazuje karakter x
+fprintf() - printf kao C
+%5.2f:
+- 5, ukupan broj cifara
+- 2, broj decimala
+- f, tip za konverziju (float)
+
+Upotreba skript datoteka:
+who - sve promenjive u memoriji
+whos - dodatne informacije
+
+Skripte:
+Postoje 3 nacina za unos
+1) definicija unutra datoteke
+2) definicija u komandnoj liniji
+3) prozivoljna promenjiva putem input funkcije
+
+Funkcije:
+1) U datotekama
+sablon je,
+function [izlazni] = ime_funkcije(ulazni1, ulazni2, ...)
+uvek imamo '.' ispred operacija
+
+2) Kao anonimne
+sablon je,
+ime = @(ulazni1, ulazni2, ...) matematicki-izraz
+i kod njih se ne stavlja '.'
+
+Grafici:
+1) komanda plot,
+prvo generisemo x, i na osnovu funkcije y, npr:
+X=[-2:0.01:4];
+Y=3.5.^(-0.5*x).*cos(6*x);
+plot(x,y)
+x i y su jednake duzine
+x - apcisa
+y - ordinata
+za plot postoji string koji odredjuje
+tip linije, boju linije, vrstu markera
+za linije:
+-, puna
+--, isprekidana
+:, tackasta
+-., crta-tacka
+za boje imamo r, g, b, k(crna), y...
+za markere, *, +, o, x
+takodje imamo dodatne argumente tipa
+'opis', int ili 'boja', primeri:
+'LineWidth', int
+'MarkerSize', int
+'MarkerEdgeColor', 'boja'
+MarkerFaceColor, 'boja'
+primer: plot(x,y,’--rx’,’ LineWidth’,3, ’MarkerSize’ ,8)
+
+2) komanda fplot
+fplot('funkcija kao str', granice, 'atributi', ...)
+granica je vektor, koji moze da bude
+[xmin, xmax] ili [xmin, xmax, ymin, ymax]
+primer: fplot(’8*x^2+5*cos(x)’,[-4,5],’:g’)
+
+3) plot grafikoni sa vise grafa
+x=[1 2 3 4]
+y=[5 6 7 8]
+z=[5 6 7 8]
+w=[1 2 3 4]
+plot(x,y,z,w)
+crta dva grafikona u jednom prozoru
+plot(x,y,’--r’,u,v,’:g’)
+i ovo je takodje validno
+koristi se za izvode koje nismo ucili
+x=[-2:0.01:4];
+y=3*x.^3-26*x+6;
+yd=9*x.^2-26;
+ydd=18*x;
+plot(x,y,’-.c’,x,yd,’--r’,x,ydd,’:g’)
+
+4) plot, hold on
+Takodje izcrtava sve 3 funkcije
+x=[-2:0.01:4];
+y=3*x.^3-26*x+6;
+yd=9*x.^2-26;
+ydd=18*x;
+plot(x,y,'--c')
+hold on # otvoramo grafički prostor za crtanje sledećih grafika
+plot(x,yd,'--r')
+plot(x,ydd,':g')
+hold off # zatvaramo grafički prostor
+
+4) line
+na postojecem grafikonu otvara novi grafik
+x=[-2:0.01:4];
+y=3*x.^3-26*x+6;
+yd=9*x.^2-26;
+ydd=18*x;
+line (x,y,’LineStyle’,’-’,’color’,’g’)
+line(x,yd, ’LineStyle’,’--’,’color’,’r’)
+line(x,ydd, ’LineStyle’,’:’,’color’,’c’)
+
+5) formatiranje grafikona
+Formatiranje grafikona:
+xlabel(’tekst’) % dodavanje natpisa na x-osi
+ylabel(’tekst’) % dodavanje natpisa na y-osi
+title(’tekst’) % dajemo naslov grafikonu
+legend(’niz1’,’niz2’, ...)
