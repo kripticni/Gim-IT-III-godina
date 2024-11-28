@@ -77,6 +77,22 @@ int uMnoguglu(Tacka t[], int n, Tacka Q) {
   return 1;
 }
 
+float gausova_formula(Tacka arr[], int n){
+    float retval = 0;
+    int j = n-1, i;
+    for(i=0; i<n; ++i){
+        // retval += (arr[j].X + arr[i].X) * (arr[j].Y - arr[i].Y);
+        // (arr[j].X + arr[i].X) * arr[j].Y + (arr[j].X + arr[i].X) * (-arr[i].Y)
+        // arr[j].Y*arr[j].X + arr[j].Y*arr[i].X  - arr[i].Y * arr[j].X - arr[i].Y * arr[i].X
+        //  (a + b) * (c - d)
+        // retval += (arr[j].Y - arr[i].Y)*(arr[j].X + arr[i].X);
+        
+        retval += (arr[j].X * arr[i].Y) - (arr[i].X * arr[j].Y);
+        j = i;
+    }
+    return fabs(retval/2.0); 
+}
+
 // dato N tacaka u ravni, takvih da nisu sve kolinearne
 // potrebno je povezati prostim mnogouglom
 
