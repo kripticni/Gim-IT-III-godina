@@ -879,3 +879,28 @@ void Array<T>::print()
 
 you can also declare multipul classes, types, structs...
 template <class T, class U>
+
+Just an accumulation of tricks:
+cin.ignore(n, delim); //removes either n characters or one compares to delim
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+<< '\n' instead of << endl
+you can check if a number is odd using "num & 1" (1st bit must be 1 for odd)
+multiplying by 2 is slower than shifting bits to the left by 1
+xoring for swap
+makes strlen not so important
+for (i=0; s[i]; i++) { ... }
+emplace_back is much faster because it never allocates memory if not needed
+Suppose the number is N then
+Let int K = log10(N); // number of digits in a number=log10(N)+1
+And int X = pow(10, K);
+Then int ans=N/X will be the most significant digit
+Number of digits in N = floor(log10(N)) + 1;
+Check for power of 2: return x && (!(x&(x-1)));
+use of:
+all_of(start, end, function_ptr_for_cmp());
+any_of(...);
+none_of(...);
+copy_n(source, n, dest);
+iota(start_addr, end_addr, start_from); //does ++i for increment
+
