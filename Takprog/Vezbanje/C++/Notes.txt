@@ -369,6 +369,23 @@ shrink_to_fit() Reduces memory usage by freeing unused space.
 data() Returns a direct pointer to the memory array used internally by the vector to store its owned elements.
 get_allocator Returns a copy of the allocator object associated with the vector.
 
+Tuples:
+A tuple is an object that can hold a number of elements
+of different data types, they are initialized as arguments
+in the order in which they will be accessed.
+get() used to access the tuple values and modify them, it accepts index and name
+make_tuple() is used to assign tuple with values
+tuple_size() return num of elements
+std::tuple<int, double, std::string> tuple_name(32, 3.14, "str");
+std::get<0>(tuple_name);
+std::get<0>(tuple_name) = 777;
+tuple_name = make_tuple(32, 3.14, "str");
+int a;
+double b;
+string c;
+tie(a, b, c) = tuple_name;
+tie(a, std::ignore, c) = tuple_name;
+
 Pairs:
 pretty much tuples but they store only two different values (or data types)
 as a single unit
@@ -396,6 +413,9 @@ would result in "A B", because it doesnt store more than 1 value
 for that we use multisets
 also auto& creates a reference to each element in the set
 set<int, greater<int> > s1; to set custom sorting
+
+a set is using an actually red-black balanced binary search tree
+under the hood
 
 functions:
 begin() – Returns an iterator to the first element in the set.
@@ -548,6 +568,11 @@ Maps
 Maps are associative containers that store elements in a mapped fashion.
 Each element has a key value and a mapped value.
 No two mapped values can have the same key values.
+And it is sorted by keys.
+
+The type returned when you iterate over a map
+is actually a std::pair, with pair.first being the key, and pair.second the value
+It is also using a red-black bst
 
 // Create a map of strings to integers
 map<string, int> mp;
@@ -702,6 +727,7 @@ Unordered Map
 
 combination of key value and mapped value, so a dictionary
 and its using a hashtable, so search insert and delete are O(1)
+not sorted
 
 at()	This function in C++ unordered_map returns the reference to the value with the element as key k
 begin()	Returns an iterator pointing to the first element in the container in the unordered_map container
