@@ -910,6 +910,7 @@ Just an accumulation of tricks:
 cin.ignore(n, delim); //removes either n characters or one compares to delim
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
+cout.tie(NULL);
 << '\n' instead of << endl
 you can check if a number is odd using "num & 1" (1st bit must be 1 for odd)
 multiplying by 2 is slower than shifting bits to the left by 1

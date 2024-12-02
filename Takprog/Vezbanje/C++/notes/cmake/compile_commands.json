@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/aleksic/Gim-IT-III-godina/Takprog/Vezbanje/C++/notes",
+  "command": "g++   -std=gnu++14 -Wall -Wextra -Werror -Wnrvo -o CMakeFiles/notes.dir/src/multithreading3.cpp.o -c /home/aleksic/Gim-IT-III-godina/Takprog/Vezbanje/C++/notes/src/multithreading3.cpp",
+  "file": "/home/aleksic/Gim-IT-III-godina/Takprog/Vezbanje/C++/notes/src/multithreading3.cpp",
+  "output": "CMakeFiles/notes.dir/src/multithreading3.cpp.o"
+}
+]
