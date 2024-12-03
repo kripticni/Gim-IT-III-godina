@@ -16,17 +16,45 @@ typedef struct tacka {
 } Tacka;
 
 float intenzitet(Vektor U);
-void vektorski_proizvod(Vektor a, Vektor b, Vektor *c);
+float intenzitet_tacka(Tacka A, Tacka B);
+float det(Vektor AB, Vektor AC);
+float det_tacka(Tacka A, Tacka B, Tacka P);
+float proizvod(Tacka A, Tacka B, Tacka P);
+float rastojanje(Tacka A, Tacka B, Tacka P);
+float povrsina_sporije(Tacka A, Tacka B, Tacka C);
 float povrsina(Tacka A, Tacka B, Tacka C);
-float povrsina1(Tacka A, Tacka B, Tacka C);
+void vektorski_proizvod(Vektor a, Vektor b, Vektor *c);
+void saIsteStrane(Tacka A, Tacka B, Tacka C, Tacka D);
+int orijentacija_sporije(Tacka P, Tacka Q, Tacka R);
+orij orijentacija(Tacka A, Tacka B, Tacka C);
+void stampajOrijentaciju(orij unos);
+int uMnoguglu(Tacka t[], int n, Tacka Q);
+float gausova_formula(Tacka arr[], int n);
+void zamena(Tacka *A, Tacka *B);
+int kvadRastojanje(Tacka A, Tacka B);
+void stampajProstMnogougao(Tacka t[], int n);
 
 float intenzitet(Vektor U) { return sqrt(U.x * U.x + U.y * U.y + U.z * U.z); }
 
-float det(Tacka A, Tacka B, Tacka P) {
+float intenzitet_tacka(Tacka A, Tacka B) {
+  return sqrt((A.x - B.x) * (A.x - B.x) + (A.y - B.y) * (A.y - B.y));
+}
+
+float det(Vektor AB, Vektor AC) { return fabs((AB.x * AC.y) - (AB.y * AC.x)); }
+
+float det_tacka(Tacka A, Tacka B, Tacka P) {
   return fabs((A.x - P.x) * (B.y - P.y) - (A.y - P.y) + (B.x - P.x));
 }
 
-float povrsina1(Tacka A, Tacka B, Tacka C) {
+float proizvod(Tacka A, Tacka B, Tacka P) {
+  return fabs((A.x - P.x) * (B.y - P.y) - (A.y - P.y) * (B.x - P.x));
+}
+
+float rastojanje(Tacka A, Tacka B, Tacka P) {
+  return proizvod(A, B, P) / intenzitet_tacka(A, B);
+}
+
+float povrsina_sporije(Tacka A, Tacka B, Tacka C) {
   Vektor AB, AC, c;
   AB.x = B.x - A.x;
   AB.y = B.y - A.y;
@@ -52,12 +80,23 @@ void vektorski_proizvod(Vektor a, Vektor b, Vektor *c) {
 
 void saIsteStrane(Tacka A, Tacka B, Tacka C, Tacka D) {
   int d1, d2;
-  d1 = det(A, B, C);
-  d2 = det(A, B, D);
-  if (d1 != 0 && d2 != 0)
+  d1 = det_tacka(A, B, C);
+  d2 = det_tacka(A, B, D);
+  if ((d1 > 0 && d2 > 0) || (d1 < 0 && d2 < 0))
     printf("Tacke su sa istih strana.");
   else
     printf("Kolinearne su.");
+}
+
+int orijentacija_sporije(Tacka P, Tacka Q, Tacka R) {
+  float k1, k2;
+  k1 = (Q.y - P.y) / (Q.x - P.x);
+  k2 = (R.y - Q.y) / (R.x - Q.x);
+  if (k1 > k2)
+    return 1;
+  if (k1 < k2)
+    return 2;
+  return 0;
 }
 
 orij orijentacija(Tacka A, Tacka B, Tacka C) {
@@ -69,6 +108,20 @@ orij orijentacija(Tacka A, Tacka B, Tacka C) {
   return negativna;
 }
 
+void stampajOrijentaciju(orij ulaz) {
+  switch (ulaz) {
+  case 0:
+    printf("Kolinearna\n");
+    break;
+  case 1:
+    printf("Pozitivna\n");
+    break;
+  case 2:
+    printf("Negativna\n");
+    break;
+  }
+}
+
 int uMnoguglu(Tacka t[], int n, Tacka Q) {
   int i;
   for (i = 0; i <= n; i++)
@@ -77,20 +130,21 @@ int uMnoguglu(Tacka t[], int n, Tacka Q) {
   return 1;
 }
 
-float gausova_formula(Tacka arr[], int n){
-    float retval = 0;
-    int j = n-1, i;
-    for(i=0; i<n; ++i){
-        // retval += (arr[j].X + arr[i].X) * (arr[j].Y - arr[i].Y);
-        // (arr[j].X + arr[i].X) * arr[j].Y + (arr[j].X + arr[i].X) * (-arr[i].Y)
-        // arr[j].Y*arr[j].X + arr[j].Y*arr[i].X  - arr[i].Y * arr[j].X - arr[i].Y * arr[i].X
-        //  (a + b) * (c - d)
-        // retval += (arr[j].Y - arr[i].Y)*(arr[j].X + arr[i].X);
-        
-        retval += (arr[j].X * arr[i].Y) - (arr[i].X * arr[j].Y);
-        j = i;
-    }
-    return fabs(retval/2.0); 
+float gausova_formula(Tacka arr[], int n) {
+  float retval = 0;
+  int j = n - 1, i;
+  for (i = 0; i < n; ++i) {
+    // retval += (arr[j].X + arr[i].X) * (arr[j].Y - arr[i].Y);
+    // (arr[j].X + arr[i].X) * arr[j].Y + (arr[j].X + arr[i].X) * (-arr[i].Y)
+    // arr[j].Y*arr[j].X + arr[j].Y*arr[i].X  - arr[i].Y * arr[j].X - arr[i].Y *
+    // arr[i].X
+    //  (a + b) * (c - d)
+    // retval += (arr[j].Y - arr[i].Y)*(arr[j].X + arr[i].X);
+
+    retval += (arr[j].x * arr[i].y) - (arr[i].x * arr[j].y);
+    j = i;
+  }
+  return fabs(retval / 2.0);
 }
 
 // dato N tacaka u ravni, takvih da nisu sve kolinearne
