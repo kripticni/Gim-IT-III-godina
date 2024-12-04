@@ -37,4 +37,9 @@ another use is finding an inverse
 a^(m-1) === 1 % m //multiply both sides with a^-1
 a^-1 === a^(m-2) % m
 
-
+prefix sum of bitwise and
+is really just counting if there are as much
+set ones as the differnce of the bounds of the subarray
+prefix sum of bitwise or would be the same, except
+you would just be checking if count is bigger than 1
+prefix sum of xor, would be the same as regular prefix sum
