@@ -195,6 +195,29 @@ void stampajProstMnogougao(Tacka t[], int n) {
     printf("(%f, %f)\n", t[i].x, t[i].y);
 }
 
+double max(double a, double b){
+    return (a>b)?a:b;
+}
+double min(double a, double b){
+    return (a<b)?a:b;
+}
+
+int pripadaDuzi(Tacka P, Tacka Q, Tacka R){
+  int d = ((Q.x - P.x) * (R.y - P.y) - (Q.y - P.y) * (R.x - P.x));
+  if (d == 0)
+    return 1;
+  return 0;
+}
+
+int pripadaOpsegu(Tacka P, Tacka R, Tacka Q){ //Q izmedju P i R
+  if(Q.x > min(P.x, R.x) && Q.x < max(P.x, R.x) &&
+      Q.y > min(P.y, R.y) &&
+      Q.y < min(P.y, R.y))
+    return 1;
+
+  return 0;
+}
+
 int main() {
   Tacka niz[] = {{0, 3}, {1, 1}, {2, 2}, {4, 4},
                  {0, 0}, {1, 2}, {3, 1}, {3, 3}};
