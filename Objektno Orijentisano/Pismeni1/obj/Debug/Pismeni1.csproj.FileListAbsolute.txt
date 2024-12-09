@@ -1,0 +1,10 @@
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\bin\Debug\Pismeni1.exe.config
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\bin\Debug\Pismeni1.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\bin\Debug\Pismeni1.pdb
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.csproj.AssemblyReference.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.Form1.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.Properties.Resources.resources
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.csproj.GenerateResource.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.csproj.CoreCompileInputs.cache
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.exe
+C:\Users\aleksic\Desktop\Gim-IT-III-godina\Objektno Orijentisano\Pismeni1\obj\Debug\Pismeni1.pdb
