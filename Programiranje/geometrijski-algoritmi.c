@@ -209,13 +209,30 @@ int pripadaDuzi(Tacka P, Tacka Q, Tacka R){
   return 0;
 }
 
-int pripadaOpsegu(Tacka P, Tacka R, Tacka Q){ //Q izmedju P i R
-  if(Q.x > min(P.x, R.x) && Q.x < max(P.x, R.x) &&
-      Q.y > min(P.y, R.y) &&
-      Q.y < min(P.y, R.y))
+int pripadaOpsegu(Tacka P, Tacka R, Tacka Q){ //R izmedju P i Q
+  if(R.x >= min(P.x, Q.x) &&
+      R.x <= max(P.x, Q.x) &&
+      R.y >= min(P.y, Q.y) &&
+      R.y <= max(P.y, Q.y))
     return 1;
 
   return 0;
+}
+
+int sekuSe(Tacka P1, Tacka Q1, Tacka P2, Tacka Q2){
+    orij O1, O2, O3, O4;
+    O1 = orijentacija(P1, Q1, P2);
+    O2 = orijentacija(P1, Q1, Q2);
+    O3 = orijentacija(P2, Q2, P1);
+    O4 = orijentacija(P2, Q2, Q1);
+
+    if(O1!=O2 && O3!=O4) return 1;
+    if(O1==kolinearne && pripadaOpsegu(P1, P2, Q1)) return 1;
+    if(O2==kolinearne && pripadaOpsegu(P1, Q2, Q1)) return 1;
+    if(O3==kolinearne && pripadaOpsegu(P2, P1, Q2)) return 1;
+    if(O3==kolinearne && pripadaOpsegu(P2, Q1, Q2)) return 1;
+
+    return 0; // u suprotnom se ne seku
 }
 
 int main() {
@@ -224,5 +241,10 @@ int main() {
   //{ {0,0}, {3,1}, {1,1}, {2,2}, {3,3}, {4,4}, {1,2}, {0,3} }
 
   stampajProstMnogougao(niz, sizeof(niz) / sizeof(Tacka));
+  //Tacka A = {2,2}, B={6,4}, C={4,4}, D = {6,2};
+  Tacka A = {1,1}, B={1,4}, C={1,2}, D = {1,5};
+  if(sekuSe(A,B,C,D))printf("Duzi se seku");
+  else printf("Duzi se ne seku");
+
   return 0;
 }
