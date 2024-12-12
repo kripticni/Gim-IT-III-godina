@@ -50,7 +50,7 @@ float intenzitet_tacka(Tacka A, Tacka B) {
 // A.x A.y
 // B.x B.y
 // det(A, B) = A.x * B.y - A.y * B.x
-float det(Vektor AB, Vektor AC) { return fabs((AB.x * AC.y) - (AB.y * AC.x)); }
+float det(Vektor AB, Vektor AC) { return (AB.x * AC.y) - (AB.y * AC.x); }
 
 // B.x - A.x  B.y - A.y
 // C.x - A.x  C.y - A.y
