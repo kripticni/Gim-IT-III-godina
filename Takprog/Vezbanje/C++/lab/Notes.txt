@@ -43,3 +43,12 @@ set ones as the differnce of the bounds of the subarray
 prefix sum of bitwise or would be the same, except
 you would just be checking if count is bigger than 1
 prefix sum of xor, would be the same as regular prefix sum
+
+Extended counting sort i just came up with (tho it most likely already exists)
+vs std::sort
+std lib: 39579 microseconds
+ext counting sort: 9 microseconds
+not as big of a save, only 0,04
+tested with:
+cat tst | tail -n 1 | tr ' ' '\n' | grep -v '*ex*' |uniq -dc | awk '{print $1}' | tr '\n' '+' # put into bc
+giving the correct result
