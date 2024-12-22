@@ -44,13 +44,13 @@ float intenzitet(Vektor U) { return sqrt(U.x * U.x + U.y * U.y + U.z * U.z); }
 
 // isto, samo sto umesto X koristimo |AB| = sqrt( (B.x - A.x)^2...
 float intenzitet_tacka(Tacka A, Tacka B) {
-  return sqrt((A.x - B.x) * (A.x - B.x) + (A.y - B.y) * (A.y - B.y));
+  return sqrt((B.x - A.x) * (B.x - A.x) + (B.y - B.y) * (A.y - B.y));
 }
 
 // A.x A.y
 // B.x B.y
 // det(A, B) = A.x * B.y - A.y * B.x
-float det(Vektor AB, Vektor AC) { return fabs((AB.x * AC.y) - (AB.y * AC.x)); }
+float det(Vektor AB, Vektor AC) { return ((AB.x * AC.y) - (AB.y * AC.x)); }
 
 // B.x - A.x  B.y - A.y
 // C.x - A.x  C.y - A.y

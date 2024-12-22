@@ -1,0 +1,53 @@
+1. Operatori:
+Dodela, =
+Logicki, & (and), ' (or), ~ (not), true (1), false (0)
+Relacije, <, >, <=, >=, ==, ~=
+
+2. Control flow:
+if(ako je)
+  <...>
+else
+  <...>
+end
+
+if(ako je)
+  <...>
+elseif(ako je)
+  <...>
+else
+  <...>
+end
+
+while(dok je)
+  <...>
+end
+
+for ciklusi su:
+C) for(int i = 1; i<n; i++){...}
+O) for i = 1:n
+    <...>
+   end
+
+3. Specijalni grafikoni
+Stubicasti grafikoni:
+bar(x,y,'osobine')
+
+Stubicasta linija grafikon:
+stem(x,y,'osobine')
+
+Pie grafikon:
+pie(z,'osobine') #jedan unos
+
+Crtanje duzi:
+plot([-1,-1],[-1,2]) #crta duz izmedju (-1,1) i (1,2)
+znaci [x1, y1] i [x2, y2]
+
+Formatiranje:
+axis([0, 4, 4, 12], "equal");
+grid on # samo pali axis
+12y __ 4x
+   |  |
+   |  |
+ 4y|__|4x
+[x1,y1,x2,y2]
+grid on; # ukljucujemo mrezu u koordinatnom sistemu, zbog preglednosti

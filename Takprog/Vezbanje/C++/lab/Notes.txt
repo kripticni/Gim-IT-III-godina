@@ -52,3 +52,19 @@ not as big of a save, only 0,04
 tested with:
 cat tst | tail -n 1 | tr ' ' '\n' | grep -v '*ex*' |uniq -dc | awk '{print $1}' | tr '\n' '+' # put into bc
 giving the correct result
+
+Radix sort for base 256 is the fastest for 2e7
+for numbers lesser than 2e8 the extended counting sort is much faster
+2e7:
+  r256: 173186 microseconds
+  extcsort: 358492 microseconds
+2e6:
+  r256: 172267 microseconds
+  extcsort: 129980 microseconds
+2e3:
+  r256: 185659 microseconds
+  extcsort: 14874 microseconds
+
+Differnce in alloc speed for primitives
+malloc time: 356774 microseconds
+new time: 396697 microseconds
