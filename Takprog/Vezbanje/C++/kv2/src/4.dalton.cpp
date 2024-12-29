@@ -21,34 +21,32 @@ int main() {
     cin >> a[i];
 
   for (int cleft = 0; cleft < m; cleft++) {
-    int l = cleft; // duzina svakog prozora, na osnovu brata
+    int l = cleft; // za svakog brata po jedan ciklus
     for (int i = 0; i + l < n; i++)
       dp[i] = max(a[i], a[i + l]);
-    // cuvamo maksimum za svaki prozor duzine L
-    // od pocetka do kraja duzine slika
+    // cuvamo maksimum za svaki moguci prozor
+    // sa 0 + broj brata, do kraja slika
 
-    // sa ova dva for loopa garantujemo da
-    // ima da prodjemo svaki podniz
-    // od broja brata do kraja niza jer
-    // se samo ti podnizi racunaju za
-    // datog brata
-
-    while (l + m < n) { // za svaki postojeci opseg
+    while (l + m < n) {
+      // dok postoji sledeci ciklus
+      // jedan ciklus je M jer toliko
+      // poteza treba dok se vratimo
+      // na brata L
       dq.clear();
-      for (int i = n - 1 - l; i >= 0;
-           i--) { // i krece od zadnjeg postojeceg opsega slika, suprotno od max
-                  // for loopa
+      for (int i = n - l - 1; i >= 0; i--) {
+        // idemo unazad kroz niz dp[i]
         while (!dq.empty() && dq.front().first >= dp[i])
-          dq.pop_front();           // dok su svi iste max vrednosti
-        dq.emplace_front(dp[i], i); // vrati tako da postoji samo jedna vrednost
-                                    // i sa istim max vrednostima u queue
+          dq.pop_front();           // dok su iste max vrednosti brisemo
+        dq.emplace_front(dp[i], i); // cuvamo samo onaj sa najmanjom vrednoscu i
+
+        // ako su elementi tacno udaljeni za jedan ciklus, to je ustvari isti
+        // ciklus, ali sa vecom vrednoscu i, a mi brisemo jer trazimo najmanju
         if (dq.back().second == i + m)
-          dq.pop_back(); // ako su elementi tacno udaljeni za jedan opseg,
-                         // izbrisemo levi element
+          dq.pop_back();
         dp[i] = dq.back().first; // onda je konacna vrednost prvi prozor koji
-                                 // nije udaljen za m
+                                 // nije udaljen za m, sa najmanjom vrednoscu i
       }
-      l += m; // povecamo opseg za m
+      l += m; // povecamo l za ciklus
       for (int i = 0; i + l < n; i++)
         dp[i] = max(a[i] + dp[i + 1], a[i + l] + dp[i]);
       // uzimamo max od levog + celog levog podstabla
@@ -60,6 +58,8 @@ int main() {
     // odgovori od 0 do trenutnog zadnjeg opsega su:
     for (int i = 0; i + l < n; i++)
       ans[n - l] = min(ans[n - l], dp[i]);
+    // za brata l, ovo racuna vrednosti od 0, n-l-m
+    // tako da ovo racuna minimume za svaki index iz niza slika
   }
   for (int i = 1; i <= m; i++)
     cout << ans[i] << " ";
