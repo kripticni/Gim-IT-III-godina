@@ -1,0 +1,70 @@
+Binary exponentiation, iterative approach
+for 2e5
+std lib: 5125765 microseconds
+bin exp: 0 microseconds
+for 2e9
+std lib: 5125765 microseconds
+bin exp: 0 microseconds
+
+Obvious worthy difference
+its also useful for modulo operations:
+
+if (b & 1)
+  result = (result * a) % mod;
+a = (a * a) % mod;
+
+and in combinatorics
+
+
+This is something I might need and didn't do in school
+int gcd(int a, int b){ return (a%b == 0)? abs(b) : gcd(b,a%b); }
+bool isPossible(int a, int b, int c){ return (c%gcd(a,b) == 0); }
+This checks a function by quotients if it has integral solutions
+
+
+Fermat's little theorem
+p is prime
+a is an integer which is not a multipul of P
+a = 2
+p = 17
+Theorem says
+2^(17-1) === 1 % 17
+so
+2^(17-1) % 17 === 1
+so then 65536-1 is a multipul of 17
+
+another use is finding an inverse
+a^(m-1) === 1 % m //multiply both sides with a^-1
+a^-1 === a^(m-2) % m
+
+prefix sum of bitwise and
+is really just counting if there are as much
+set ones as the differnce of the bounds of the subarray
+prefix sum of bitwise or would be the same, except
+you would just be checking if count is bigger than 1
+prefix sum of xor, would be the same as regular prefix sum
+
+Extended counting sort i just came up with (tho it most likely already exists)
+vs std::sort
+std lib: 39579 microseconds
+ext counting sort: 9 microseconds
+not as big of a save, only 0,04
+tested with:
+cat tst | tail -n 1 | tr ' ' '\n' | grep -v '*ex*' |uniq -dc | awk '{print $1}' | tr '\n' '+' # put into bc
+giving the correct result
+
+Radix sort for base 256 is the fastest for 2e7
+for numbers lesser than 2e8 the extended counting sort is much faster
+2e7:
+  r256: 173186 microseconds
+  extcsort: 358492 microseconds
+2e6:
+  r256: 172267 microseconds
+  extcsort: 129980 microseconds
+2e3:
+  r256: 185659 microseconds
+  extcsort: 14874 microseconds
+
+Differnce in alloc speed for primitives
+malloc time: 356774 microseconds
+new time: 396697 microseconds

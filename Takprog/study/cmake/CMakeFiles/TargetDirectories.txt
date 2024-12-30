@@ -1,0 +1,3 @@
+/home/aleksic/Gim-IT-III-godina/Takprog/Vezbanje/C++/notes/build/CMakeFiles/notes.dir
+/home/aleksic/Gim-IT-III-godina/Takprog/Vezbanje/C++/notes/build/CMakeFiles/edit_cache.dir
+/home/aleksic/Gim-IT-III-godina/Takprog/Vezbanje/C++/notes/build/CMakeFiles/rebuild_cache.dir

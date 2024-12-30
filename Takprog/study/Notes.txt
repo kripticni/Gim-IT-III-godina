@@ -1,0 +1,933 @@
+For starters, this will do, I'll likely move on another resource
+https://www.geeksforgeeks.org/cpp-programming-examples/
+https://www.geeksforgeeks.org/c-plus-plus/
+
+constexpr is initalized and known at compile time
+constexpr functions are evaluated at compile time too
+const can be done at both compile and run time
+
+up qualifying means that a
+int a = 10;
+const int* p = &a;
+is allowed, even if a is not const
+the pointer will qualify
+but
+const int a = 10;
+int* p = &a;
+doesnt work, since it breaks the const guarantee
+but const int* p works
+
+Storage Classes:
+Auto is any variable with type only,
+it dies out of scope and is only visible to local scope
+Extern is a global variable initialized with a legal value, defined outside the scope its used in
+for example, referencing a global var from a function
+Static variables perserve their value even when out of scope
+Register variables have no address and are really fast since they are in the register
+Mutable instance (means in class) variables are used to declare which variables
+can be altered even when const is provided
+Thread local means a variable will be local and unconnected between threads, aka its own copy
+
+DataTypes:
+Primary: int, bool, char, float, double void, wchar_t
+Derived: functions, arrays, pointers, references
+User-Defined: class, struct, union, enum, typedef
+
+importantly, refernces are for example
+int a;
+int& b = a;
+this makes b an exact alias for a, so they mean the same
+a literal reference
+
+any kinds of literals are ready only in the data segment of the executable
+this makes string literals unchangeable
+
+Casting Operations:
+static_cast, a compile-time conversion for explicit conversions (safe)
+int a = 10;
+double b = static_cast<double>(a);
+
+dynamic_cast, mainly for converting a pointer of a base class, to a derived class
+on failure it returns null or bad_cast exception
+Dog* dogPtr = dynamic_cast<Dog*>(animalPtr);
+considering animalPtr = new Dog(); and class Dog : public Animal, this will work
+
+const_cast is used to modify const or volatile qualifiers, it can remove const
+const int a = 10;
+int* p = &a;
+would fail, but
+const int a = 10;
+int* p = const_cast<int*>(a);
+would actually work
+
+reinterpret_cast is used to convert a pointer to any type of pointer
+int number = 10;
+int* numberPointer = &number;
+char* charPointer = reinterpret_cast<char*>(numberPointer);
+now both point to the same address
+
+scope resolution operator is ::
+it can be used to access a global var, when there is a local with the same name
+::x, for global
+x, for local
+it can be used for defining a function outside a class
+void a_class::a_function(...){...}
+to access a classes static variables
+int a_class::x = 1;
+and in cases of multipul inheritance
+to refer to a base class from a derived object
+Derived obj;
+obj.Base::func();
+obj.func();
+
+iostream stands for stdio, it includes
+cin, cout, cerr, and clog?
+iomanip are the manipulators for streams
+fstream only file stream
+bits/stdc++ includes every standard library
+
+cin.get()
+cin.getline()
+cin.ignore()
+cin.peek()
+cin.putback() //into the stream
+cin.eof() //if eof
+cin.fail() //	returns true if an input operation has failed
+cin.clear()	// clears the error flags on the input stream, allowing further operations.
+cin.sync()	// discards unread characters from the input buffer.
+cin.gcount() // Returns the number of characters extracted by the last unformatted input operation.
+cin.rdbuf() // gets or sets the associated stream buffer object
+cin.read() // reads in address x, y characters
+
+cout.write() // writes from adress x, y characters
+cout.put() // putchar
+cout.precision() // sets the decimal points
+
+input manipulators:
+cout<<setbase(16)<<100
+would print 100 in hex
+endl,
+ws (ignore whitespace in string sequence),
+ends (null character),
+flush  (forces all output to be written)
+setw(val) (used to set field width)
+setfill(val) (replaces whitespaces of setw with another char)
+setbase(val) (numeric base)
+setiosflags(flag) (format flags by parameter mask)
+resetiosflags(m)
+
+showpos (force show + on positive numbers)
+noshowpos (opposite)
+showbase (shows num base)
+uppercase
+nouppercase
+fixed (decimal notation for floats)
+scientific (exponential for floats)
+hex
+dec
+oct
+left
+right
+
+if-elses are the same
+ternary is the same
+jump statements (break continue goto return) are the same
+loops are the same
+
+for tail recursion optimizations,
+a recursive call should be the last function called
+
+a friend functionc can access private data of a class
+even if its not a member of the class, its declared within public
+
+you can set default argument values for functions
+int sum(int x, int y, int z=0, int w=0)
+works as function overloads, so this can be called
+with either 2, 3 or 4 parameters
+
+recursion:
+direct:
+a) head recursion with a call at the start of the function
+b) at the end of the function
+c) tree recursion with many calls
+indirect: it calls another function which might call this one back in return
+
+tail recursion optimization relies on the fact that
+all future states are not impacted by the past
+so in return it doesnt need new stack frames
+it will just continue the operations within
+the same stack frame and change values
+
+you achieve this by replacing the recursive call
+with a goto to the start of the function
+
+quicksort is a good example of this
+and mergesort is not tail call optimizable because
+you need to merge the two arrays after the calls
+
+function inlining
+cant be done with large functions, recursive functions
+if the storage class is extern inline
+if there is use of static variables
+if a function address is ever taken
+if there is loops
+
+__attribute__((always_inline)), forces inlining on gcc
+
+lambda expressions are inline functions which are used
+only once, and therefore dont need a name
+
+sort(v.begin(), v.end(), [](const int& a, const int& b) -> bool
+{
+  return a > b;
+});
+
+auto pushinto = [&] (int m){ //& means by reference and = by value
+  v1.push_back(m); //accesses the outer scope by reference
+  v2.push_back(m);
+};
+
+you can also declare yourself
+[&x, y]/* manually saying which variables can be accessed how*/
+(int z, float w)/* you arguments */
+-> return_type
+{ ... /* code block */ }
+
+types of pointers
+dangling, pointing to freed memory
+void, can point to literally anything
+null, pointing to nothing
+wild, not initalized to anything
+
+NULL is defined as integer constant with all zeroes
+nullptr is a keyword that can be used
+in all places a null would be
+and its a clear and typesafe way to respresent
+null pointers, as its a pointer constant
+
+passing an array by reference prevents pointer decay
+also passing a string as an obj and not c-string prevents pointer decay
+
+
+Description
+
+string functions
+length()	returns the length of the string.
+swap() 	swap the values of 2 strings.
+size() 	 find the size of string
+capacity() returns the current reallocatable capacity of str
+resize()	resize the length of the string up to the given number of characters.
+find()	 find the string which is passed in parameters
+push_back()	push the passed character at the end of the string
+pop_back() 	pop the last character from the string
+clear() 	remove all the elements of the string.
+strncmp()	compares at most the first num bytes of both passed strings.
+strncpy()	is similar to strcpy() function, except that at most n bytes of src are copied
+strrchr()	locates the last occurrence of a character in the string.
+strcat()	appends a copy of the source string to the end of the destination string
+find()	search for a certain substring inside a string and returns the position of the first character of the substring.
+replace()	replace each element in the range [first, last) that is equal to old value with new value.
+substr()	create a substring from a given string.
+compare()	compare two strings and returns the result in the form of an integer.
+erase()	remove a certain part of a string.
+shrink_to_fit() reallocates with capacity equal to length
+at() access a character at specific index
+append(), or + operator, for concating
+compare(), or == operator
+substr(), finding a substr in str
+replace(), modify part of a str
+insert(), adds an str at specific position
+c_str(), returns a c style string from the object
+
+c_strings use all the string.h functions
+
+
+
+iterator functions
+begin()	 returns an iterator pointing to the beginning of the string.
+end()	 returns an iterator that points to the end of the string.
+rfind()	  find the string’s last occurrence.
+rbegin()	 returns a reverse iterator pointing to the end of the string.
+rend()	 returns a reverse iterator pointing to the beginning of the string.
+cbegin()	 returns a const_iterator pointing to the beginning of the string.
+cend() 	 returns a const_iterator pointing to the end of the string.
+crbegin() 	 returns a const_reverse_iterator pointing to the end of the string.
+crend()	 returns a const_reverse_iterator pointing to the beginning of the string.
+
+you can tokenize using strtok or the stringstream class
+there is also std::sregex_token_iterator
+
+for cstrings
+char* str[5]
+char str[5][5]
+
+for strings
+string str[5];
+vector<string> str; //vectors are pretty important
+array<string,5> str; //array as a class
+
+structs are the same as in C
+typedef is also the same
+
+unions allow for classes and constructors/destructors
+unions are useful when you dont know which type is passed to the function
+since a union contains all possible data types
+obviously all the same applies for classes
+bitfields are also the same
+
+enums are the same, except there is also scoped enums or enum class type
+for this type you need static casts to convert them
+you can specify the underlying type of an enum in C++11 and older
+
+there is also C memory allocation,
+so exactly the same as realloc, reallocf, malloc, calloc and free
+
+The STL
+
+Useful data manipulation functions:
+sort(first_iterator, last_iterator) – To sort the given vector.
+sort(first_iterator, last_iterator, greater<int>()) – To sort the given container/vector in descending order
+reverse(first_iterator, last_iterator) – To reverse a vector. ( if ascending -> descending  OR  if descending -> ascending)
+*max_element (first_iterator, last_iterator) – To find the maximum element of a vector.
+*min_element (first_iterator, last_iterator) – To find the minimum element of a vector.
+accumulate(first_iterator, last_iterator, initial value of sum) – Does the summation of vector elements
+count(first_iterator, last_iterator,x) – To count the occurrences of x in vector.
+find(first_iterator, last_iterator, x) – Returns an iterator to the first occurrence of x in vector and points to last address of vector ((name_of_vector).end()) if element is not present in vector.
+binary_search(first_iterator, last_iterator, x) – Tests whether x exists in sorted vector or not.
+lower_bound(first_iterator, last_iterator, x) – returns an iterator pointing to the first element in the range [first,last) which         has a value not less than ‘x’.
+upper_bound(first_iterator, last_iterator, x) – returns an iterator pointing to the first element in the range [first,last)                  which has a value greater than ‘x’.
+arr.erase(position to be deleted) – This erases selected element in vector and shifts and resizes the vector elements accordingly.
+arr.erase(unique(arr.begin(),arr.end()),arr.end()) – This erases the duplicate occurrences in sorted vector in a single line.
+next_permutation(first_iterator, last_iterator) – This modified the vector to its next permutation.
+prev_permutation(first_iterator, last_iterator) – This modified the vector to its previous permutation.
+distance(first_iterator,desired_position) – It returns the distance of desired position from the first iterator.This function               is very useful while finding the index.
+
+Containers:
+Sequence:
+  array
+  vector
+  deque
+  forward_list (singly-linked)
+  list (doubly-linked)
+
+Adapters:
+  stack
+  queue
+  priority_queue
+
+Associative containers can be quickly searched, at O(log n)
+those are:
+  set, collection of unique keys, sorted by keys
+  map, collection of key-value pairs, sorted by keys, keys are unique
+  multiset, class template for the same
+  multimap, class template for the same
+
+Unordered associate containers, aka unsorted with the usual complexity
+of O(1) and at the rarest worst case O(n)
+
+unordered_set, collection of unique keys, hashed by keys (class template)
+unordered_map, collection of key-value pairs, hashed by keys (class template)
+
+vectors, I've mostly implemented this in C and its quite nice
+vector<T> vec_name; to make a vector, you can also construct it like
+vector<T> vec_name(size, value); or init it like a array
+vector<T> vec_name = {value1, value2...};
+to delete the last element its
+v.pop_back
+v.erase to delete a given
+
+all functions:
+vectors really should be passed by reference
+push_back() Adds an element to the end of the vector.
+pop_back() Removes the last element of the vector.
+size() Returns the number of elements in the vector.
+max_size() Returns the maximum number of elements that the vector can hold.
+resize() Changes the size of the vector.
+empty() Checks if the vector is empty.
+operator[] Accesses the element at a specific position.
+at() Accesses the element at a specific position, with bounds checking.
+front() Accesses the first element of the vector.
+back() Accesses the last element of the vector.
+begin() Returns an iterator pointing to the first element of the vector.
+end() Returns an iterator pointing to the past-the-end element of the vector.
+rbegin() Returns a reverse iterator pointing to the last element of the vector.
+rend() Returns a reverse iterator pointing to the element preceding the first element of the vector.
+cbegin Returns const_iterator to beginning
+cend Returns const_iterator to end
+crbegin Returns const_reverse_iterator to reverse beginning
+crend Returns const_reverse_iterator to reverse end
+insert() Inserts elements at a specific position in the vector.
+erase() Removes elements from a specific position or range in the vector.
+swap() Swaps the contents of the vector with those of another vector.
+clear() Removes all elements from the vector.
+emplace() Constructs and inserts an element in the vector.
+emplace_back() Constructs and inserts an element at the end of the vector.
+assign() Assigns new values to the vector elements by replacing old ones.
+capacity() Returns the size of the storage space currently allocated to the vector.
+reserve() Requests that the vector capacity be at least enough to contain a specified number of elements.
+shrink_to_fit() Reduces memory usage by freeing unused space.
+data() Returns a direct pointer to the memory array used internally by the vector to store its owned elements.
+get_allocator Returns a copy of the allocator object associated with the vector.
+
+Tuples:
+A tuple is an object that can hold a number of elements
+of different data types, they are initialized as arguments
+in the order in which they will be accessed.
+get() used to access the tuple values and modify them, it accepts index and name
+make_tuple() is used to assign tuple with values
+tuple_size() return num of elements
+std::tuple<int, double, std::string> tuple_name(32, 3.14, "str");
+std::get<0>(tuple_name);
+std::get<0>(tuple_name) = 777;
+tuple_name = make_tuple(32, 3.14, "str");
+int a;
+double b;
+string c;
+tie(a, b, c) = tuple_name;
+tie(a, std::ignore, c) = tuple_name;
+
+Pairs:
+pretty much tuples but they store only two different values (or data types)
+as a single unit
+pair <T1, T2> pair_name;
+you access the elements as .first and .second (fixed order)
+Pair can be assigned, copied, and compared.
+The array of objects allocated in a map or hash_map is of type ‘pair’ by default
+in which all the ‘first’ elements are unique keys associated with their ‘second’ value objects.
+
+make_pair() is a template that allows for a value pair to be created without explicity writing types
+.swap() can swap 2 pairs if they are of the same type
+.tie() is used to unpack tuples
+
+Sets:
+Sets are a type of associative container in which each element has to be unique
+because the value of the element identifies it, and values are sorted (ascending or descending)
+std::set<char> a;
+a.insert('B');
+a.insert('B');
+a.insert('A');
+for (auto& str : a) {
+    std::cout << str << ' ';
+}
+would result in "A B", because it doesnt store more than 1 value
+for that we use multisets
+also auto& creates a reference to each element in the set
+set<int, greater<int> > s1; to set custom sorting
+
+a set is using an actually red-black balanced binary search tree
+under the hood
+
+functions:
+begin() – Returns an iterator to the first element in the set.
+end() – Returns an iterator to the theoretical element that follows the last element in the set.
+size() – Returns the number of elements in the set.
+max_size() – Returns the maximum number of elements that the set can hold.
+empty() – Returns whether the set is empty.
+rbegin()	Returns a reverse iterator pointing to the last element in the container.
+rend()	Returns a reverse iterator pointing to the theoretical element right before the first element in the set container.
+crbegin()	Returns a constant iterator pointing to the last element in the container.
+crend()	Returns a constant iterator pointing to the position just before the first element in the container.
+cbegin()	Returns a constant iterator pointing to the first element in the container.
+cend()	Returns a constant iterator pointing to the position past the last element in the container.
+max_size()	Returns the maximum number of elements that the set can hold.
+empty()	Returns whether the set is empty.
+insert(const g) 	Adds a new element ‘g’ to the set.
+iterator insert (iterator position, const g)	Adds a new element ‘g’ at the position pointed by the iterator.
+erase(iterator position) 	Removes the element at the position pointed by the iterator.
+erase(const g)	Removes the value ‘g’ from the set.
+clear() 	Removes all the elements from the set.
+key_comp() / value_comp()	Returns the object that determines how the elements in the set are ordered (‘<‘ by default).
+find(const g)	Returns an iterator to the element ‘g’ in the set if found, else returns the iterator to the end.
+count(const g)	Returns 1 or 0 based on whether the element ‘g’ is present in the set or not.
+lower_bound(const g)	Returns an iterator to the first element that is equivalent to ‘g’ or definitely will not go before the element ‘g’ in the set.
+upper_bound(const g)	Returns an iterator to the first element that will go after the element ‘g’ in the set.
+equal_range()	The function returns an iterator of pairs. (key_comp). The pair refers to the range that includes all the elements in the container which have a key equivalent to k.
+emplace()	This function is used to insert a new element into the set container, only if the element to be inserted is unique and does not already exist in the set.
+emplace_hint()	Returns an iterator pointing to the position where the insertion is done. If the element passed in the parameter already exists, then it returns an iterator pointing to the position where the existing element is.
+swap()	This function is used to exchange the contents of two sets but the sets must be of the same type, although sizes may differ.
+operator=	The ‘=’ is an operator in C++ STL that copies (or moves) a set to another set and set::operator= is the corresponding operator function.
+get_allocator()	Returns the copy of the allocator object associated with the set.
+
+Multisets are the same except they can hold multiple elements of the same value
+
+begin()	Returns an iterator to the first element in the multiset.
+end()	Returns an iterator to the theoretical element that follows the last element in the multiset.
+size()	Returns the number of elements in the multiset.
+max_size()	Returns the maximum number of elements that the multiset can hold.
+empty()	Returns whether the multiset is empty.
+pair insert(const g)	Adds a new element ‘g’ to the multiset.
+iterator insert (iterator position,const g)	Adds a new element ‘g’ at the position pointed by the iterator.
+erase(iterator position)	Removes the element at the position pointed by the iterator.
+erase(const g)	Removes the value ‘g’ from the multiset.
+clear()	Removes all the elements from the multiset.
+key_comp() / value_comp()	Returns the object that determines how the elements in the multiset are ordered (‘<‘ by default).
+find(const g)	Returns an iterator to the element ‘g’ in the multiset if found, else returns the iterator to end.
+count(const g)	Returns the number of matches to element ‘g’ in the multiset.
+lower_bound(const g)	Returns an iterator to the first element that is equivalent to ‘g’ or definitely will not go before the element ‘g’ in the multiset if found, else returns the iterator to end.
+upper_bound(const g)	Returns an iterator to the first element that will go after the element ‘g’ in the multiset.
+multiset::swap()	This function is used to exchange the contents of two multisets but the sets must be of the same type, although sizes may differ.
+multiset::operator=	This operator is used to assign new contents to the container by replacing the existing contents.
+multiset::emplace()	This function is used to insert a new element into the multiset container.
+multiset equal_range()	Returns an iterator of pairs. The pair refers to the range that includes all the elements in the container which have a key equivalent to k.
+multiset::emplace_hint()	Inserts a new element in the multiset.
+multiset::rbegin()	Returns a reverse iterator pointing to the last element in the multiset container.
+multiset::rend()	Returns a reverse iterator pointing to the theoretical element right before the first element in the multiset container.
+multiset::cbegin()	Returns a constant iterator pointing to the first element in the container.
+multiset::cend()	Returns a constant iterator pointing to the position past the last element in the container.
+multiset::crbegin()	Returns a constant reverse iterator pointing to the last element in the container.
+multiset::crend()	Returns a constant reverse iterator pointing to the position just before the first element in the container.
+multiset::get_allocator()	Returns a copy of the allocator object associated with the multiset.
+
+insertion and deletion is O(log n)
+searching is also O(log n)
+
+Stack
+empty() – Returns whether the stack is empty – Time Complexity : O(1)
+size() – Returns the size of the stack – Time Complexity : O(1)
+top() – Returns a reference to the top most element of the stack – Time Complexity : O(1)
+push(g) – Adds the element ‘g’ at the top of the stack – Time Complexity : O(1)
+pop() – Deletes the most recent entered element of the stack – Time Complexity : O(1)
+
+Queue
+queue::empty()	Returns whether the queue is empty. It return true if the queue is empty otherwise returns false.
+queue::size()	Returns the size of the queue.
+queue::swap()	Exchange the contents of two queues but the queues must be of the same data type, although sizes may differ.
+queue::emplace()	Insert a new element into the queue container, the new element is added to the end of the queue.
+queue::front()	Returns a reference to the first element of the queue.
+queue::back()	Returns a reference to the last element of the queue.
+queue::push(g) 	Adds the element ‘g’ at the end of the queue.
+queue::pop() 	Deletes the first element of the queue.
+
+Priority queue/Heap
+The top element it always the greatest by default, so its pretty much
+the heap data structure
+
+priority_queue <int, vector<int>, greater<int>> pq;
+‘int’ is the type of elements you want to store in the priority queue. In this case, it’s an integer. You can replace int with any other data type you need.
+‘vector<int>’ is the type of internal container used to store these elements.
+std::priority_queue is not a container in itself but a container adopter.
+It wraps other containers. In this example, we’re using a vector,
+but you could choose a different container that supports front(), push_back(), and pop_back() methods.
+‘greater<int>‘ is a custom comparison function.
+This determines how the elements are ordered within the priority queue. In this specific example, greater<int> sets up a min-heap. It means that the smallest element will be at the top of the queue.
+
+priority_queue::empty()	Returns whether the queue is empty.
+priority_queue::size() 	Returns the size of the queue.
+priority_queue::top()	Returns a reference to the topmost element of the queue.
+priority_queue::push() 	Adds the element ‘g’ at the end of the queue.
+priority_queue::pop()	Deletes the first element of the queue.
+priority_queue::swap()	Used to swap the contents of two queues provided the queues must be of the same type, although sizes may differ.
+priority_queue::emplace()	Used to insert a new element into the priority queue container.
+priority_queue value_type 	Represents the type of object stored as an element in a priority_queue. It acts as a synonym for the template parameter.
+
+Double ended queue (deque)
+deque::insert()	Inserts an element. And returns an iterator that points to the first of the newly inserted elements.
+deque::rbegin()	Returns a reverse iterator which points to the last element of the deque (i.e., its reverse beginning).
+deque::rend()	Returns a reverse iterator which points to the position before the beginning of the deque (which is considered its reverse end).
+deque::cbegin()	Returns a constant iterator pointing to the first element of the container, that is, the iterator cannot be used to modify, only traverse the deque.
+deque::max_size()	Returns the maximum number of elements that a deque container can hold.
+deque::assign()	Assign values to the same or different deque container.
+deque::resize() 	Function which changes the size of the deque.
+deque::push_front()	It is used to push elements into a deque from the front.
+deque::push_back() 	This function is used to push elements into a deque from the back.
+deque::pop_front() and deque::pop_back()	pop_front() function is used to pop or remove elements from a deque from the front. pop_back() function is used to pop or remove elements from a deque from the back.
+deque::front() and deque::back()	front() function is used to reference the first element of the deque container. back() function is used to reference the last element of the deque container.
+deque::clear() and deque::erase() 	clear() function is used to remove all the elements of the deque container, thus making its size 0. erase() function is used to remove elements from a container from the specified position or range.
+deque::empty() and deque::size()	empty() function is used to check if the deque container is empty or not. size() function is used to return the size of the deque container or the number of elements in the deque container.
+deque::operator= and deque::operator[]	operator= operator is used to assign new contents to the container by replacing the existing contents. operator[] operator is used to reference the element present at position given inside the operator.
+deque::at() and deque::swap()	at() function is used reference the element present at the position given as the parameter to the function. swap() function is used to swap the contents of one deque with another deque of same type and size.
+deque::begin() and deque::end() 	begin() function is used to return an iterator pointing to the first element of the deque container. end() function is used to return an iterator pointing to the last element of the deque container.
+deque::emplace_front() and deque::emplace_back() 	emplace_front() function is used to insert a new element into the deque container. The new element is added to the beginning of the deque. emplace_back() function is used to insert a new element into the deque container. The new element is added to the end of the deque.
+
+List (doubly linked list)
+front() – Returns the value of the first element in the list.
+back() – Returns the value of the last element in the list.
+push_front() – Adds a new element ‘g’ at the beginning of the list.
+push_back() – Adds a new element ‘g’ at the end of the list.
+pop_front() – Removes the first element of the list, and reduces the size of the list by 1.
+pop_back() – Removes the last element of the list, and reduces the size of the list by 1.
+insert() – Inserts new elements in the list before the element at a specified position.
+size() – Returns the number of elements in the list.
+begin() – begin() function returns an iterator pointing to the first element of the list.
+end() – end() function returns an iterator pointing to the theoretical last element which follows the last element.
+
+Forward List (Singly linked list)
+front()	This function is used to reference the first element of the forward list container.
+begin()	This function is used to return an iterator pointing to the first element of the forward list container.
+end()	This function is used to return an iterator pointing to the last element of the list container.
+cbegin()	Returns a constant iterator pointing to the first element of the forward_list.
+cend()	Returns a constant iterator pointing to the past-the-last element of the forward_list.
+before_begin()	Returns an iterator that points to the position before the first element of the forward_list.
+cbefore_begin()	Returns a constant random access iterator which points to the position before the first element of the forward_list.
+max_size()	Returns the maximum number of elements that can be held by forward_list.
+resize()	Changes the size of forward_list.
+unique()	Removes all consecutive duplicate elements from the forward_list. It uses a binary predicate for comparison.
+reverse() 	Reverses the order of the elements present in the forward_list.
+
+Maps
+Maps are associative containers that store elements in a mapped fashion.
+Each element has a key value and a mapped value.
+No two mapped values can have the same key values.
+And it is sorted by keys.
+
+The type returned when you iterate over a map
+is actually a std::pair, with pair.first being the key, and pair.second the value
+It is also using a red-black bst
+
+// Create a map of strings to integers
+map<string, int> mp;
+
+// Insert some values into the map
+mp["one"] = 1;
+mp["two"] = 2;
+mp["three"] = 3;
+
+map::insert()	Insert elements with a particular key in the map container –> O(log n)
+map:: count()	Returns the number of matches to element with key-value ‘g’ in the map. –> O(log n)
+map equal_range()	Returns an iterator of pairs. The pair refers to the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+map erase()	Used to erase elements from the container –> O(log n)
+map rend()	Returns a reverse iterator pointing to the theoretical element right before the first key-value pair in the map(which is considered its reverse end).
+map rbegin()Returns a reverse iterator which points to the last element of the map.
+map find()	Returns an iterator to the element with key-value ‘g’ in the map if found, else returns the iterator to end.
+map crbegin() and crend() 	crbegin() returns a constant reverse iterator referring to the last element in the map container. crend() returns a constant reverse iterator pointing to the theoretical element before the first element in the map.
+map cbegin() and cend()	cbegin() returns a constant iterator referring to the first element in the map container. cend() returns a constant iterator pointing to the theoretical element that follows the last element in the multimap.
+map emplace()	Inserts the key and its element in the map container.
+map max_size() 	Returns the maximum number of elements a map container can hold –> O(1)
+map upper_bound()	Returns an iterator to the first element that is equivalent to mapped value with key-value ‘g’ or definitely will go after the element with key-value ‘g’ in the map
+map operator=	Assigns contents of a container to a different container, replacing its current content.
+map lower_bound()	Returns an iterator to the first element that is equivalent to the mapped value with key-value ‘g’ or definitely will not go before the element with key-value ‘g’ in the map –> O(log n)
+map emplace_hint()	Inserts the key and its element in the map container with a given hint.
+map value_comp() 	Returns the object that determines how the elements in the map are ordered (‘<‘ by default).
+map key_comp() 	Returns the object that determines how the elements in the map are ordered (‘<‘ by default).
+map::size()	Returns the number of elements in the map.
+map::empty()	Returns whether the map is empty
+map::begin() and end()	begin() returns an iterator to the first element in the map. end() returns an iterator to the theoretical element that follows the last element in the map
+map::operator[]	This operator is used to reference the element present at the position given inside the operator.
+map::clear() Removes all the elements from the map.
+map::at() and map::swap()	at() function is used to return the reference to the element associated with the key k. swap() function is used to exchange the contents of two maps but the maps must be of the same type, although sizes may differ.
+
+Multimap
+Same as map except multipul elements can have the same key
+Also, it is NOT required that the key-value and mapped value pair have to be unique in this case.
+One important thing to note about multimap is that multimap keeps all the keys in sorted order.
+These properties of multimap make it very much useful in competitive programming.
+
+multimap::operator=	It is used to assign new contents to the container by replacing the existing contents.
+multimap::crbegin() and multimap::crend()	crbegin() returns a constant reverse iterator referring to the last element in the multimap container. crend() returns a constant reverse iterator pointing to the theoretical element before the first element in the multimap.
+multimap::emplace_hint()	Insert the key and its element in the multimap container with a given hint.
+multimap clear()	Removes all the elements from the multimap.
+multimap empty()	Returns whether the multimap is empty.
+multimap maxsize()	Returns the maximum number of elements a multimap container can hold.
+multimap value_comp() 	Returns the object that determines how the elements in the multimap are ordered (‘<‘ by default).
+multimap rend	Returns a reverse iterator pointing to the theoretical element preceding to the first element of the multimap container.
+multimap::cbegin() and multimap::cend()	cbegin() returns a constant iterator referring to the first element in the multimap container. cend() returns a constant iterator pointing to the theoretical element that follows the last element in the multimap.
+multimap::swap()	Swap the contents of one multimap with another multimap of same type and size.
+multimap rbegin	Returns an iterator pointing to the last element of the container.
+multimap size()	Returns the number of elements in the multimap container.
+multimap::emplace() 	Inserts the key and its element in the multimap container.
+multimap::begin() and multimap::end()	begin() returns an iterator referring to the first element in the multimap container. end() returns an iterator to the theoretical element that follows the last element in the multimap.
+multimap upper_bound()	Returns an iterator to the first element that is equivalent to multimapped value with key-value ‘g’ or definitely will go after the element with key-value ‘g’ in the multimap.
+multimap::count()	Returns the number of matches to element with key-value ‘g’ in the multimap.
+multimap::erase() 	Removes the key value from the multimap.
+multimap::find()	Returns an iterator to the element with key-value ‘g’ in the multimap if found, else returns the iterator to end.
+multimap equal_range()	Returns an iterator of pairs. The pair refers to the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+multimap insert()	Used to insert elements in the multimap container.
+multimap lower_bound()	Returns an iterator to the first element that is equivalent to multimapped value with key-value ‘g’ or definitely will not go before the element with key-value ‘g’ in the multimap.
+multimap key_comp() 	Returns the object that determines how the elements in the multimap are ordered (‘<‘ by default).
+
+multimap<int, int> gquiz1;
+
+Bitsets
+A bitset is an array of bools but each boolean value is not stored in a separate byte instead,
+bitset optimizes the space such that each boolean value takes 1-bit space only,
+so space taken by bitset is less than that of an array of bool or vector of bool.
+
+set() Set the bit value at the given index to 1.
+reset() Set the bit value at a given index to 0.
+flip() Flip the bit value at the given index.
+count() Count the number of set bits.
+test() Returns the boolean value at the given index.
+any() Checks if any bit is set.
+none() Checks if none bit is set.
+all() Check if all bit is set.
+size() Returns the size of the bitset.
+to_string() Converts bitset to std::string.
+to_ulong() Converts bitset to unsigned long.
+to_ullong() Converts bitset to unsigned long long.
+
+Unordered Set
+This is a hash table, so that means no order
+a regular set and a multiset is sorted, not this
+99.999% of the time, insertion/search complexity is O(1), in collisions is O(N)
+with N being the values with the same hash
+An unordered set does not have duplicates
+
+insert() Insert a new {element} in the unordered_set container.
+begin() Return an iterator pointing to the first element in the unordered_set container.
+end() Returns an iterator pointing to the past-the-end-element.
+count() Count occurrences of a particular element in an unordered_set container.
+find() Search for an element in the container.
+clear() Removes all of the elements from an unordered_set and empties it.
+cbegin() Return a const_iterator pointing to the first element in the unordered_set container.
+cend() Return a const_iterator pointing to a past-the-end element in the unordered_set container or in one of its buckets.
+bucket_size() Returns the total number of elements present in a specific bucket in an unordered_set container.
+erase() Remove either a single element or a range of elements ranging from start(inclusive) to end(exclusive).
+size() Return the number of elements in the unordered_set container.
+swap() Exchange values of two unordered_set containers.
+emplace() Insert an element in an unordered_set container.
+max_size() Returns maximum number of elements that an unordered_set container can hold.
+empty() Check if an unordered_set container is empty or not.
+equal_range Returns range that includes all elements equal to a given value.
+operator= Copies (or moves) an unordered_set to another unordered_set and unordered_set::operator= is the corresponding operator function.
+hash_function() This hash function is a unary function that takes a single argument only and returns a unique value of type size_t based on it.
+reserve() Used to request a capacity change of unordered_set.
+bucket() Returns the bucket number of a specific element.
+bucket_count() Returns the total number of buckets present in an unordered_set container.
+load_factor() Returns the current load factor in the unordered_set container.
+rehash() Set the number of buckets in the container of unordered_set to a given size or more.
+max_load_factor() Returns(Or sets) the current maximum load factor of the unordered set container.
+emplace_hint() Inserts a new element in the unordered_set only if the value to be inserted is unique, with a given hint.
+== operator The ‘==’ is an operator in C++ STL that performs an equality comparison operation between two unordered sets and unordered_set::operator== is the corresponding operator function for the same.
+key_eq() Returns a boolean value according to the comparison. It returns the key equivalence comparison predicate used by the unordered_set.
+operator!= The != is a relational operator in C++ STL which compares the equality and inequality between unordered_set containers.
+max_bucket_count()  Find the maximum number of buckets that unordered_set can have.
+
+Unordered multiset is the same except we can have multipul copies of the same key
+
+insert()	Inserts new elements in the unordered_multiset. This increases the container size.
+begin()	Returns an iterator pointing to the first element in the container or the first element in one of its buckets.
+end()	Returns an iterator pointing to the position immediately after the last element in the container or to the position immediately after the last element in one of its buckets.
+empty()	It returns true if the unordered_multiset container is empty. Otherwise, it returns false.
+find()	Returns an iterator that points to the position which has the element val.
+cbegin()	Returns a constant iterator pointing to the first element in the container or the first element in one of its buckets.
+cend()	Returns a constant iterator pointing to the position immediately after the last element in the container or immediately after the last element in one of its buckets.
+equal_range()	Returns the range in which all the elements are equal to a given value.
+emplace()	Inserts a new element in the unordered_multiset container.
+clear()	Clears the contents of the unordered_multiset container.
+count()	Returns the count of elements in the unordered_multiset container which is equal to a given value.
+size()	The size() method of unordered_multiset is used to count the number of elements of unordered_set it is called with.
+max_size	The max_size() of unordered_multiset takes the maximum number of elements that the unordered_multiset container is able to hold.
+swap()	Swaps the contents of two unordered_multiset containers.
+erase()	Used to remove either a single element or, all elements with a definite value or, a range of elements ranging from the start(inclusive) to the end(exclusive).
+bucket()	Returns the bucket number in which a given element is. Bucket size varies from 0 to bucket_count-1.
+bucket_size()	Returns the number of elements in the bucket that has the element val.
+reserve()	The reverse() function of unordered_multiset sets the number of buckets in the container (bucket_count) to the most appropriate to contain at least n elements.
+max_bucket_count()	Returns the maximum number of buckets that the unordered multiset container can have.
+load_factor()	Returns the current load factor in the unordered_multiset container.
+max_load_factor()	Returns the maximum load factor of the unordered_multiset container.
+bucket_count()	Returns the total number of buckets in the unordered_multiset container.
+hash_function()	This hash function is a unary function that takes a single argument only and returns a unique value of type size_t based on it.
+rehash()	Sets the number of buckets in the container to N or more.
+key_eq()	Returns a boolean value according to the comparison.
+emplace_hint()	Inserts a new element in the unordered_multiset container.
+get_allocator	This function gets the stored allocator object and returns the allocator object used to construct the container.
+operator =	 The ‘=’ is an operator in C++ STL that copies (or moves) an unordered_multiset to another unordered_multiset and unordered_multiset::operator= is the corresponding operator function.
+
+Unordered Map
+
+combination of key value and mapped value, so a dictionary
+and its using a hashtable, so search insert and delete are O(1)
+not sorted
+
+at()	This function in C++ unordered_map returns the reference to the value with the element as key k
+begin()	Returns an iterator pointing to the first element in the container in the unordered_map container
+end()	Returns an iterator pointing to the position past the last element in the container in the unordered_map container
+bucket()	Returns the bucket number where the element with the key k is located in the map
+bucket_count	Bucket_count is used to count the total no. of buckets in the unordered_map. No parameter is required to pass into this function
+bucket_size	Returns the number of elements in each bucket of the unordered_map
+count()	Count the number of elements present in an unordered_map with a given key
+equal_range	Return the bounds of a range that includes all the elements in the container with a key that compares equal to k
+find()	Returns iterator to the element
+empty()	Checks whether the container is empty in the unordered_map container
+erase()	Erase elements in the container in the unordered_map container
+
+Unordered Multimap
+
+begin()– Returns an iterator pointing to the first element in the container or to the first element in one of its bucket.
+end()– Returns an iterator pointing to the position after the last element in the container or to the position after the last element in one of its bucket.
+count()– Returns the number of elements in the container whose key is equal to the key passed in the parameter.
+cbegin()– Returns a constant iterator pointing to the first element in the container or to the first element in one of its bucket.
+cend()– Returns a constant iterator pointing to the position after the last element in the container or to the position after the last element in one of its bucket.
+clear() – Clears the contents of the unordered_multimap container.
+size()– Returns the size of the unordered_multimap. It denotes the number of elements in that container.
+swap()– Swaps the contents of two unordered_multimap containers. The sizes can differ of both the containers.
+find()– Returns an iterator which points to one of the elements which have the key k.
+bucket_size()– Returns the number of elements in the bucket n.
+empty()– It returns true if the unordered_multimap container is empty. Otherwise, it returns false.
+equal_range()– Returns the range in which all the element’s key is equal to a key.
+operator=– Copy/Assign/Move elements from different container.
+max_size()– Returns the maximum number of elements that the unordered_multimap container can hold.
+load_factor()– Returns the current load factor in the unordered_multimap container.
+key_eq()– Returns a boolean value according to the comparison.
+emplace()– Inserts a new {key, element} in the unordered_multimap container.
+emplace_hint()– Inserts a new {key:element} in the unordered_multimap container.
+bucket_count()– Returns the total number of buckets in the unordered_multimap container.
+bucket()– Returns the bucket number in which a given key is.
+max_load_factor()– Returns the maximum load factor of the unordered_multimap container.
+rehash()– Sets the number of buckets in the container to N or more.
+reserve()– Sets the number of buckets in the container (bucket_count) to the most appropriate number so that it contains at least n elements.
+hash_function()– This hash function is a unary function that takes a single argument only and returns a unique value of type size_t based on it.
+max_bucket_count()– Returns the maximum number of buckets that the unordered multimap container can have.
+
+scanf is faster than cin, incase syncing is enabled
+
+
+
+Iterators
+iterators are an object (pretty much a pointer) that is used to move through the
+contents of the container
+
+Supported Iterators:
+vector - random access
+list - bidirectional
+deque - random access
+map - bidirectional
+multimap - bidirectional
+set - bidirectional
+multiset - bidirectional
+stack - no iterator supported
+queue - no iterator supported
+priority_queue - no iterator supported
+
+Types of iterators:
+- Input: reading only in a one time pass
+- Output: writing only in a one time pass
+- Forward: read and write, one time pass
+- Bidirectional: it can move in both directions
+- Random-Access: not limited to moving sequentially
+
+vector<int>::iterator i;
+for (i = v.begin(); i != v.end(); ++i)
+{
+  cout << *i << " ";
+}
+
+Multithreading
+std::thread thread_object (callable);
+std::thread thread_object (callable, parameters_for_the_callable);
+callable means any code and its address, so:
+function pointer
+lambda expression
+function object
+non-Static member function
+static member function
+
+Smart pointers
+A wrapper class over a pointer aka <T>*
+except they can allocate and free memory
+and they do it when their destructor gets called
+aka when they get out of scope
+
+auto_ptr DEPRECATED in turn of unique_ptr
+These pointers are used when you want to make sure
+there is only one pointer to some memory
+but you also want to change the pointer to the same memory
+lets say a dynamic array
+if auto_ptr1 is pointing to it
+and auto_ptr2 asks to point to it
+auto_ptr1 will hand over the ownership to auto_ptr2
+auto_ptr1 is now NULL, and auto_ptr2 holds the address
+they cannot be copied, and no arrays
+
+unique_ptr
+when you want to ensure that
+there is only a single owner of memory
+and that only if it chooses to remove itself
+another pointer can take its place
+you can use move to change the ownership explicitly
+unique_ptr<T> unique_ptr1(new T(..));
+unique_ptr<T> unique_ptr2;
+unique_ptr2 = move(unique_ptr1);
+
+shared_ptr
+is a shared pointer between many objects
+and it only gets deallocated after all
+references to it are out of scope
+it accomplishes this by keeping a count
+
+weak_ptr
+a pointer that can point to memory
+without holding any ownership over it
+it provides access to an object that is owned
+by one or more shared_ptr instances
+it is also used to break cyclic dependency
+but does not participate in reference counting
+
+Passing a function to a function
+passing as pointer
+using std::function<>
+using lambdas
+
+in definition:
+int (*func)(int, int)
+function<int(int, int)> func
+
+when calling:
+&func
+[](int x, int y) -> int {return x + y;});
+
+Templates
+they are pretty much macros for anything and everything
+
+template <typename T>
+T myMax(T x, T y)
+{
+    return (x > y) ? x : y;
+}
+
+template <typename T>
+class Array {
+private:
+    T* ptr;
+    int size;
+
+public:
+    Array(T arr[], int s);
+    void print();
+};
+
+template <typename T>
+Array<T>::Array(T arr[], int s)
+{
+    ptr = new T[s];
+    size = s;
+    for (int i = 0; i < size; i++)
+        ptr[i] = arr[i];
+}
+
+template <typename T>
+void Array<T>::print()
+{
+    for (int i = 0; i < size; i++)
+        cout << " " << *(ptr + i);
+    cout << endl;
+}
+
+you can also declare multipul classes, types, structs...
+template <class T, class U>
+
+Just an accumulation of tricks:
+cin.ignore(n, delim); //removes either n characters or one compares to delim
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+cout.tie(NULL);
+<< '\n' instead of << endl
+you can check if a number is odd using "num & 1" (1st bit must be 1 for odd)
+multiplying by 2 is slower than shifting bits to the left by 1
+xoring for swap
+makes strlen not so important
+for (i=0; s[i]; i++) { ... }
+emplace_back is much faster because it never allocates memory if not needed
+Suppose the number is N then
+Let int K = log10(N); // number of digits in a number=log10(N)+1
+And int X = pow(10, K);
+Then int ans=N/X will be the most significant digit
+Number of digits in N = floor(log10(N)) + 1;
+Check for power of 2: return x && (!(x&(x-1)));
+use of:
+all_of(start, end, function_ptr_for_cmp());
+any_of(...);
+none_of(...);
+copy_n(source, n, dest);
+iota(start_addr, end_addr, start_from); //does ++i for increment
+
