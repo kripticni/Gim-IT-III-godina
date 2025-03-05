@@ -7,7 +7,7 @@ koeficienata:
 ```octave
 	3x^2 + 5x + 1
 	[3 5 1]
-	#kada nemamo neki stepej, njegov koeficient je nula
+	%kada nemamo neki stepen, njegov koeficient je nula
 	3x^4 + 5x + 1
 	[3 0 0 5 1]
 ```
@@ -18,6 +18,7 @@ Da bi smo izracunali Y za neki X u polinomu:
 	x = 4
 	y = polyval(p, x)
 ```
+
 Da bi smo grafirali funkciju, samo moramo da
 znamo opseg X (i korak):
 ```octave
@@ -52,30 +53,28 @@ Da bi smo pomnozili ili podelili, koristimo
 operacije **konvolucije** (nacin kombinovanja
 koeficienta dva vektora, da bi smo dobili treci):
 ```octave
-	# conv za mnozenje, deconv za deljenje
+	% conv za mnozenje deconv za deljenje
 	a=[3 15 0 -10 -3 15 -40];
 	b=[3 0 -2 -6];
 	c = conv(a,b)
 	
-	# a -> brojilac
-	# b -> imenilac
-	# c -> rezultat
-	# o -> ostatak
+	% a -> brojilac
+	% b -> imenilac
+	% c -> rezultat
+	% o -> ostatak
 	[c o] = deconv(a,b)
 ```
-
-
 
 **Polyder** funkcija za izvode
 ima nekoliko overload-a:
 ```octave
-	# 1. izracunavanje izvoda jednog polinoma
+	% 1. izracunavanje izvoda jednog polinoma
 	c = polyder(a)
 	
-	# 2. izvod proizvoda dva polinoma
+	% 2. izvod proizvoda dva polinoma
 	c = polyder (a, b)
 	
-	# 3. izvod kolicnika
+	% 3. izvod kolicnika
 	[c d] = polyder(a, b)
 	(c -> brojioc, d -> imenioc
 	a -> brojioc, b -> imenioc)
@@ -90,7 +89,7 @@ tacke x, y (ili barem blizu):
 	y = [4 3 2 1]
 	n = 1
 	p = polyfit(x,y,n)
-	dobili bi -x+5 donosno [-1 5]
+    % dobili bi -x+5 donosno [-1 5]
 ```
 
 ## Trodimenzionalni grafikoni
@@ -109,12 +108,12 @@ Za grafikon trece dimenzije:
 plot3(x,y,z,*svojstva...*)
 crta liniju koja povezuje sve tacke u 3d:
 ```octave
-	# ako znamo da su parametri
+	% ako znamo da su parametri
 	x=cos(2t)
 	y=cos(2t)
 	z=0.5t
 	0 =< t =< 6\*pi
-	# onda mozemo da izgrafiramo ovako
+	% onda mozemo da izgrafiramo ovako
 	t=0:0.1:6\*pi;
 	x=sqrt(t).\*sin(2\*t);
 	y=sqrt(t).\*cos(2\*t);
@@ -128,17 +127,17 @@ Postoje i mrezasti i povrsinski 3d grafikoni
 oni su predstavljeni kao:
 ```octave
 	z=f(x,y)
-	# 1. prvo biramo opseg za x, y nezavisno
+	% 1. prvo biramo opseg za x i y nezavisno
 	x=-1:3
 	y=1:4
-	# 2. pravimo matricu koja pokriva sve tacke (x,y,0)
+	% 2. pravimo matricu koja pokriva sve tacke (x,y,0)
 	[X,Y] = meshgrid(x,y)
-	# 3. racunamo Z za svaku tacku (uzeto proizvoljna f-ija)
+	% 3. racunamo Z za svaku tacku (uzeto proizvoljna f-ija)
 	Z= X.* Y.^2 ./ (X.^2 + Y.^2)
-	# 4. prikazujemo mesoviti ili povrsinski
+	% 4. prikazujemo mesoviti ili povrsinski
 	mesh(X,Y,Z)
-	# ili
-	# surf(X,Y,Z)
+	% ili
+	% surf(X,Y,Z)
 ```
 
 | Vrsta grafikona | Komanda |
@@ -149,10 +148,11 @@ oni su predstavljeni kao:
 | Tačkasti 3D     | `scatter3` |
 | Kružni 3D       | `pie` |
 
-primer za kruzni:
+Primer za kruzni:
 ```octave
 	x=[5 9 14 20];
-	explode=[0 0 1 0]; # odredjuje udaljenost odsecka od centra
+	explode=[0 0 1 0]; 
+    % explode, odredjuje udaljenost odsecka od centra
 	pie3(x,explode)
 ```
 
@@ -202,7 +202,7 @@ Ako hocemo da stavimo graf na koordinatama (2,3)
 u subplotu dimenzija 2x3, onda stavljamo
 subplot(2,3,6)
 
-primer ovih funkcija:
+Primer ovih funkcija:
 ```octave
 	x=0:1:5;
 	y=[1 -0.6242 -1.4707 3.2406 -0.7366 -6.3717];
