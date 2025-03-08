@@ -45,7 +45,7 @@ VALUES (3, 'Mila', 'Milosavljevic', 700000, 'Z', TO_DATE('08-03-2025','YYYY-MM-D
 
 | **Operator** | **Description**                                    |
 |--------------|----------------------------------------------------|
-| **`||`**     | Joins fields and columns together as strings      |
+| **`\|\|`**     | Joins fields and columns together as strings      |
 | **`*`**      | Wildcard that selects everything available   |
 | **`;`**      | Denotes the end of the query                     |
 
