@@ -113,6 +113,7 @@ WHERE plata >= 50000
 
 SELECT pol, AVG(plata)
 FROM zaposljeni
+GROUP BY pol
 HAVING AVG(plata) < 100000
 ```
 
@@ -145,6 +146,7 @@ WHERE plata BETWEEN 30000 AND 500000 OR id IN(1,2,5,8,10) AND date IS NOT NULL;
 
 SELECT pol, AVG(plata)
 FROM zaposljeni
+GROUP BY pol
 HAVING AVG(plata) BETWEEN 30000 AND 500000;
 ```
 
