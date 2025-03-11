@@ -24,22 +24,25 @@ CREATE TABLE zaposljeni(
   pol CHAR(1) NOT NULL,
   zaposljen DATE,
 );
+```
 
 INSERT INTO %(%,...), inserts new entities into a table % and inserts into % columns
 VALUES(%,...), defines which values to insert from an insert into statement
-example:
+Example:
+```SQL
 INSERT INTO zaposljeni(id, ime, prezime, plata, pol, zaposljen)
-VALUES (1, 'Lazar', 'Lazarevic', 900000, 'M', TO_DATE('08-03-2025','YYYY-MM-DD'))
+VALUES (1, 'Lazar', 'Lazarevic', 900000, 'M', TO_DATE('2025-03-08','YYYY-MM-DD'))
 INSERT INTO zaposljeni(id, ime, prezime, plata, pol, zaposljen)
-VALUES (2, 'Jovan', 'Jovanovic', 800000, 'M', TO_DATE('08-03-2025','YYYY-MM-DD'))
+VALUES (2, 'Jovan', 'Jovanovic', 800000, 'M', TO_DATE('2025-03-08','YYYY-MM-DD'))
 INSERT INTO zaposljeni(id, ime, prezime, plata, pol, zaposljen)
-VALUES (3, 'Mila', 'Milosavljevic', 700000, 'Z', TO_DATE('08-03-2025','YYYY-MM-DD'));
+VALUES (3, 'Mila', 'Milosavljevic', 700000, 'Z', TO_DATE('2025-03-08','YYYY-MM-DD'));
 ```
 
 ## **Queries**:
 | **Keyword** | **Description**                                |
 |-------------|------------------------------------------------|
 | **SELECT %** | Chooses columns to query from                |
+| **DISTINCT** | Put after select to show only unique data                |
 | **FROM %**   | Chooses the table from which to query columns defined in `SELECT` |
 | **AS**       | Renames a column temporarily                 |
 
