@@ -41,8 +41,7 @@ void kmp(char str[], char text[]) {
 
       if (j == m) {
         printf("Nadjeno na indeksu: %i\n", i - j);
-        return; //ako trazimo jedno pojavljivanje
-        //j = lps[j - 1]; // ako trazimo vise
+        j = lps[j - 1]; //trazimo vise ponavljanja
       }
     }
 
