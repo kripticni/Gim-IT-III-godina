@@ -17,7 +17,7 @@ operacije:
 >>, arithmetic right shift
 <<, arithmetic left shift
 printf format string:
-%h znaci short ali mora da se naglasi 
+%h znaci short ali mora da se naglasi
 da li je integer ili unsigned sa i ili u
 %hu short unsigned, %hi short signed
 
@@ -42,6 +42,7 @@ void getbitn(unsigned a, short n);    //ispisuje bit na poziciji n
 void setbitn(unsigned a, short n);    //postavlja 1 na poziciji i prikazuje bin
 void unsetbitn(unsigned a, short n);  //postavlja 0 na poziciji i prikazuje bin
 void invertbitn(unsigned a, short n); //menja stanje na n-ti bit i ispisuje
+void frompinvertn(unsigned a, short p, short n); //invertuje n pitova od pozicije p
 
 int main(){
   int a = 3;
@@ -91,6 +92,9 @@ int main(){
 
   printf("Invertuje bit na N i ispisuje (n = 3) (a = 7): ");
   invertbitn(a,3);
+
+  printf("Na poziciji p invertuje sledecih n bitova i ispisuje\n(n = 4) (p = 4) (a = 7)");
+  frompinvertn(a,4,4);
 }
 
 short copy6lsb(short a){
@@ -157,6 +161,12 @@ void unsetbitn(unsigned a, short n){
 
 void invertbitn(unsigned a, short n){
   printbin(a^(1<<n));
+}
+
+void frompinvertn(unsigned a, short p, short n){
+    unsigned mask = 0xFFFFFFFF;
+    mask = ~(mask << n) << (p - 1);
+    printbin(a^mask);
 }
 
 //licne pomocne funkcije za pokazivanje bitova
