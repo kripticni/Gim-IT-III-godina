@@ -1,0 +1,15 @@
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/bin/Debug/net8.0/socket
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/bin/Debug/net8.0/socket.deps.json
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/bin/Debug/net8.0/socket.runtimeconfig.json
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/bin/Debug/net8.0/socket.dll
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/bin/Debug/net8.0/socket.pdb
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.GeneratedMSBuildEditorConfig.editorconfig
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.AssemblyInfoInputs.cache
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.AssemblyInfo.cs
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.csproj.CoreCompileInputs.cache
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.sourcelink.json
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.dll
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/refint/socket.dll
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.pdb
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/socket.genruntimeconfig.cache
+/home/aleksic/Gim-IT-III-godina/Objektno Orijentisano/Projekti/p2pchat/socket/obj/Debug/net8.0/ref/socket.dll

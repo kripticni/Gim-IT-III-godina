@@ -12,8 +12,7 @@ the structure is:
 | **INTEGER(%)**     | 32-bit integer                                 |
 | **DATE**           | Format `YYYY-MM-DD`                            |
 | **TIME**           | Format `00:00:00`                              |
-| **DATETIME(fsp)**  | `DATE + TIME` formats
-
+| **DATETIME(fsp)**  | `DATE + TIME` formats                          |
 Example of a table creation:
 ```SQL
 CREATE TABLE zaposljeni(
