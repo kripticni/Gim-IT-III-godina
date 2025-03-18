@@ -19,6 +19,7 @@ namespace GUI
 
         private void UserControl4_Load(object sender, EventArgs e)
         {
+            richTextBox1.ReadOnly = true;
             richTextBox1.Rtf = "{\\rtf1\\ansi\\deff0\r\n" + 
                 "{\\colortbl ;\\red0\\green0\\blue0;\\red0\\green128\\blue255;\\red34\\green177\\blue76;\\red255\\green165\\blue0;}\r\n" + 
                 "\r\n" + "{\\b\\fs48\\cf2 Welcome to P2PChat!}\\par\r\n" + 

@@ -17,6 +17,12 @@ namespace GUI
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            fixButtonBorders();
+            showUserControl(userControl41);
+        }
+
         private void fixButtonBorder(Button button){
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 2;
@@ -38,14 +44,13 @@ namespace GUI
             selected.Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            fixButtonBorders();
-            showUserControl(userControl41);
-        }
-
         private void button2_Click(object sender, EventArgs e){
             showUserControl(userControl21);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            showUserControl(userControl31);
         }
     }
 }
