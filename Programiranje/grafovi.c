@@ -57,6 +57,26 @@ int povezaniElementi(int g[5][5], int a, int b){
     return 0;
 }
 
+typedef struct{
+    char ime[20];
+    char prezime[20];
+}Osoba;
+
+int prijatelji(int g[5][5], int n){
+    int max = 0, imax = 0, br, i, j;
+    for(i = 0; i < n; ++i){
+        br = 0;
+        for(j = 0; j < n; ++j)
+            if(g[i][j]==1 && i!=j)
+                ++br;
+        if(br > max){
+            max = br;
+            imax = i;
+        }
+    }
+    return imax;
+}
+
 int main(){
   const int n = 5;
   int matrica1[5][5] = {
