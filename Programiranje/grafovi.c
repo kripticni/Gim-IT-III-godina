@@ -62,7 +62,7 @@ typedef struct{
     char prezime[20];
 }Osoba;
 
-int prijatelji(int g[5][5], int n){
+int maxPrijatelja(int g[5][5], int n){
     int max = 0, imax = 0, br, i, j;
     for(i = 0; i < n; ++i){
         br = 0;
@@ -75,6 +75,19 @@ int prijatelji(int g[5][5], int n){
         }
     }
     return imax;
+}
+
+void ispisPrijatelja(int g[5][5], Osoba o[5], int i, int n){
+    printf("%s %s ima prijatelje:",o[i].ime,o[i].prezime);
+    for(int j = 0; j < n; ++j)
+        if(g[i][j])
+            printf("\t%s %s", o[j].ime, o[j].prezime);
+    printf("\n");
+}
+
+void ispisSvihPrijatelja(int g[5][5], Osoba o[5], int n){
+    for(int i = 0; i < n; ++i)
+        ispisPrijatelja(g,o,i,n);
 }
 
 int main(){
