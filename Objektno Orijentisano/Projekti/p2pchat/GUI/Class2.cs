@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 
 
-public class Korisnik : Osoba
+public class Korisnik : Osoba, IFajl
 {
 	private string korisnicko_ime;
     public string KorisnickoIme {
@@ -112,26 +112,11 @@ public class Korisnik : Osoba
 		promeniProfilnu(_put_do_slike);
     }
 
-    public Korisnik(StreamReader r)
+	#region interface
+	override public string podrazumevani_fajl { get; set; } = "korisnik.txt";
+	override public void Pisi(string put)
     {
-        Ime = r.ReadLine();
-        Prezime = r.ReadLine();
-        DatumRodjenja = DateTime.Parse(r.ReadLine());
-        Pol = r.ReadLine();
-		KorisnickoIme = r.ReadLine();
-		Email = r.ReadLine();
-		BrojTelefona = r.ReadLine();
-		put_do_profilne = r.ReadLine();
-        r.Close();
-    }
-
-	//zato sto metoda SacuvajInformacije
-	//u baznoj klasi nije abstraktna (ni virtualna, ni override)
-	//koristimo new da bi smo samo sakrili metodu iz bazne klase
-	//iz ovog scope-a
-    new public void SacuvajInformacije()
-    {
-        StreamWriter w = new StreamWriter("korisnik.txt");
+        StreamWriter w = new StreamWriter(put);
         w.WriteLine(Ime);
         w.WriteLine(Prezime);
         w.WriteLine(DatumRodjenja.ToString());
@@ -142,4 +127,44 @@ public class Korisnik : Osoba
 		w.WriteLine(put_do_profilne);
         w.Close();
     }
+    override public void Pisi()
+    {
+        StreamWriter w = new StreamWriter(podrazumevani_fajl);
+        w.WriteLine(Ime);
+        w.WriteLine(Prezime);
+        w.WriteLine(DatumRodjenja.ToString());
+        w.WriteLine(Pol);
+        w.WriteLine(KorisnickoIme);
+        w.WriteLine(Email);
+        w.WriteLine(BrojTelefona);
+        w.WriteLine(put_do_profilne);
+        w.Close();
+    }
+    override public void Citaj(string put)
+    {
+        StreamReader r = new StreamReader(put);
+        Ime = r.ReadLine();
+        Prezime = r.ReadLine();
+        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        Pol = r.ReadLine();
+        KorisnickoIme = r.ReadLine();
+        Email = r.ReadLine();
+        BrojTelefona = r.ReadLine();
+        put_do_profilne = r.ReadLine();
+        r.Close();
+    }
+    override public void Citaj()
+    {
+		StreamReader r = new StreamReader(podrazumevani_fajl);
+        Ime = r.ReadLine();
+        Prezime = r.ReadLine();
+        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        Pol = r.ReadLine();
+        KorisnickoIme = r.ReadLine();
+        Email = r.ReadLine();
+        BrojTelefona = r.ReadLine();
+        put_do_profilne = r.ReadLine();
+        r.Close();
+    }
+    #endregion
 }

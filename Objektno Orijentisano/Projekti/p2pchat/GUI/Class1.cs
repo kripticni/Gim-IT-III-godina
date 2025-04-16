@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-public abstract class Osoba
+public abstract class Osoba : IFajl
 {
 	protected string ime;
 	protected string prezime;
@@ -98,21 +98,46 @@ public abstract class Osoba
         Pol = _pol;
     }
 
-    public Osoba(StreamReader r) {
+	#region interface
+	virtual public string podrazumevani_fajl { get; set; } = "osoba.txt";
+
+	//ovde koristimo virtual jer hocemo da
+	//osoba ima svoju podrazumevanu implementaciju
+	//i jer hocemo da override-ujemo u izvedenim klasama
+    virtual public void Pisi(string put)
+    {
+        StreamWriter w = new StreamWriter(put);
+        w.WriteLine(Ime);
+        w.WriteLine(Prezime);
+        w.WriteLine(DatumRodjenja.ToString());
+        w.WriteLine(Pol);
+        w.Close();
+    }
+    virtual public void Pisi()
+    {
+        StreamWriter w = new StreamWriter(podrazumevani_fajl);
+        w.WriteLine(Ime);
+        w.WriteLine(Prezime);
+        w.WriteLine(DatumRodjenja.ToString());
+        w.WriteLine(Pol);
+        w.Close();
+    }
+    virtual public void Citaj(string put) {
+		StreamReader r = new StreamReader(put);
         Ime = r.ReadLine();
         Prezime = r.ReadLine();
         DatumRodjenja = DateTime.Parse(r.ReadLine());
         Pol = r.ReadLine();
         r.Close();
 	}
-
-	public void SacuvajInformacije()
-	{
-		StreamWriter w = new StreamWriter("osoba.txt");
-        w.WriteLine(Ime);
-        w.WriteLine(Prezime);
-        w.WriteLine(DatumRodjenja.ToString());
-        w.WriteLine(Pol);
-        w.Close();
-	}
+    virtual public void Citaj()
+    {
+        StreamReader r = new StreamReader(podrazumevani_fajl);
+        Ime = r.ReadLine();
+        Prezime = r.ReadLine();
+        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        Pol = r.ReadLine();
+        r.Close();
+    }
+    #endregion 
 }
