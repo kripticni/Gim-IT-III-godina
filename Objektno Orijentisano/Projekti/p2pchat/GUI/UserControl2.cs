@@ -127,11 +127,20 @@ namespace GUI
             PowerStatus ps = SystemInformation.PowerStatus;
             textBox8.Text = Convert.ToString(ps.BatteryLifePercent * 100) + ',' + ps.BatteryChargeStatus.ToString();
         }
+
+        private void fillComboBox()
+        {
+            comboBox1.Items.Clear();
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+                comboBox1.Items.Add(nic.Name);
+        }
+
         public UserControl2()
         {
             InitializeComponent();
 
             textBoxReadOnly();
+            fillComboBox();
 
             WriteHostname();
             WritePublicIP(); //no await, parallel
@@ -144,6 +153,17 @@ namespace GUI
             WriteAdapterType();
             WriteOS();
             WritePower();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string adp = comboBox1.SelectedItem.ToString();
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+                if (nic.Name == adp)
+                {
+                    //update
+                    //break;
+                }
         }
     }
 }
