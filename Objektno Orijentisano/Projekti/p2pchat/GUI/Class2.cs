@@ -48,7 +48,7 @@ public class Korisnik : Osoba, IFajl
     {
 		if (br_telefona == string.Empty)
 			return false;
-        string sablon = @"^\+\(\d{3}\) \(\d{3}\) \(\d{7}\)$";
+        string sablon = @"^\+\(\d{3}\) \d{3} \d{6,7}$";
         return Regex.IsMatch(br_telefona, sablon);
     }
     public string BrojTelefona
@@ -67,6 +67,7 @@ public class Korisnik : Osoba, IFajl
 	}
 
 	private Bitmap profilna;
+	public string PutDoProfilne { get { return put_do_profilne; } }
 	private string put_do_profilne;
 
 	public static bool validnaSlika(string put)
@@ -112,8 +113,22 @@ public class Korisnik : Osoba, IFajl
 		promeniProfilnu(_put_do_slike);
     }
 
-	#region interface
-	override public string podrazumevani_fajl { get; set; } = "korisnik.txt";
+    public Korisnik(string _ime, string _prezime, DateTime _datum_rodjenja, string _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
+     : base(_ime, _prezime, _datum_rodjenja, _pol)
+    {
+        KorisnickoIme = _korisnicko_ime;
+        Email = _email;
+        BrojTelefona = _broj_telefona;
+        promeniProfilnu(_put_do_slike);
+    }
+
+	public Korisnik(string put)
+	{
+		this.Citaj(put);
+	}
+
+    #region interface
+    override public string podrazumevani_fajl { get; set; } = "korisnik.txt";
 	override public void Pisi(string put)
     {
         StreamWriter w = new StreamWriter(put);

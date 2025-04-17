@@ -98,6 +98,11 @@ public abstract class Osoba : IFajl
         Pol = _pol;
     }
 
+	public Osoba(string put)
+	{
+		this.Citaj(put);
+	}
+
 	#region interface
 	virtual public string podrazumevani_fajl { get; set; } = "osoba.txt";
 
