@@ -9,113 +9,168 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
-
+using System.Net.Security;
+using System.IO;
 class Mreza
 {
-    public NetworkInterface Nic { get; set; }
-
-
     public Mreza(NetworkInterface nic)
     {
         Nic = nic;
     }
-
-    public string PublicIP { get; private set; }
-    public bool isPublicIPv4 { get; private set; }
-    private async Task<string> PublicIP_API()
+    public Mreza(NetworkInterface nic, IPAddress addr)
     {
-        using (HttpClient client = new HttpClient())
-        {
-            try
-            {
-                PublicIP = await client.GetStringAsync("https://api.ipify.org");
-                return PublicIP;
-            }
-            catch
-            {
-                MessageBox.Show("Greska sa konekcijom.");
-                PublicIP = string.Empty;
-                return string.Empty;
-            }
-        }
+        Nic = nic;
+        PrivateIP = addr;
     }
 
-    public IPAddress PrivateIP { get; private set; }
-    public bool isPrivateIPv4 { get; private set; }
-    private void PrivateIP_Local()
-    {
-        foreach (var address in Nic.GetIPProperties().UnicastAddresses)
+    private NetworkInterface nic;
+    public NetworkInterface Nic { 
+        get { return nic; }
+        set
         {
-            if (address.Address.AddressFamily == AddressFamily.InterNetwork)
-            { 
-                isPrivateIPv4 = true;
-            }
-            else
-            { 
-                isPrivateIPv4 = false;
-            }
-            PrivateIP = address.Address;
+            bool exists = false;
+            foreach (var NIC in NetworkInterface.GetAllNetworkInterfaces())
+                if (NIC.Id == value.Id)
+                {
+                    exists = true;
+                    break;
+                }
+            if (!exists)
+                throw new ArgumentException("Adapter ne postoji.");
+            nic = value;
+            GetNicType();
+            GetMAC();
         }
+    }
+    public NetworkInterfaceType NicType { get; private set; }
+    public PhysicalAddress MAC { get; private set; }
+    private void GetMAC()
+    {
+        MAC = Nic.GetPhysicalAddress();
+    }
+    private void GetNicType()
+    {
+        NicType = Nic.NetworkInterfaceType;
+    }
+
+    private IPAddress privateip;
+    public IPAddress PrivateIP {
+        get { return privateip; }
+        set {
+            bool exists = false;
+            foreach(var addr in Nic.GetIPProperties().UnicastAddresses)
+            {
+                if(addr.Address == value)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+                throw new ArgumentException("Adresa ne postoji za adapter.");
+
+            privateip = value;
+            if (PrivateIP.AddressFamily == AddressFamily.InterNetwork)
+                isPrivateIPv4 = true;
+            else
+                isPrivateIPv4 = false;
+
+            GetPublicIP();
+            SubnetAndPrefix();
+            DefaultGateway();
+            GetDHCP();
+        } 
+    }
+    public bool isPrivateIPv4 { get; private set; }
+    public IPAddress PublicIP { get; private set; }
+    public bool isPublicIPv4 { get; private set; }
+
+    private void GetPublicIP()
+    {
+        //prvo razresimo ip addr od api-ja
+        IPAddress resolved_remote;
+        //https://api.ipify.org
+        const string PublicIPService = "api.ipify.org";
+        try
+        {
+            IPAddress[] host = Dns.GetHostAddresses(PublicIPService);
+            resolved_remote = host[0];
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Greska pri razresavanju adrese \"{PublicIPService}\". {ex}");
+        }
+        IPEndPoint local = new IPEndPoint(PrivateIP, 0);
+        IPEndPoint remote = new IPEndPoint(resolved_remote, 443); //port 443 za https
+
+        TcpClient client = new TcpClient();
+
+        client.Client.Bind(local);
+        client.Connect(remote);
+        SslStream sslStream = new SslStream(client.GetStream());
+        sslStream.AuthenticateAsClient(PublicIPService);
+
+        string request = $"GET / HTTP/1.1\r\nHost: {PublicIPService}\r\nConnection: close\r\n\r\n";
+        byte[] requestBytes = Encoding.ASCII.GetBytes(request);
+        sslStream.Write(requestBytes);
+        sslStream.Flush();
+
+        StreamReader r = new StreamReader(sslStream, Encoding.ASCII);
+        while (!r.EndOfStream)
+        {
+            //parseujemo liniju po liniju od response za
+            //liniju sa ip addresom
+            string line = r.ReadLine();
+            if(IPAddress.TryParse(line, out IPAddress ip))
+            {
+                PublicIP = ip;
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    isPublicIPv4 = true;
+                else if (ip.AddressFamily == AddressFamily.InterNetworkV6)
+                    isPublicIPv4 = false;
+                //Console.WriteLine(line);
+                break;
+            }
+            //Console.WriteLine(line);
+        }
+        client.Close();
     }
 
     public IPAddress Subnet { get; private set; }
     public int PrefixLength { get; private set; }
     private void SubnetAndPrefix()
     {
-        foreach (UnicastIPAddressInformation unicastIPAddressInformation in Nic.GetIPProperties().UnicastAddresses)
-            if (unicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork)
-                Subnet = unicastIPAddressInformation.IPv4Mask;
-            else if (unicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetworkV6)
-                PrefixLength = unicastIPAddressInformation.PrefixLength;
+        if (isPrivateIPv4)
+            foreach (UnicastIPAddressInformation unicast1 in Nic.GetIPProperties().UnicastAddresses)
+                if (unicast1.Address == PrivateIP)
+                    Subnet = unicast1.IPv4Mask;
+        else
+            foreach (UnicastIPAddressInformation unicast2 in Nic.GetIPProperties().UnicastAddresses)
+                if (unicast2.Address == PrivateIP)
+                    PrefixLength = unicast2.PrefixLength;
     }
 
     //ip verzija od gateway isto zavisi od lokalne ip verzije
     public IPAddress Gateway { get; private set; }
-    private void DefautltGateway()
-    {
-        if (Nic.OperationalStatus == OperationalStatus.Up)
-            foreach (GatewayIPAddressInformation gateway in Nic.GetIPProperties().GatewayAddresses)
-                Gateway = gateway.Address;
+    private void DefaultGateway()
+    { 
+        //moze da pravi problemi ako nic podrzava vise gateway
+        //adresa za obe adresne porodice, ali to se nece desiti za 
+        //nijedan desktop racunar
+        foreach (var gateway in Nic.GetIPProperties().GatewayAddresses)
+            if (gateway.Address.AddressFamily == PrivateIP.AddressFamily)
+                Gateway = gateway.Address;    
     }
 
-    private void WriteDHCP()
+    public bool DHCP { get; private set; }
+    private void GetDHCP()
     {
-        foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
-            if (nic.OperationalStatus == OperationalStatus.Up)
-            {
-                bool isDhcpEnabled = nic.GetIPProperties().GetIPv4Properties()?.IsDhcpEnabled ?? false;
-                textBox12.Text = isDhcpEnabled ? "Dynamic" : "Static";
-            }
-    }
-
-    private void WriteMAC() //LINQ, nice
-    {
-        textBox6.Text = NetworkInterface
-        .GetAllNetworkInterfaces()
-        .Where(nic => nic.OperationalStatus == OperationalStatus.Up && nic.NetworkInterfaceType != NetworkInterfaceType.Loopback)
-        .Select(nic => nic.GetPhysicalAddress().ToString())
-        .FirstOrDefault();
-    }
-
-    private void WriteAdapterType()
-    {
-        foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
-        {
-            string temp = nic.NetworkInterfaceType.ToString();
-            if (temp != "Loopback")
-                textBox10.Text = temp;
-        }
-    }
-
-    private void WriteOS()
-    {
-        textBox9.Multiline = true;
-        textBox9.Text = RuntimeInformation.OSDescription;
-    }
-
-    private void WritePower()
-    {
-        PowerStatus ps = SystemInformation.PowerStatus;
-        textBox8.Text = Convert.ToString(ps.BatteryLifePercent * 100) + ',' + ps.BatteryChargeStatus.ToString();
+        if (isPrivateIPv4)
+            // ?. null-conditional operator, ako GetIPV4... vrati null cela ekspresija
+            // postaje null umesto da dobijemo exception
+            // ?? null-coalescing operator, ako je ekspresija null, vraca drugu ekspresiju (false)
+            DHCP = Nic.GetIPProperties().GetIPv4Properties()?.IsDhcpEnabled ?? false;
+        else
+            DHCP = false; //C# nema biblioteke koje dozvoljavaju da razresimo ovo za IPv6
     }
 }
