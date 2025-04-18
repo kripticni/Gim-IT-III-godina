@@ -2,6 +2,8 @@
 using System.Text.RegularExpressions;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 
 public class Korisnik : Osoba, IFajl
@@ -66,23 +68,33 @@ public class Korisnik : Osoba, IFajl
 		}
 	}
 
-	private Bitmap profilna;
-	public string PutDoProfilne { get { return put_do_profilne; } }
+	private Image profilna;
+	
 	private string put_do_profilne;
-
-	public static bool validnaSlika(string put)
+    public string PutDoProfilne { get { return put_do_profilne; } 
+		set
+		{
+			promeniProfilnu(value);
+		}
+	}
+    public static bool validnaSlika(string put)
 	{
 		const int maxVelicina = 1 * 1024 * 1024; //1mb
+		FileInfo file = new FileInfo(put);
+
 		if (!File.Exists(put))
 			return false;
-			//throw new FileNotFoundException("Fajl nije pronadjen.");
+        //throw new FileNotFoundException("Fajl nije pronadjen.");
 
-		long velicina = new FileInfo(put).Length;
-		if (velicina > maxVelicina)
+        string[] ekstenzije = { ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tiff", ".tif", ".ico" };
+		if (!ekstenzije.Contains(file.Extension.ToLower()))
 			return false;
-		//throw new Exception("Fajl je veci od 1mb.");
 
-		return true;
+		if (file.Length > maxVelicina)
+			return false;
+        //throw new Exception("Fajl je veci od 1mb.");
+
+        return true;
 	}
 
 	public void promeniProfilnu(string put)
@@ -92,8 +104,11 @@ public class Korisnik : Osoba, IFajl
 		try
 		{
 			using (FileStream fs = new FileStream(put, FileMode.Open, FileAccess.Read))
-				using (Image img = Image.FromStream(fs, useEmbeddedColorManagement: false, validateImageData: true))
-					profilna = new Bitmap(img);
+			{
+				Image img = Image.FromStream(fs, false, true);
+				profilna?.Dispose();
+				profilna = new Bitmap(img);
+			}
 			put_do_profilne = put;
 		}
 		catch (Exception)
@@ -102,7 +117,19 @@ public class Korisnik : Osoba, IFajl
 		}
 	}
 
-	
+	public void postaviProfilnu(PictureBox pb) 
+	{
+		if (profilna == null)
+			throw new Exception("Nije ucitana profilna");
+
+		if (pb.Image != null)
+			pb.Image.Dispose();
+
+		pb.Image = profilna; 
+		//deli referencu jer hocu
+		//da direktno povezem klasu
+		//sa taj picturebox
+	}
 
     public Korisnik(string _ime, string _prezime, DateTime _datum_rodjenja, bool _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
 		: base(_ime, _prezime, _datum_rodjenja, _pol)
@@ -165,7 +192,7 @@ public class Korisnik : Osoba, IFajl
         KorisnickoIme = r.ReadLine();
         Email = r.ReadLine();
         BrojTelefona = r.ReadLine();
-        put_do_profilne = r.ReadLine();
+        PutDoProfilne = r.ReadLine();
         r.Close();
     }
     override public void Citaj()
@@ -178,7 +205,7 @@ public class Korisnik : Osoba, IFajl
         KorisnickoIme = r.ReadLine();
         Email = r.ReadLine();
         BrojTelefona = r.ReadLine();
-        put_do_profilne = r.ReadLine();
+        PutDoProfilne = r.ReadLine();
         r.Close();
     }
     #endregion
