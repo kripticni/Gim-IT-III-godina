@@ -123,8 +123,11 @@ namespace GUI
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                textBox16.Text = openFileDialog.FileName;
-                pictureBox1.Image = Image.FromFile(textBox16.Text);
+                if (Korisnik.validnaSlika(textBox16.Text))
+                {
+                    textBox16.Text = openFileDialog.FileName;
+                    pictureBox1.Image = Image.FromFile(textBox16.Text);
+                }
             }
         }
 
@@ -159,6 +162,7 @@ namespace GUI
             textBox15.Text = k.Email;
             maskedTextBox2.Text = k.BrojTelefona;
             textBox16.Text = k.PutDoProfilne;
+            k.postaviProfilnu(pictureBox1);
         }
     }
 }
