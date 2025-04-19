@@ -3,44 +3,20 @@
   "WorkspaceRootPath": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\p2pchat\\gui\\usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\p2pchat\\gui\\class5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\p2pchat\\gui\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\p2pchat\\gui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,8 +27,44 @@
       "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\p2pchat\\gui\\class7.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class7.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\class4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\interface1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -71,31 +83,69 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserControl3.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl3.cs",
+              "RelativeDocumentMoniker": "UserControl3.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl3.cs",
+              "RelativeToolTip": "UserControl3.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAkwDcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T14:17:24.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Class7.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class7.cs",
+              "RelativeDocumentMoniker": "Class7.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class7.cs",
+              "RelativeToolTip": "Class7.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T13:49:28.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Class6.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class6.cs",
+              "RelativeDocumentMoniker": "Class6.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class6.cs",
+              "RelativeToolTip": "Class6.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAmwHIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T04:34:13.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Class5.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class5.cs",
               "RelativeDocumentMoniker": "Class5.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class5.cs",
               "RelativeToolTip": "Class5.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCYAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAcwBEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T15:10:38.816Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T14:00:15.355Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-18T14:00:15.355Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 14,
               "Title": "Class4.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class4.cs",
               "RelativeDocumentMoniker": "Class4.cs",
@@ -103,12 +153,11 @@
               "RelativeToolTip": "Class4.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T16:06:58.684Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-16T16:06:58.684Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "Interface1.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Interface1.cs",
               "RelativeDocumentMoniker": "Interface1.cs",
@@ -120,59 +169,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 12,
               "Title": "Class3.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class3.cs",
               "RelativeDocumentMoniker": "Class3.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class3.cs",
               "RelativeToolTip": "Class3.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAowJoAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-16T11:35:03.467Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "Class2.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class2.cs",
               "RelativeDocumentMoniker": "Class2.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class2.cs",
               "RelativeToolTip": "Class2.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAcwIMAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAnwM8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-14T18:15:14.805Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Class1.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class1.cs",
               "RelativeDocumentMoniker": "Class1.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Class1.cs",
               "RelativeToolTip": "Class1.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAwCAAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAAD4vzIAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-14T18:11:48.967Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "UserControl2.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl2.cs",
               "RelativeDocumentMoniker": "UserControl2.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl2.cs",
               "RelativeToolTip": "UserControl2.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAtwKQAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAtwJIAAACQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-17T20:29:47.23Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "UserControl4.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl4.cs",
               "RelativeDocumentMoniker": "UserControl4.cs",
@@ -180,29 +229,32 @@
               "RelativeToolTip": "UserControl4.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAiwB0AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T16:32:28.902Z"
+              "WhenOpened": "2025-03-16T16:32:28.902Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 5,
               "Title": "UserControl4.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl4.cs",
               "RelativeDocumentMoniker": "UserControl4.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl4.cs [Design]",
               "RelativeToolTip": "UserControl4.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T16:08:15.907Z"
+              "WhenOpened": "2025-03-16T16:08:15.907Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 3,
               "Title": "UserControl3.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl3.cs",
               "RelativeDocumentMoniker": "UserControl3.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl3.cs [Design]",
               "RelativeToolTip": "UserControl3.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T16:04:28.855Z"
+              "WhenOpened": "2025-03-16T16:04:28.855Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -218,7 +270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "UserControl1.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\UserControl1.cs",
               "RelativeDocumentMoniker": "UserControl1.cs",
@@ -230,7 +282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 15,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\p2pchat\\GUI\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -238,8 +290,7 @@
               "RelativeToolTip": "Form1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T15:35:01.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T15:35:01.223Z"
             }
           ]
         }

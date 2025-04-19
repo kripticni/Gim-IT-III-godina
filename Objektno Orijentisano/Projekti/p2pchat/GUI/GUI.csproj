@@ -55,6 +55,8 @@
     <Compile Include="Class3.cs" />
     <Compile Include="Class4.cs" />
     <Compile Include="Class5.cs" />
+    <Compile Include="Class6.cs" />
+    <Compile Include="Class7.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
