@@ -4,6 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.Globalization;
 
 
 public class Korisnik : Osoba, IFajl
@@ -68,7 +70,7 @@ public class Korisnik : Osoba, IFajl
 		}
 	}
 
-	private Image profilna;
+	public Bitmap profilna { get; private set; }
 	
 	private string put_do_profilne;
     public string PutDoProfilne { get { return put_do_profilne; } 
@@ -131,6 +133,26 @@ public class Korisnik : Osoba, IFajl
 		//sa taj picturebox
 	}
 
+    public string EnkodirajBitmapB64(Bitmap bitmap, ImageFormat format)
+    {
+        using (MemoryStream ms = new MemoryStream())
+        {
+            bitmap.Save(ms, format);
+            byte[] imageBytes = ms.ToArray();
+            return Convert.ToBase64String(imageBytes);
+        }
+    }
+
+    // Decode Base64 string to Bitmap
+    public static Bitmap DekodirajBitmapB64(string base64)
+    {
+        byte[] imageBytes = Convert.FromBase64String(base64);
+        using (MemoryStream ms = new MemoryStream(imageBytes))
+        {
+            return new Bitmap(ms);
+        }
+    }
+
     public Korisnik(string _ime, string _prezime, DateTime _datum_rodjenja, bool _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
 		: base(_ime, _prezime, _datum_rodjenja, _pol)
     {
@@ -149,6 +171,46 @@ public class Korisnik : Osoba, IFajl
         promeniProfilnu(_put_do_slike);
     }
 
+	public Korisnik(string[] podaci)
+	{
+		Ime = "nepoznato";
+		Prezime = "nepoznato";
+		DatumRodjenja = DateTime.ParseExact("00/00/0000", "dd/mm/yyyy", CultureInfo.InvariantCulture);
+		Pol = "Musko";
+		KorisnickoIme = "nepoznato";
+		Email = "nepoznato@nepoznato";
+		BrojTelefona = "+(000) 000 0000000";
+		promeniProfilnu("defaultmalepfp.png");
+		foreach(string linija in podaci)
+		{
+			if (linija.StartsWith("Ime: ")) Ime = linija.Substring("Ime: ".Length);
+			if (linija.StartsWith("Prezime: ")) Prezime = linija.Substring("Ime: ".Length);
+			if (linija.StartsWith("Datum rodjenja: ")) DatumRodjenja = DateTime.ParseExact(linija.Substring("Datum rodjenja: ".Length), "dd/mm/yyyy", CultureInfo.InvariantCulture);
+			if (linija.StartsWith("Pol: ")) Pol = linija.Substring("Pol: ".Length);
+			if (linija.StartsWith("Korisnicko ime: ")) KorisnickoIme = linija.Substring("Korisnicko ime: ".Length);
+			if (linija.StartsWith("Email: ")) Email = linija.Substring("Email: ".Length);
+			if (linija.StartsWith("Broj telefona: ")) BrojTelefona = linija.Substring("Broj telefona: ".Length);
+			if (linija.StartsWith("Profilna: "))
+			{
+				string enkodirano = linija.Substring("Profilna: ".Length);
+				if (enkodirano == "defaultmalepfp.png")
+				{
+					promeniProfilnu("defaultmalepfp.png");
+					continue;
+				}
+				if (enkodirano == "defaultfemalepfp.png")
+				{
+					promeniProfilnu("defaultfemalepfp.png");
+					continue;
+				}
+				//nema provere, ali sobzirom da je bitmap
+				//i da je response ogranicen na 2mb, trebalo
+				//bi da je sve u redu ovako
+				profilna = DekodirajBitmapB64(enkodirano);
+			}
+		}
+	}
+
 	public Korisnik(string put)
 	{
 		this.Citaj(put);
@@ -166,7 +228,7 @@ public class Korisnik : Osoba, IFajl
 		w.WriteLine(KorisnickoIme);
 		w.WriteLine(Email);
 		w.WriteLine(BrojTelefona);
-		w.WriteLine(put_do_profilne);
+		w.WriteLine(PutDoProfilne);
         w.Close();
     }
     override public void Pisi()
@@ -179,7 +241,7 @@ public class Korisnik : Osoba, IFajl
         w.WriteLine(KorisnickoIme);
         w.WriteLine(Email);
         w.WriteLine(BrojTelefona);
-        w.WriteLine(put_do_profilne);
+        w.WriteLine(PutDoProfilne);
         w.Close();
     }
     override public void Citaj(string put)
