@@ -19,8 +19,20 @@ namespace GUI
 {
     public partial class UserControl2 : UserControl
     {
-        Mreza m; // Klasa za sve mrezne operacije
-        Korisnik k; // Za profil
+        public Peer p { get; private set; } //za mrezu i profil
+        private Mreza m; //privremeno
+        private Korisnik k; //privremeno
+
+        //da bi mogli da proverimo na form1 button
+        public ComboBox ComboBox1{
+            get { return comboBox1; }
+        }
+        public ComboBox ComboBox2
+        {
+            get { return comboBox2; }
+        }
+
+
         private void fillTextBoxes()
         {
             textBox1.ReadOnly = true;
@@ -46,6 +58,10 @@ namespace GUI
         List<NetworkInterface> interfaces = NetworkInterface.GetAllNetworkInterfaces().ToList();
         private void fillComboBoxes()
         {
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+
             comboBox3.Items.Clear();
             comboBox3.Items.Add("Musko");
             comboBox3.Items.Add("Zensko");
@@ -84,13 +100,19 @@ namespace GUI
             textBox9.Text = m.Gateway.ToString();
             textBox10.Text = m.Subnet.ToString();
             textBox11.Text = m.DHCP.ToString();
+            if (p != null)
+                if(p.Mreza != null)
+                    p.Mreza.PrivateIP = m.PrivateIP;
         }
 
 
         public UserControl2()
         {
             InitializeComponent();
+        }
 
+        private void UserControl2_Load(object sender, EventArgs e)
+        {
             fillTextBoxes();
             fillComboBoxes();
 
@@ -144,25 +166,63 @@ namespace GUI
         //ime, prezime, datum, pol, korisnicko ime, email, broj telefona, put do slike
         private void button3_Click(object sender, EventArgs e)
         {
-            k = new Korisnik(textBox12.Text, textBox13.Text, DateTime.ParseExact(maskedTextBox1.Text, "dd/mm/yyyy", CultureInfo.InvariantCulture),
+            k = new Korisnik(textBox12.Text, textBox13.Text, Datum.Parse(maskedTextBox1.Text),
                             comboBox3.SelectedItem.ToString(), textBox14.Text, textBox15.Text, maskedTextBox2.Text,
                             textBox16.Text);
-            
-            k.Pisi(textBox17.Text); //cuvamo u fajl
+            m = new Mreza(Mreza.NicParse(comboBox1.SelectedItem.ToString()), IPAddress.Parse(comboBox2.SelectedItem.ToString()));
+            p = new Peer(k, m, ParseCheckedListBox());
+
+            p.Pisi(textBox17.Text); //cuvamo u fajl
+            UcitajPeer(); //ucitavamo da bi napravili peer-a
+        }
+
+        private byte ParseCheckedListBox()
+        {
+            byte PrivacySettings = new byte();
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if(checkedListBox1.GetItemChecked(i))
+                {
+                    PrivacySettings = NetCalc.SetBit(PrivacySettings, i);
+                }
+            }
+            return PrivacySettings;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            k = new Korisnik(textBox17.Text);
-            textBox12.Text = k.Ime;
-            textBox13.Text = k.Prezime;
-            maskedTextBox1.Text = k.DatumRodjenja.ToString("/dd/mm/yyyy");
-            comboBox3.SelectedItem = k.Pol;
-            textBox14.Text = k.KorisnickoIme;
-            textBox15.Text = k.Email;
-            maskedTextBox2.Text = k.BrojTelefona;
-            textBox16.Text = k.PutDoProfilne;
-            k.postaviProfilnu(pictureBox1);
+            UcitajPeer();
         }
+
+        private void UcitajPeer()
+        {
+            p = new Peer(textBox17.Text);
+            if(comboBox2.SelectedItem != null)
+                p.Mreza.PrivateIP = IPAddress.Parse(comboBox2.SelectedItem.ToString());
+            textBox12.Text = p.Korisnik.Ime;
+            textBox13.Text = p.Korisnik.Prezime;
+            maskedTextBox1.Text = p.Korisnik.DatumRodjenja.ToString();
+            comboBox3.SelectedItem = p.Korisnik.Pol;
+            textBox14.Text = p.Korisnik.KorisnickoIme;
+            textBox15.Text = p.Korisnik.Email;
+            maskedTextBox2.Text = p.Korisnik.BrojTelefona;
+            textBox16.Text = p.Korisnik.PutDoProfilne;
+            p.Korisnik.postaviProfilnu(pictureBox1);
+            postaviCheckListbox(p);
+            comboBox1.SelectedItem = p.Mreza.Nic.Name;
+        }
+
+        private void postaviCheckListbox(Peer p)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if (NetCalc.isBitSet(p.PrivacySettings, i))
+                {
+                    checkedListBox1.SetItemChecked(i, true);
+                }
+            }
+        }
+
+
     }
 }
