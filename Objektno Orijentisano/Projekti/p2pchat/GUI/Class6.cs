@@ -114,4 +114,9 @@ public static class NetCalc
     {
         return (b & (1 << n)) != 0;
     }
+
+    public static byte SetBit(byte b, int n)
+    {
+        return (byte)(b | (1 << n));
+    }
 }
