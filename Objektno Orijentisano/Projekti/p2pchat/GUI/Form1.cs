@@ -13,6 +13,13 @@ namespace GUI
 {
     public partial class Form1 : Form
     {
+        public UserControl2 UserControl2
+        {
+            get
+            {
+                return userControl21;
+            }
+        }
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +52,25 @@ namespace GUI
             selected.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (userControl21.p == null)
+            {
+                MessageBox.Show("Prvo ucitajte profil u configure, ili ga napravite i sacuvajte.");
+                return;
+            }
+            if(userControl21.ComboBox1.SelectedIndex == -1 )
+            {
+                MessageBox.Show("Izaberite adapter i adresu u configure.");
+                return;
+            }
+            if (userControl21.ComboBox2.SelectedIndex == -1)
+            {
+                MessageBox.Show("Izaberite adresu u configure.");
+                return;
+            }
+            showUserControl(userControl11);
+        }
         private void button2_Click(object sender, EventArgs e){
             showUserControl(userControl21);
         }
