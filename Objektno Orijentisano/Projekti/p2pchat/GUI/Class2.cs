@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.CodeDom;
 
 
 public class Korisnik : Osoba, IFajl
@@ -153,7 +154,38 @@ public class Korisnik : Osoba, IFajl
         }
     }
 
-    public Korisnik(string _ime, string _prezime, DateTime _datum_rodjenja, bool _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
+    public override int GetHashCode()
+    {
+		string podaci = $"{Ime}{Prezime}{DatumRodjenja.ToString()}{Pol}{KorisnickoIme}{Email}{BrojTelefona}{PutDoProfilne}";
+		return podaci.GetHashCode();
+    }
+
+	public override bool Equals(object obj)
+	{
+		if(obj is Korisnik other){
+			if (this.Ime == other.Ime &&
+				this.Prezime == other.Prezime &&
+				this.DatumRodjenja == other.DatumRodjenja &&
+				this.Pol == other.Pol &&
+				this.Email == other.Email &&
+				this.BrojTelefona == other.BrojTelefona &&
+				this.PutDoProfilne == other.PutDoProfilne)
+				return true;
+		}
+		return false;
+	}
+
+	public static bool operator==(Korisnik a, Korisnik b)
+	{
+		return a.Equals(b);
+	}
+
+    public static bool operator !=(Korisnik a, Korisnik b)
+    {
+        return !a.Equals(b);
+    }
+
+    public Korisnik(string _ime, string _prezime, Datum _datum_rodjenja, bool _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
 		: base(_ime, _prezime, _datum_rodjenja, _pol)
     {
 		KorisnickoIme = _korisnicko_ime;
@@ -162,7 +194,7 @@ public class Korisnik : Osoba, IFajl
 		promeniProfilnu(_put_do_slike);
     }
 
-    public Korisnik(string _ime, string _prezime, DateTime _datum_rodjenja, string _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
+    public Korisnik(string _ime, string _prezime, Datum _datum_rodjenja, string _pol, string _korisnicko_ime, string _email, string _broj_telefona, string _put_do_slike)
      : base(_ime, _prezime, _datum_rodjenja, _pol)
     {
         KorisnickoIme = _korisnicko_ime;
@@ -175,7 +207,7 @@ public class Korisnik : Osoba, IFajl
 	{
 		Ime = "nepoznato";
 		Prezime = "nepoznato";
-		DatumRodjenja = DateTime.ParseExact("00/00/0000", "dd/mm/yyyy", CultureInfo.InvariantCulture);
+		DatumRodjenja = Datum.Parse("01/01/1970");
 		Pol = "Musko";
 		KorisnickoIme = "nepoznato";
 		Email = "nepoznato@nepoznato";
@@ -185,7 +217,7 @@ public class Korisnik : Osoba, IFajl
 		{
 			if (linija.StartsWith("Ime: ")) Ime = linija.Substring("Ime: ".Length);
 			if (linija.StartsWith("Prezime: ")) Prezime = linija.Substring("Ime: ".Length);
-			if (linija.StartsWith("Datum rodjenja: ")) DatumRodjenja = DateTime.ParseExact(linija.Substring("Datum rodjenja: ".Length), "dd/mm/yyyy", CultureInfo.InvariantCulture);
+			if (linija.StartsWith("Datum rodjenja: ")) DatumRodjenja = Datum.Parse("01/01/1970");
 			if (linija.StartsWith("Pol: ")) Pol = linija.Substring("Pol: ".Length);
 			if (linija.StartsWith("Korisnicko ime: ")) KorisnickoIme = linija.Substring("Korisnicko ime: ".Length);
 			if (linija.StartsWith("Email: ")) Email = linija.Substring("Email: ".Length);
@@ -249,7 +281,7 @@ public class Korisnik : Osoba, IFajl
         StreamReader r = new StreamReader(put);
         Ime = r.ReadLine();
         Prezime = r.ReadLine();
-        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        DatumRodjenja = Datum.Parse(r.ReadLine());
         Pol = r.ReadLine();
         KorisnickoIme = r.ReadLine();
         Email = r.ReadLine();
@@ -262,7 +294,7 @@ public class Korisnik : Osoba, IFajl
 		StreamReader r = new StreamReader(podrazumevani_fajl);
         Ime = r.ReadLine();
         Prezime = r.ReadLine();
-        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        DatumRodjenja = Datum.Parse(r.ReadLine());
         Pol = r.ReadLine();
         KorisnickoIme = r.ReadLine();
         Email = r.ReadLine();
