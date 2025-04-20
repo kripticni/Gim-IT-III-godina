@@ -42,6 +42,15 @@ public class Mreza
             GetMAC();
         }
     }
+
+    public static NetworkInterface NicParse(string name)
+    {
+        foreach (var NIC in NetworkInterface.GetAllNetworkInterfaces())
+            if (NIC.Name == name)
+                return NIC;
+        throw new ArgumentException("Adapter ne postoji");
+    }
+
     public NetworkInterfaceType NicType { get; private set; }
     public PhysicalAddress MAC { get; private set; }
     private void GetMAC()
@@ -60,14 +69,14 @@ public class Mreza
             bool exists = false;
             foreach(var addr in Nic.GetIPProperties().UnicastAddresses)
             {
-                if(addr.Address == value)
+                if(addr.Address.ToString() == value.ToString())
                 {
                     exists = true;
                     break;
                 }
             }
             if (!exists)
-                throw new ArgumentException("Adresa ne postoji za adapter.");
+                throw new ArgumentException($"Adresa {value.ToString()} ne postoji za adapter.");
 
             privateip = value;
             if (PrivateIP.AddressFamily == AddressFamily.InterNetwork)
@@ -138,24 +147,28 @@ public class Mreza
 
     public IPAddress Subnet { get; private set; }
     public int PrefixLength { get; private set; }
+    //resenje je bilo da proverimo dereferencirane vrednosti
     private void SubnetAndPrefix()
     {
+        //Console.WriteLine("Pokrenuto");
         if (isPrivateIPv4)
         {
             foreach (UnicastIPAddressInformation unicast1 in Nic.GetIPProperties().UnicastAddresses)
-                if (unicast1.Address == PrivateIP)
+                if (unicast1.Address.ToString() == PrivateIP.ToString())
                 {
                     PrefixLength = unicast1.PrefixLength;
                     Subnet = unicast1.IPv4Mask;
+                    //Console.WriteLine($"{Subnet}");
                 }
         }
         else
         {
             foreach (UnicastIPAddressInformation unicast2 in Nic.GetIPProperties().UnicastAddresses)
-                if (unicast2.Address == PrivateIP)
+                if (unicast2.Address.ToString() == PrivateIP.ToString())
                 {
                     PrefixLength = unicast2.PrefixLength;
                     Subnet = new IPAddress(NetCalc.CreateSubnetMaskV6(PrefixLength));
+                    //Console.WriteLine($"{Subnet}");
                 }
         }
     }
