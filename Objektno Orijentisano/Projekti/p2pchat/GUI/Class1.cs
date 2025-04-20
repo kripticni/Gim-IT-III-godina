@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 public abstract class Osoba : IFajl
 {
@@ -25,19 +26,9 @@ public abstract class Osoba : IFajl
         }
     }
 
-	protected DateTime datum_rodjenja;
-	public int Starost { 
-		get
-		{  
-			DateTime danas = DateTime.Today;
-			int godine = danas.Year - datum_rodjenja.Year;
-            if (datum_rodjenja > danas.AddYears(-godine))
-                godine--; //ako se rodjendan nije jos desio, smanjimo godinu
-			return godine;
-		}
-	}
+	protected Datum datum_rodjenja;
 
-	public DateTime DatumRodjenja
+	public Datum DatumRodjenja
 	{
 		get { return datum_rodjenja; }
 		protected set
@@ -45,7 +36,7 @@ public abstract class Osoba : IFajl
 			datum_rodjenja = value;
 		}
 	}
-
+	public int Starost { get { return DatumRodjenja.Starost; } }
 	protected bool pol;
 
 	public static bool PolToBool(string pol)
@@ -73,16 +64,44 @@ public abstract class Osoba : IFajl
 	public string PunoIme => $"{Ime} {Prezime}";
     //skracenica za get i string interpolacija
 
-	//nezasticeno za string.Empty, sluzi za izvedene klase
+    public override int GetHashCode()
+    {
+        string podaci = $"{Ime}{Prezime}{DatumRodjenja.ToString()}{Pol}";
+        return podaci.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+		if(obj is Osoba other){
+			if (this.Ime == other.Ime &&
+				this.Prezime == other.Prezime &&
+				this.DatumRodjenja == other.DatumRodjenja &&
+				this.Pol == other.Pol)
+				return true;
+		}
+        return false;
+    }
+
+    public static bool operator ==(Osoba a, Osoba b)
+    {
+        return a.Equals(b);
+    }
+
+    public static bool operator !=(Osoba a, Osoba b)
+    {
+        return !a.Equals(b);
+    }
+
+    //nezasticeno za string.Empty, sluzi za izvedene klase
     protected Osoba()
     {
 		ime = string.Empty;
 		prezime = string.Empty;
-		datum_rodjenja = DateTime.Now;
+		datum_rodjenja = Datum.Parse("01/01/1970");
 		pol = false;
     }
 
-    public Osoba(string _ime, string _prezime, DateTime _datum_rodjenja, bool _pol)
+    public Osoba(string _ime, string _prezime, Datum _datum_rodjenja, bool _pol)
 	{
 		Ime = _ime;
 		Prezime = _prezime;
@@ -90,7 +109,7 @@ public abstract class Osoba : IFajl
 		pol = _pol;
 	}
 
-    public Osoba(string _ime, string _prezime, DateTime _datum_rodjenja, string _pol)
+    public Osoba(string _ime, string _prezime, Datum _datum_rodjenja, string _pol)
     {
         Ime = _ime;
         Prezime = _prezime;
@@ -131,7 +150,7 @@ public abstract class Osoba : IFajl
 		StreamReader r = new StreamReader(put);
         Ime = r.ReadLine();
         Prezime = r.ReadLine();
-        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        DatumRodjenja = Datum.Parse(r.ReadLine());
         Pol = r.ReadLine();
         r.Close();
 	}
@@ -140,7 +159,7 @@ public abstract class Osoba : IFajl
         StreamReader r = new StreamReader(podrazumevani_fajl);
         Ime = r.ReadLine();
         Prezime = r.ReadLine();
-        DatumRodjenja = DateTime.Parse(r.ReadLine());
+        DatumRodjenja = Datum.Parse(r.ReadLine());
         Pol = r.ReadLine();
         r.Close();
     }
