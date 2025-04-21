@@ -27,6 +27,7 @@ namespace GUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Icon = new Icon("PeerSpeakV1Icon.ico");
             fixButtonBorders();
             showUserControl(userControl41);
         }

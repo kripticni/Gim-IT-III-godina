@@ -71,6 +71,11 @@ namespace GUI
                 comboBox1.Items.Add(I.Name);
         }
 
+        private void fillListCheckBoxes() {
+            for (int i = 0; i < checkedListBox1.Items.Count; ++i)
+                    checkedListBox1.SetItemChecked(i, true);
+        }
+
         List<IPAddress> AddressesForNic = new List<IPAddress>();
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -115,6 +120,7 @@ namespace GUI
         {
             fillTextBoxes();
             fillComboBoxes();
+            fillListCheckBoxes();
 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.Image = Image.FromFile("defaultmalepfp.jpg");
@@ -179,7 +185,7 @@ namespace GUI
         private byte ParseCheckedListBox()
         {
             byte PrivacySettings = new byte();
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count; ++i)
             {
                 if(checkedListBox1.GetItemChecked(i))
                 {
@@ -219,6 +225,10 @@ namespace GUI
                 if (NetCalc.isBitSet(p.PrivacySettings, i))
                 {
                     checkedListBox1.SetItemChecked(i, true);
+                }
+                else
+                {
+                    checkedListBox1.SetItemChecked(i, false);
                 }
             }
         }
