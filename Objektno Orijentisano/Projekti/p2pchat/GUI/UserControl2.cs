@@ -14,6 +14,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Net.Http;
 using System.Globalization;
+using System.IO;
 
 namespace GUI
 {
@@ -124,6 +125,8 @@ namespace GUI
 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.Image = Image.FromFile("defaultmalepfp.jpg");
+            if (File.Exists("korisnik.txt"))
+                UcitajPeer();
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -216,6 +219,8 @@ namespace GUI
             p.Korisnik.postaviProfilnu(pictureBox1);
             postaviCheckListbox(p);
             comboBox1.SelectedItem = p.Mreza.Nic.Name;
+            try { comboBox2.SelectedItem = p.Mreza.PrivateIP.ToString(); }
+            catch { } //na catch nista ne radimo
         }
 
         private void postaviCheckListbox(Peer p)

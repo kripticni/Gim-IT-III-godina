@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI
 {
@@ -28,11 +27,10 @@ namespace GUI
             textBox8.ReadOnly = true;
             textBox9.ReadOnly = true;
             textBox10.ReadOnly = true;
-        }
-
-        private void fillComboBoxes()
-        {
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            textBox11.ReadOnly = true;
+            textBox12.ReadOnly = true;
+            textBox13.ReadOnly = true;
+            textBox14.ReadOnly = true;
         }
 
         public UserControl1()
@@ -47,7 +45,6 @@ namespace GUI
         private void UserControl1_Load(object sender, EventArgs e)
         {
             fillTextBoxes();
-            fillComboBoxes();
             listener_cts = new CancellationTokenSource();
             portscanner_cts = new CancellationTokenSource();
             timer = new System.Windows.Forms.Timer();
@@ -79,7 +76,11 @@ namespace GUI
             if (this.Visible)
             {
                 form = FindForm() as Form1;
-                p = form.UserControl2.p;
+                p = form.UserControl2.p; //passujemo referencu p
+                textBox11.Text = p.Mreza.Broadcast.ToString();
+                textBox12.Text = p.Mreza.NetworkPrefix.ToString();
+                textBox13.Text = p.Mreza.HostsInSubnetV4.ToString();
+                textBox14.Text = p.Mreza.Subnet.ToString();
 
                 timer.Start();
             }
@@ -116,18 +117,7 @@ namespace GUI
             textBox1.Text = string.Empty;
         }
 
-        private void UpdatePeersUI(object sender, EventArgs e)
-        {
-            if (p.Peers == null) return;
-            listBox1.Items.Clear();
-            comboBox1.Items.Clear();
-            foreach(var item in p.Peers)
-            {
-                string repr = $"{item.first.ToString()}:{item.second.KorisnickoIme}";
-                listBox1.Items.Add(repr);
-                comboBox1.Items.Add(repr);
-            }
-        }
+
 
         bool aktivan_skener;
         private void button3_Click(object sender, EventArgs e)
@@ -179,11 +169,60 @@ namespace GUI
         {
             if(comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("Izaberite iznad osobu sa kojom zelite da se dopisujete");
-                return;
+                if (comboBox1.Text == string.Empty)
+                {
+                    MessageBox.Show("Izaberite iznad korisnika sa kojom zelite da se dopisujete");
+                    return;
+                }
+                try
+                {
+                    IPAddress ip = IPAddress.None;
+                    try { ip = IPAddress.Parse(comboBox1.Text); }
+                    catch { MessageBox.Show("Losa IP Adresa je uneta."); }
+                    Korisnik k = new Korisnik();
+                    Pair<IPAddress, Korisnik> peer = new Pair<IPAddress, Korisnik>(ip, k);
+                    _ = p.ConnectToPeer(peer);
+                }
+                catch { MessageBox.Show("Uneli ste adresu koja nije prihvatila caskanje."); }
+                return; //finally
             }
             Pair<IPAddress, Korisnik> receiver = GetPeer(comboBox1.SelectedItem.ToString());
             _ = p.ConnectToPeer(receiver); //novi thread za chat gui
+        }
+
+        bool UpdatePeersUILock;
+        CancellationTokenSource updatepeerui_cts;
+        private async void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            UpdatePeersUILock = true;
+
+            updatepeerui_cts?.Cancel(); //ako je vec pozvana metoda, cancelujemo nju
+            updatepeerui_cts = new CancellationTokenSource(); //pravimo novi cts za nasu metodu
+            CancellationToken token = updatepeerui_cts.Token;
+
+            try
+            {
+                await Task.Delay(5000, token);
+                UpdatePeersUILock = false; 
+                //novi poziv nasledjuje odgovornost da postavi na false
+            }
+            catch (TaskCanceledException)
+            {
+                return; //samo zavrsimo ako se canceluje
+            }
+        }
+        private void UpdatePeersUI(object sender, EventArgs e)
+        {
+            if (p.Peers == null) return;
+            listBox1.Items.Clear();
+            comboBox1.Items.Clear();
+            foreach (var item in p.Peers)
+            {
+                string repr = $"{item.first.ToString()}:{item.second.KorisnickoIme}";
+                listBox1.Items.Add(repr);
+                if(!UpdatePeersUILock) //da bi moglo da se kuca bez resetovanja
+                    comboBox1.Items.Add(repr);
+            }
         }
     }
 }
