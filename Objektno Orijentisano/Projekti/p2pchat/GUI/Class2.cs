@@ -212,11 +212,11 @@ public class Korisnik : Osoba, IFajl
 		KorisnickoIme = "nepoznato";
 		Email = "nepoznato@nepoznato";
 		BrojTelefona = "+(000) 000 0000000";
-		promeniProfilnu("defaultmalepfp.png");
+		promeniProfilnu("defaultmalepfp.jpg");
 		foreach(string linija in podaci)
 		{
 			if (linija.StartsWith("Ime: ")) Ime = linija.Substring("Ime: ".Length);
-			if (linija.StartsWith("Prezime: ")) Prezime = linija.Substring("Ime: ".Length);
+			if (linija.StartsWith("Prezime: ")) Prezime = linija.Substring("Prezime: ".Length);
 			if (linija.StartsWith("Datum rodjenja: ")) DatumRodjenja = Datum.Parse("01/01/1970");
 			if (linija.StartsWith("Pol: ")) Pol = linija.Substring("Pol: ".Length);
 			if (linija.StartsWith("Korisnicko ime: ")) KorisnickoIme = linija.Substring("Korisnicko ime: ".Length);
@@ -225,14 +225,14 @@ public class Korisnik : Osoba, IFajl
 			if (linija.StartsWith("Profilna: "))
 			{
 				string enkodirano = linija.Substring("Profilna: ".Length);
-				if (enkodirano == "defaultmalepfp.png")
+				if (enkodirano.StartsWith("defaultmalepfp.jpg"))
 				{
-					promeniProfilnu("defaultmalepfp.png");
+					promeniProfilnu("defaultmalepfp.jpg");
 					continue;
 				}
-				if (enkodirano == "defaultfemalepfp.png")
+				if (enkodirano.StartsWith("defaultfemalepfp.jpg"))
 				{
-					promeniProfilnu("defaultfemalepfp.png");
+					promeniProfilnu("defaultfemalepfp.jpg");
 					continue;
 				}
 				//nema provere, ali sobzirom da je bitmap
@@ -247,6 +247,18 @@ public class Korisnik : Osoba, IFajl
 	{
 		this.Citaj(put);
 	}
+
+	public Korisnik()
+	{
+        Ime = "nepoznato";
+        Prezime = "nepoznato";
+        DatumRodjenja = Datum.Parse("01/01/1970");
+        Pol = "Musko";
+        KorisnickoIme = "nepoznato";
+        Email = "nepoznato@nepoznato";
+        BrojTelefona = "+(000) 000 0000000";
+        promeniProfilnu("defaultmalepfp.jpg");
+    }
 
     #region interface
     override public string podrazumevani_fajl { get; set; } = "korisnik.txt";
@@ -286,7 +298,7 @@ public class Korisnik : Osoba, IFajl
         KorisnickoIme = r.ReadLine();
         Email = r.ReadLine();
         BrojTelefona = r.ReadLine();
-        PutDoProfilne = r.ReadLine();
+        promeniProfilnu(r.ReadLine());
         r.Close();
     }
     override public void Citaj()
@@ -299,7 +311,7 @@ public class Korisnik : Osoba, IFajl
         KorisnickoIme = r.ReadLine();
         Email = r.ReadLine();
         BrojTelefona = r.ReadLine();
-        PutDoProfilne = r.ReadLine();
+        promeniProfilnu(r.ReadLine());
         r.Close();
     }
     #endregion

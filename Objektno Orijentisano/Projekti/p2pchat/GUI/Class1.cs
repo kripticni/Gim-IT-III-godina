@@ -122,8 +122,8 @@ public abstract class Osoba : IFajl
 		this.Citaj(put);
 	}
 
-	#region interface
-	virtual public string podrazumevani_fajl { get; set; } = "osoba.txt";
+    #region interface
+    virtual public string podrazumevani_fajl { get; set; } = "osoba.txt";
 
 	//ovde koristimo virtual jer hocemo da
 	//osoba ima svoju podrazumevanu implementaciju
