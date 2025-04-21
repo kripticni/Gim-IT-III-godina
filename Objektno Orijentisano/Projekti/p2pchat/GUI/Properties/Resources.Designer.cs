@@ -63,6 +63,26 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap attachment_icon {
+            get {
+                object obj = ResourceManager.GetObject("attachment_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap attachment_icon_resized {
+            get {
+                object obj = ResourceManager.GetObject("attachment_icon_resized", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap chat_icon {
             get {
                 object obj = ResourceManager.GetObject("chat-icon", resourceCulture);
@@ -76,6 +96,26 @@ namespace GUI.Properties {
         internal static System.Drawing.Bitmap config_icon {
             get {
                 object obj = ResourceManager.GetObject("config-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap send_message_icon {
+            get {
+                object obj = ResourceManager.GetObject("send_message_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap send_message_icon_resized {
+            get {
+                object obj = ResourceManager.GetObject("send_message_icon_resized", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

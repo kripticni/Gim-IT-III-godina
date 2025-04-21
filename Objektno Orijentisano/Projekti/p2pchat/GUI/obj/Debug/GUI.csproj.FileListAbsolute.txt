@@ -40,3 +40,4 @@ D:\desk\Gim-IT-III-godina\Objektno Orijentisano\Projekti\p2pchat\GUI\obj\Debug\G
 D:\desk\Gim-IT-III-godina\Objektno Orijentisano\Projekti\p2pchat\GUI\bin\Debug\GUI.exe.config
 D:\desk\Gim-IT-III-godina\Objektno Orijentisano\Projekti\p2pchat\GUI\bin\Debug\GUI.exe
 D:\desk\Gim-IT-III-godina\Objektno Orijentisano\Projekti\p2pchat\GUI\bin\Debug\GUI.pdb
+D:\desk\Gim-IT-III-godina\Objektno Orijentisano\Projekti\p2pchat\GUI\obj\Debug\GUI.Form2.resources
