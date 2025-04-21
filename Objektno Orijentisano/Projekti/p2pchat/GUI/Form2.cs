@@ -81,7 +81,8 @@ namespace GUI
             richTextBox1.AppendText(client_poruka);
             richTextBox2.Clear();
             richTextBox1.ScrollToCaret();
-            w.WriteLineAsync($"{Peer.MESSAGE_HEADER}{poruka}");
+            try{ w.WriteLineAsync($"{Peer.MESSAGE_HEADER}{poruka}"); }
+            catch { OnDisconnect(); }
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -103,7 +104,11 @@ namespace GUI
         {
             while (true)
             {
-                string message = await r.ReadLineAsync();
+                string message = string.Empty;
+                try { message = await r.ReadLineAsync(); }
+                catch { if (OnDisconnect() == false) return; }
+                if (message == string.Empty)
+                    return;
                 if (message.StartsWith(Peer.MESSAGE_HEADER))
                 {
                     message = message.Substring(Peer.MESSAGE_HEADER.Length);
@@ -137,6 +142,22 @@ namespace GUI
                     }
                 }
             }
+        }
+
+        private bool OnDisconnect()
+        {
+            DialogResult result = MessageBox.Show(
+                $"{peer.second.KorisnickoIme}:{peer.first.ToString()} je zatvorio konekciju, zatvorite prozor?",
+                "Zatvorena Konekcija",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+                return true;
+            }
+            return false;
         }
     }
 }
