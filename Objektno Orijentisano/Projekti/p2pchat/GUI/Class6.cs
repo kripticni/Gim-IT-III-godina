@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
+
 public static class NetCalc
 {
     static public bool isLowerAddress(IPAddress a, IPAddress b)
@@ -118,5 +120,29 @@ public static class NetCalc
     public static byte SetBit(byte b, int n)
     {
         return (byte)(b | (1 << n));
+    }
+
+    public static BigInteger AddressDifferenceV6(IPAddress a, IPAddress b)
+    {
+        //klasa IPAddress cuva stvari u big endian zbog networking
+        //a za klasu BigInteger i int nam treba little endian
+        byte[] little_endian_a = a.GetAddressBytes();
+        Array.Reverse(little_endian_a);
+        byte[] little_endian_b = b.GetAddressBytes();
+        Array.Reverse(little_endian_b);
+        BigInteger big1 = new BigInteger(little_endian_a);
+        BigInteger big2 = new BigInteger(little_endian_b);
+        return big1 - big2;
+    }
+
+    public static int AddressDifferenceV4(IPAddress a, IPAddress b)
+    {
+        byte[] little_endian_a = a.GetAddressBytes();
+        Array.Reverse(little_endian_a);
+        byte[] little_endian_b = b.GetAddressBytes();
+        Array.Reverse(little_endian_b);
+        int int1 = BitConverter.ToInt32(little_endian_a, 0);
+        int int2 = BitConverter.ToInt32(little_endian_b, 0);
+        return int1 - int2;
     }
 }

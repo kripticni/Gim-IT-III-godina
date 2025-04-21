@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Security;
 using System.IO;
+using System.Numerics;
+
 public class Mreza
 {
     public Mreza(NetworkInterface nic)
@@ -181,6 +183,21 @@ public class Mreza
     public IPAddress Broadcast //ustvari je najveca mreza u subnet-u za v6
     {
         get{ return NetCalc.HighestAddressInNet(PrivateIP, Subnet); }
+    }
+
+    public BigInteger HostsInSubnet
+    {
+        get { return HostsInSubnetV6; } //radi za oba slucaja
+    }
+
+    public BigInteger HostsInSubnetV6
+    {
+        get { return NetCalc.AddressDifferenceV6(Broadcast, NetworkPrefix); }
+    }
+
+    public int HostsInSubnetV4
+    {
+        get { return NetCalc.AddressDifferenceV4(Broadcast, NetworkPrefix); }
     }
 
     //ip verzija od gateway isto zavisi od lokalne ip verzije
