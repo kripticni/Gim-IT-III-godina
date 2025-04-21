@@ -26,36 +26,36 @@ namespace GUI
       "\\red255\\green165\\blue0;}" +  //orange
     "\\viewkind4\\uc1\\pard" +
     //title
-    "\\cf2\\b\\fs48 P2P Chat - Credits\\b0" +
+    "\\cf2\\b\\fs48 PeerSpeak - Credits\\b0" +
     "\\cf1\\b\\fs24\\par" +
     "\\par" +
     //programmer
-    "\\cf1\\b\\fs36 Programmer:\\b0" +
+    "\\cf1\\b\\fs36 Programer:\\b0" +
     "\\cf3\\b\\fs32  Lazar Aleksic\\b0" +
     "\\cf3\\b\\fs26  (Gimnazija \"Bora Stankovic\" Vranje III-7)\\b0\\par" +
     "\\par" +
     //artist
-    "\\cf1\\b\\fs36 Artist:\\b0" +
+    "\\cf1\\b\\fs36 Graficki dizajner:\\b0" +
     "\\cf3\\b\\fs32  Katarina Stoilkovic\\b0" +
     "\\cf3\\b\\fs26  (Hemijsko - Tehnoloska Skola Vranje III-3)\\b0\\par" +
     "\\cf1\\b\\fs24\\par" +
     "\\par" +
     //language
-    "\\cf1\\b\\fs32 Written In:\\b0" +
+    "\\cf1\\b\\fs32 Napisano u:\\b0" +
     "\\cf3\\b\\fs28  C#\\b0" +
     "\\cf1\\b\\fs24\\par" +
     "\\par" +
     //formatting
-    "\\cf1\\b\\fs32 Formatting:\\b0" +
+    "\\cf1\\b\\fs32 Formatirano sa:\\b0" +
     "\\cf3\\b\\fs28  RTF\\b0" +
     "\\cf1\\b\\fs24\\par" +
     "\\par" +
     //links
-    "\\cf1\\b\\fs32 Learn More:\\b0\\par" +
+    "\\cf1\\b\\fs32 Linkovi:\\b0\\par" +
     "  \\cf4\\fs24\\ul https://github.com/kripticni\\ul0\\cf1\\b\\fs24\\b0\\par" +
     "\\par" +
     //footer
-    "\\pard\\qc\\cf2\\b\\fs28 Thank you for using P2P Chat!\\b0" +
+    "\\pard\\qc\\cf2\\b\\fs28 Hvala vam sto koristite PeerSpeak!\\b0" +
     "\\cf1\\b\\fs24\\par" +
     "}";
         }
