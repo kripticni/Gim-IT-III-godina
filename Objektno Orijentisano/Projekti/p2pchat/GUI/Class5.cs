@@ -13,7 +13,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Drawing.Imaging;
-using GUI; //Console.writeline
+using GUI;
+using System.Net.NetworkInformation; //Console.writeline
 
 //sealed sprecava dalje nasledjivanje
 public sealed class Peer : IFajl
@@ -362,6 +363,7 @@ public sealed class Peer : IFajl
         w.WriteLine(Korisnik.PutDoProfilne);
         w.WriteLine(this.PrivacySettings.ToString());
         w.WriteLine(Mreza.Nic.Name);
+        w.WriteLine(Mreza.PrivateIP.ToString()); //soft checkujemo da li postoji
         w.Close();
     }
     public void Pisi()
@@ -377,6 +379,7 @@ public sealed class Peer : IFajl
         w.WriteLine(Korisnik.PutDoProfilne);
         w.WriteLine(this.PrivacySettings.ToString());
         w.WriteLine(Mreza.Nic.Name);
+        w.WriteLine(Mreza.PrivateIP.ToString());
         w.Close();
     }
     public void Citaj(string put)
@@ -391,7 +394,11 @@ public sealed class Peer : IFajl
         string BrojTelefona = r.ReadLine();
         string PutDoProfilne = r.ReadLine();
         this.PrivacySettings = byte.Parse(r.ReadLine());
-        Mreza = new Mreza(Mreza.NicParse(r.ReadLine()));
+        NetworkInterface nic = Mreza.NicParse(r.ReadLine());
+        IPAddress privateip = IPAddress.Parse(r.ReadLine());
+        Mreza = new Mreza(nic);
+        try { Mreza.PrivateIP = privateip; } //verovatno se je promenio pa try catchujemo
+        catch { MessageBox.Show("IP adresa se je promenila od proslog koriscenja, izaberite korektnu u configure."); }  
         Korisnik = new Korisnik(Ime, Prezime, DatumRodjenja, Pol, KorisnickoIme, Email, BrojTelefona, PutDoProfilne);
         r.Close();
     }
@@ -407,7 +414,11 @@ public sealed class Peer : IFajl
         string BrojTelefona = r.ReadLine();
         string PutDoProfilne = r.ReadLine();
         this.PrivacySettings = byte.Parse(r.ReadLine());
-        Mreza = new Mreza(Mreza.NicParse(r.ReadLine()));
+        NetworkInterface nic = Mreza.NicParse(r.ReadLine());
+        IPAddress privateip = IPAddress.Parse(r.ReadLine());
+        Mreza = new Mreza(nic);
+        try { Mreza.PrivateIP = privateip; } //verovatno se je promenio pa try catchujemo
+        catch { MessageBox.Show("IP adresa se je promenila od proslog koriscenja, izaberite korektnu u configure."); }
         Korisnik = new Korisnik(Ime, Prezime, DatumRodjenja, Pol, KorisnickoIme, Email, BrojTelefona, PutDoProfilne);
         r.Close();
     }
