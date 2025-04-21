@@ -1,0 +1,1 @@
+netsh advfirewall firewall add rule name="P2PChatPort" dir=in action=allow protocol=TCP localport=51888
