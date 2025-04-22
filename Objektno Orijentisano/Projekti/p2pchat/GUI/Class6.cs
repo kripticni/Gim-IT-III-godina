@@ -52,57 +52,35 @@ public static class NetCalc
         ip = new IPAddress(bytes); //updateujemo isti objekat koji smo dobili na ulazu
     }
 
-    public static byte[] CreateSubnetMask(int n, bool isIPv4)
+    public static IPAddress DecrementAddress(IPAddress ip)
     {
-        if (isIPv4)
-            return CreateSubnetMaskV4(n);
-        else
-            return CreateSubnetMaskV6(n);
+        byte[] bytes = ip.GetAddressBytes();
+        for (int i = bytes.Length - 1; i >= 0; --i)
+            if (bytes[i] > 0)
+            {
+                --bytes[i];
+                break;
+            }
+            else
+                bytes[i] = 255;
+
+        return new IPAddress(bytes);
     }
 
-    public static byte[] CreateSubnetMaskV4(int n)
+    public static void DecrementAddress(ref IPAddress ip)
     {
-        byte[] bits = new byte[4];
+        byte[] bytes = ip.GetAddressBytes();
+        for (int i = bytes.Length - 1; i >= 0; --i)
+            if (bytes[i] > 0)
+            {
+                --bytes[i];
+                break;
+            }
+            else
+                bytes[i] = 255;
 
-        for (int i = 0; i < n / 8; ++i)
-        {
-            bits[i] = 0xFF;
-        }
-
-        if (n % 8 != 0)
-        {
-            bits[n / 8] = (byte)(0xFF << (8 - (n % 8)));
-        }
-
-        return bits;
+        ip = new IPAddress(bytes); // updateujemo isti objekat koji smo dobili na ulazu
     }
-
-    public static byte[] CreateSubnetMaskV6(int n)
-    {
-        byte[] bits = new byte[16];
-
-        for (int i = 0; i < n / 8; ++i)
-        {
-            bits[i] = 0xFF;
-        }
-
-        if (n % 8 != 0)
-        {
-            bits[n / 8] = (byte)(0xFF << (8 - (n % 8)));
-        }
-
-        return bits;
-    }
-
-    public static IPAddress LowestAddressInNet(IPAddress ipAddress, IPAddress SubnetMask)
-    {
-        byte[] ip = ipAddress.GetAddressBytes();
-        byte[] mask = SubnetMask.GetAddressBytes();
-        for (int i = 0; i < ip.Length; ++i) //idemo do ip.Length jer se mozda radi o V6
-            ip[i] = (byte)(ip[i] & mask[i]);
-        return new IPAddress(ip);
-    }
-
     public static IPAddress HighestAddressInNet(IPAddress ipAddress, IPAddress SubnetMask)
     {
         byte[] ip = ipAddress.GetAddressBytes();
@@ -111,15 +89,13 @@ public static class NetCalc
             ip[i] = (byte)(ip[i] | (~mask[i]));
         return new IPAddress(ip);
     }
-
-    public static bool isBitSet(byte b, int n)
+    public static IPAddress LowestAddressInNet(IPAddress ipAddress, IPAddress SubnetMask)
     {
-        return (b & (1 << n)) != 0;
-    }
-
-    public static byte SetBit(byte b, int n)
-    {
-        return (byte)(b | (1 << n));
+        byte[] ip = ipAddress.GetAddressBytes();
+        byte[] mask = SubnetMask.GetAddressBytes();
+        for (int i = 0; i < ip.Length; ++i) //idemo do ip.Length jer se mozda radi o V6
+            ip[i] = (byte)(ip[i] & mask[i]);
+        return new IPAddress(ip);
     }
 
     public static BigInteger AddressDifferenceV6(IPAddress a, IPAddress b)
@@ -144,5 +120,46 @@ public static class NetCalc
         int int1 = BitConverter.ToInt32(little_endian_a, 0);
         int int2 = BitConverter.ToInt32(little_endian_b, 0);
         return int1 - int2;
+    }
+    public static byte[] CreateSubnetMask(int n, bool isIPv4)
+    {
+        if (isIPv4)
+            return CreateSubnetMaskV4(n);
+        else
+            return CreateSubnetMaskV6(n);
+    }
+
+    public static byte[] CreateSubnetMaskV4(int n)
+    {
+        byte[] bits = new byte[4];
+        for (int i = 0; i < n / 8; ++i)
+            bits[i] = 0xFF;
+
+        if (n % 8 != 0)
+            bits[n / 8] = (byte)(0xFF << (8 - (n % 8)));
+
+        return bits;
+    }
+
+    public static byte[] CreateSubnetMaskV6(int n)
+    {
+        byte[] bits = new byte[16];
+        for (int i = 0; i < n / 8; ++i)
+            bits[i] = 0xFF;
+
+        if (n % 8 != 0)
+            bits[n / 8] = (byte)(0xFF << (8 - (n % 8)));
+
+        return bits;
+    }
+
+    public static bool isBitSet(byte b, int n)
+    {
+        return (b & (1 << n)) != 0;
+    }
+
+    public static byte SetBit(byte b, int n)
+    {
+        return (byte)(b | (1 << n));
     }
 }
