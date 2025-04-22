@@ -1,0 +1,10 @@
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\bin\Debug\projekat-IgraHvatanja.exe.config
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\bin\Debug\projekat-IgraHvatanja.exe
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\bin\Debug\projekat-IgraHvatanja.pdb
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat-IgraHvatanja.csproj.AssemblyReference.cache
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat_IgraHvatanja.Form1.resources
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat_IgraHvatanja.Properties.Resources.resources
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat-IgraHvatanja.csproj.GenerateResource.cache
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat-IgraHvatanja.csproj.CoreCompileInputs.cache
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat-IgraHvatanja.exe
+C:\Users\KOMPJUTER\source\repos\projekat-IgraHvatanja\projekat-IgraHvatanja\obj\Debug\projekat-IgraHvatanja.pdb

@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D846E987-E3BB-412F-9B9D-7F5917DA98E4}|projekat-IgraHvatanja\\projekat-IgraHvatanja.csproj|C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-igrahvatanja\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D846E987-E3BB-412F-9B9D-7F5917DA98E4}|projekat-IgraHvatanja\\projekat-IgraHvatanja.csproj|solutionrelative:projekat-igrahvatanja\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D846E987-E3BB-412F-9B9D-7F5917DA98E4}|projekat-IgraHvatanja\\projekat-IgraHvatanja.csproj|c:\\users\\kompjuter\\desktop\\projekat-igrahvatanja\\projekat-igrahvatanja\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D846E987-E3BB-412F-9B9D-7F5917DA98E4}|projekat-IgraHvatanja\\projekat-IgraHvatanja.csproj|solutionrelative:projekat-igrahvatanja\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D846E987-E3BB-412F-9B9D-7F5917DA98E4}|projekat-IgraHvatanja\\projekat-IgraHvatanja.csproj|C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-igrahvatanja\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D846E987-E3BB-412F-9B9D-7F5917DA98E4}|projekat-IgraHvatanja\\projekat-IgraHvatanja.csproj|solutionrelative:projekat-igrahvatanja\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Form1.cs",
+              "RelativeDocumentMoniker": "projekat-IgraHvatanja\\Form1.cs",
+              "ToolTip": "C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Form1.cs",
+              "RelativeToolTip": "projekat-IgraHvatanja\\Form1.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAUwJ4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T15:31:55.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Class1.cs",
+              "RelativeDocumentMoniker": "projekat-IgraHvatanja\\Class1.cs",
+              "ToolTip": "C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Class1.cs",
+              "RelativeToolTip": "projekat-IgraHvatanja\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T15:30:28.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\KOMPJUTER\\Desktop\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Form1.cs",
+              "RelativeDocumentMoniker": "projekat-IgraHvatanja\\Form1.cs",
+              "ToolTip": "C:\\Users\\KOMPJUTER\\source\\repos\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\source\\repos\\projekat-IgraHvatanja\\projekat-IgraHvatanja\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T15:30:19.344Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
