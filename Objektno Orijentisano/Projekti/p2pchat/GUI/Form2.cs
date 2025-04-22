@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -64,14 +65,13 @@ namespace GUI
         private void button1_Click(object sender, EventArgs e)
         {
             if (richTextBox2.Text != string.Empty)
-                posaljiPoruku(richTextBox2.Text);
+                posaljiPoruku(richTextBox2.Text + '\n');
         }
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
             if (richTextBox2.Text.EndsWith("\n") ||
-               richTextBox2.Text.EndsWith("\r") ||
-               richTextBox2.Text.EndsWith("\r\n"))
+               richTextBox2.Text.EndsWith("\r"))
                 posaljiPoruku(richTextBox2.Text);
         }
 
@@ -81,7 +81,10 @@ namespace GUI
             richTextBox1.AppendText(client_poruka);
             richTextBox2.Clear();
             richTextBox1.ScrollToCaret();
-            try{ w.WriteLineAsync($"{Peer.MESSAGE_HEADER}{poruka}"); }
+            try{ 
+                w.WriteAsync($"{Peer.MESSAGE_HEADER}{poruka}");
+                Console.Write($"Poslato: {Peer.MESSAGE_HEADER}{poruka}");
+            }
             catch { OnDisconnect(); }
         }
 
@@ -104,11 +107,18 @@ namespace GUI
         {
             while (true)
             {
-                string message = string.Empty;
-                try { message = await r.ReadLineAsync(); }
-                catch { if (OnDisconnect() == false) return; }
+                string message;
+                message = string.Empty;
+                try
+                {
+                    message = await r.ReadLineAsync();
+                    Console.WriteLine($"Primljeno: {message}");
+                }
+                catch { if (OnDisconnect() == true) return; }
                 if (message == string.Empty)
-                    return;
+                    continue;
+                if (message == null)
+                    if (OnDisconnect() == true) return;
                 if (message.StartsWith(Peer.MESSAGE_HEADER))
                 {
                     message = message.Substring(Peer.MESSAGE_HEADER.Length);
@@ -144,8 +154,10 @@ namespace GUI
             }
         }
 
+        bool closed = false; 
         private bool OnDisconnect()
         {
+            if (closed) return true; //ako smo vec zatvorili sa OnFormClosing, samo vratimo
             DialogResult result = MessageBox.Show(
                 $"{peer.second.KorisnickoIme}:{peer.first.ToString()} je zatvorio konekciju, zatvorite prozor?",
                 "Zatvorena Konekcija",
@@ -158,6 +170,21 @@ namespace GUI
                 return true;
             }
             return false;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            closed = true; //prakticno lock za OnDisconnect
+            try
+            {
+                r?.Close();
+                w?.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Form2 close: {ex.Message}");
+            }
         }
     }
 }

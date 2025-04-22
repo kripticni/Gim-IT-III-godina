@@ -81,6 +81,7 @@ namespace GUI
                 textBox12.Text = p.Mreza.NetworkPrefix.ToString();
                 textBox13.Text = p.Mreza.HostsInSubnetV4.ToString();
                 textBox14.Text = p.Mreza.Subnet.ToString();
+                textBox15.Text = p.Mreza.PublicIP.ToString();
 
                 timer.Start();
             }
@@ -171,7 +172,7 @@ namespace GUI
             {
                 if (comboBox1.Text == string.Empty)
                 {
-                    MessageBox.Show("Izaberite iznad korisnika sa kojom zelite da se dopisujete");
+                    MessageBox.Show("Izaberite iznad korisnika sa kojim zelite da se dopisujete");
                     return;
                 }
                 try
