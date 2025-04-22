@@ -191,13 +191,13 @@ public class Mreza
     }
 
     public BigInteger HostsInSubnetV6
-    {
-        get { return NetCalc.AddressDifferenceV6(Broadcast, NetworkPrefix); }
+    {   // - 3 jer gateway, adresa mreze i broadcast adresa nisu hostovi
+        get { return NetCalc.AddressDifferenceV6(Broadcast, NetworkPrefix) - 3; }
     }
 
     public int HostsInSubnetV4
     {
-        get { return NetCalc.AddressDifferenceV4(Broadcast, NetworkPrefix); }
+        get { return NetCalc.AddressDifferenceV4(Broadcast, NetworkPrefix) - 3; }
     }
 
     //ip verzija od gateway isto zavisi od lokalne ip verzije

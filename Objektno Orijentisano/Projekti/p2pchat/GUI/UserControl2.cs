@@ -91,9 +91,10 @@ namespace GUI
                 AddressesForNic.Add(address.Address);
             }
 
-
-            m = new Mreza(nic);
-            textBox5.Text = m.MAC.ToString();
+            if (m == null)
+                m = new Mreza(nic);
+            else m.Nic = nic;
+                textBox5.Text = m.MAC.ToString();
             textBox6.Text = m.NicType.ToString();
         }
 
