@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using GUI;
-using System.Net.NetworkInformation; //Console.writeline
+using System.Net.NetworkInformation;
 
 //sealed sprecava dalje nasledjivanje
 public sealed class Peer : IFajl
@@ -22,8 +22,8 @@ public sealed class Peer : IFajl
     public Korisnik Korisnik;
     public Mreza Mreza;
     const int DEFAULT_PORT = 51888;
-    public static readonly string REQUEST_STRING = "P2PChat Scan Request";
-    public static readonly string REQUEST_CHAT_STRING = "P2PChat Initiate Chat";
+    public static readonly string REQUEST_SCAN = "P2PChat Scan Request";
+    public static readonly string REQUEST_CHAT = "P2PChat Initiate Chat";
     public static readonly string MESSAGE_HEADER = "P2PChat Send Message: ";
     public static readonly string FILE_HEADER = "P2PChat Send File: ";
     public int Port { get; private set; }
@@ -36,6 +36,15 @@ public sealed class Peer : IFajl
     public static readonly int EMAIL_BIT = 5;
     public static readonly int BROJ_BIT = 6;
     public static readonly int PROFILNA_BIT = 7;
+
+    public enum Status
+    {
+        Success,
+        ProtocolUnconfirmed,
+        DataExchanged,
+        ConnectionLost,
+        ChatRequest
+    }
 
     public Peer(Korisnik k, Mreza m, byte ps)
     {
@@ -92,6 +101,11 @@ public sealed class Peer : IFajl
     //ce da daje hash i proverava za jednakost jedino vezano za Pair.first
     //da bi imali neku korist od nje
     public HashSet<Pair<IPAddress, Korisnik>> Peers { get; set; }
+
+    public static Pair<IPAddress, Korisnik> MakePeer(IPAddress ip, Korisnik k)
+    {
+        return new Pair<IPAddress, Korisnik>(ip, k);
+    }
     public static bool SetUpdate<T>(HashSet<T> set, T item)
     {
         if (set.Contains(item))
@@ -115,7 +129,6 @@ public sealed class Peer : IFajl
         return false;
     }
 
-    private TcpListener listener;
     public string ListenerAddressString
     {
         get { return $"{Mreza.PrivateIP.ToString()}:{Port.ToString()}"; }
@@ -132,7 +145,7 @@ public sealed class Peer : IFajl
     //cts.Close() bi zatvorio listener
     public async Task Listener(CancellationToken LCancelToken)
     {
-        listener = new TcpListener(Mreza.PrivateIP, Port);
+        TcpListener listener = new TcpListener(Mreza.PrivateIP, Port);
         listener.Start();
 
         try
@@ -150,7 +163,8 @@ public sealed class Peer : IFajl
                 if (completedTask == acceptTask)
                 {
                     TcpClient client = acceptTask.Result;
-                    _ = RespondInfo(client);
+                    _ = RespondInfo(client); 
+                    //multithreadujemo da bi mogli da obradimo vise konekcija odjednom
                 }
                 else
                 {
@@ -160,70 +174,38 @@ public sealed class Peer : IFajl
         }
         catch (OperationCanceledException)
         {
-            
+            //nista
         }
         finally
         {
-            listener.Stop();
+            listener.Stop(); //u oba slucaja gasimo
         }
     }
 
     private async Task RespondInfo(TcpClient client)
     {
-        const int maxSize = 2 * 1024 * 1024; //ne prihavata vise od 2mb u povratku
-        X509Certificate2 serverCertificate = new X509Certificate2("P2PChatCert.pfx",
-                                                 password: "PeerToPeerChatCertificate");
-        NetworkStream netStream = client.GetStream();
-        SslStream sslStream = new SslStream(netStream, false);
+        
         IPAddress connected = ((IPEndPoint)client.Client.RemoteEndPoint).Address;
         Console.WriteLine($"Povezan od strane {connected.ToString()}");
 
         try
         {
-            await sslStream.AuthenticateAsServerAsync(
-                serverCertificate,
-                clientCertificateRequired: true,
-                enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
-                checkCertificateRevocation: false);
+            Pair<StreamReader,StreamWriter> rw_ssl = await GetServerSSl(client);
+            StreamReader reader = rw_ssl.first;
+            StreamWriter writer = rw_ssl.second;
 
-            StreamReader reader = new StreamReader(sslStream);
-            //object initializer, postavljamo atribut odma nakon konstruktora
-            StreamWriter writer = new StreamWriter(sslStream) { AutoFlush = true };
-            Console.WriteLine("Imamo ssl stream");
-            
-            //ako neko pokusava da zloupotrebi otvoren port
-            //proveravamo da li je zahtev od aplikacije ili ne
-            string received = await reader.ReadLineAsync();
-            Console.WriteLine($"Primljeno: {received}");
-            if(received != REQUEST_STRING && received != REQUEST_CHAT_STRING)
-            {
-                client.Dispose();
+            Pair<Status,Korisnik> response = await ServerHandshake(reader, writer);
+            if (response.first == Status.ProtocolUnconfirmed)
                 return;
-            }
 
-            await writer.WriteAsync(FilteredData);
-            Console.WriteLine($"Postalo {FilteredData}");
-            //kad posaljemo nase informacije, isto pitamo za njihove jer smo potvrdili
-            //da koriste nas protokol malopre, pa citamo i cuvamo
-            char[] buffer = new char[maxSize];
-            _ = await reader.ReadAsync(buffer, 0, maxSize); //ostavljamo kolko smo byta procitali je nemamo upotrebu
-            string full_response = new string(buffer);
-            Console.WriteLine($"Primljeno {full_response}");
-            string[] response = full_response.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
-            Korisnik connected_profile = new Korisnik(response);
-
-            Pair<IPAddress, Korisnik> peer = new Pair<IPAddress, Korisnik>(connected, connected_profile);
+            Pair<IPAddress, Korisnik> peer = new Pair<IPAddress, Korisnik>(connected, response.second);
             SetUpdate(Peers, peer);
-            if (received != REQUEST_CHAT_STRING)
-            {
-                client.Dispose();
-                return;
-            }
-            Form2 form2 = new Form2(reader, writer, this, peer);
-            form2.Show();
-            form2.BringToFront();
-            form2.Focus();
 
+            if (response.first == Status.DataExchanged)
+                return;
+
+            if(response.first == Status.ChatRequest)
+                StartChat(reader, writer, this, peer);
         }
         catch (Exception ex)
         {
@@ -231,121 +213,209 @@ public sealed class Peer : IFajl
         }
     }
 
+    private async Task<Pair<StreamReader, StreamWriter>> GetServerSSl(TcpClient client)
+    {
+        NetworkStream netStream = client.GetStream();
+        SslStream sslStream = new SslStream(netStream, false);
+        try
+        {
+            X509Certificate2 serverCertificate = new X509Certificate2("P2PChatCert.pfx",
+                                                 password: "PeerToPeerChatCertificate");
+            await sslStream.AuthenticateAsServerAsync(
+                serverCertificate,
+                clientCertificateRequired: true,
+                enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
+                checkCertificateRevocation: false);
+        }
+        catch
+        {
+            throw new Exception("Client nije autentifikovao ssl certifikat.");
+        }
+        //object initializer, postavljamo atribut odma nakon konstruktora
+        StreamReader reader = new StreamReader(sslStream);
+        StreamWriter writer = new StreamWriter(sslStream) { AutoFlush = true };
+        Console.WriteLine("Imamo ssl stream");
+        return new Pair<StreamReader,StreamWriter>(reader, writer);
+    }
+
+    private async Task<Pair<Status,Korisnik>> ServerHandshake(StreamReader r, StreamWriter w)
+    {
+        string received = await r.ReadLineAsync();
+        Console.WriteLine($"Primljeno: {received}");
+        if (received != REQUEST_SCAN && received != REQUEST_CHAT)
+            return new Pair<Status, Korisnik>(Status.ProtocolUnconfirmed, null);
+
+        Korisnik connected_profile;
+        try
+        {
+            connected_profile = await SendAndReceive(r, w);
+        }
+        catch
+        {
+            return new Pair<Status, Korisnik>(Status.ConnectionLost, null);
+        }
+        if (received == REQUEST_CHAT)
+            return new Pair<Status, Korisnik>(Status.ChatRequest, connected_profile);
+        else return new Pair<Status, Korisnik>(Status.DataExchanged, connected_profile);
+    }
+
+    private async Task<Korisnik> SendAndReceive(StreamReader r, StreamWriter w)
+    {
+        const int maxSize = 2 * 1024 * 1024; //ne prihavata vise od 2mb u povratku
+        //ako neko pokusava da zloupotrebi otvoren port
+        //proveravamo da li je zahtev od aplikacije ili ne
+        await w.WriteAsync(FilteredData);
+        Console.WriteLine($"Postalo {FilteredData}");
+
+        //kad posaljemo nase informacije, isto pitamo za njihove jer smo potvrdili
+        //da koriste nas protokol malopre, pa citamo i cuvamo
+        char[] buffer = new char[maxSize];
+        _ = await r.ReadAsync(buffer, 0, maxSize); //ostavljamo kolko smo byta procitali je nemamo upotrebu
+        string full_response = new string(buffer);
+        string[] response = full_response.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
+        Korisnik connected_profile = new Korisnik(response);
+        Console.WriteLine($"Primljeno {full_response}");
+
+        return connected_profile;
+    }
+
     public async Task<HashSet<Pair<IPAddress, Korisnik>>> ScanLocalNet(TextBox textBox, CancellationToken SCancelToken)
     {
-        const int maxSize = 2 * 1024 * 1024; //ne prihvata vise od 2mb
-        X509Certificate2 clientCertificate = new X509Certificate2("P2PChatCert.pfx",
-                                                 password: "PeerToPeerChatCertificate");
-        X509CertificateCollection certs = new X509CertificateCollection { clientCertificate };
+        TcpClient client = new TcpClient(); //promenjiva za povezivanje
         while(!SCancelToken.IsCancellationRequested) //zauvek se ponavlja
         for (IPAddress i = NetCalc.IncrementAddress(Mreza.NetworkPrefix);
             NetCalc.isLowerAddress(i, Mreza.Broadcast)
             && !SCancelToken.IsCancellationRequested;
             NetCalc.IncrementAddress(ref i))
         {
-            try
-            {
-                //preskacemo sebe, adresu mreze, i gateway
-                if (i.ToString() == Mreza.PrivateIP.ToString() || i.ToString() == Mreza.Gateway.ToString())
-                    continue;
-                Console.WriteLine($"Pokusavamo {i.ToString()}:{Port.ToString()}");
-                textBox.Text = i.ToString();
-                TcpClient client = new TcpClient();
-                var connectTask = client.ConnectAsync(i, Port);
-                var timeoutTask = Task.Delay(1000);
-
-                if (await Task.WhenAny(connectTask, timeoutTask) == connectTask)
+                try
                 {
-                    NetworkStream netStream = client.GetStream();
-                    SslStream sslStream = new SslStream(netStream, false,
-                        new RemoteCertificateValidationCallback((sender, cert, chain, sslPolicyErrors) => true));
-                    //za sigurnost bi korektno bilo => return cert.GetCertHashString() == "...";
-                    //ali necemo to da radimo
+                    //preskacemo sebe, adresu mreze, i gateway
+                    if (i.ToString() == Mreza.PrivateIP.ToString() || i.ToString() == Mreza.Gateway.ToString())
+                        continue;
+                    Console.WriteLine($"Pokusavamo {i.ToString()}:{Port.ToString()}");
+                    textBox.Text = i.ToString();
 
-                    await sslStream.AuthenticateAsClientAsync(
-                        targetHost: "P2PChatCert", //mora da se podudara sa DNS name na generisan cert
-                        clientCertificates: certs,
-                        enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
-                        checkCertificateRevocation: false);
+                    client = new TcpClient();
+                    var connectTask = client.ConnectAsync(i, Port);
+                    var timeoutTask = Task.Delay(500);
 
-                    StreamWriter writer = new StreamWriter(sslStream) { AutoFlush = true };
-                    StreamReader reader = new StreamReader(sslStream);
+                    if (await Task.WhenAny(connectTask, timeoutTask) == connectTask)
+                    {
+                        Pair<StreamReader, StreamWriter> rw_ssl = await GetClientSSL(client);
+                        StreamReader reader = rw_ssl.first;
+                        StreamWriter writer = rw_ssl.second;
 
-                    //potvrdjujemo protokol
-                    Console.WriteLine($"Saljemo {REQUEST_STRING}");
-                    await writer.WriteLineAsync(REQUEST_STRING);
-                    //citamo njihove podatke
-                    char[] buffer = new char[maxSize];
-                    _ = await reader.ReadAsync(buffer, 0, maxSize);
-                    string full_response = new string(buffer);
-                    string[] response = full_response.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
-                    Console.WriteLine($"Primljeno {full_response}");
-                    Korisnik found = new Korisnik(response);
-                    //saljemo nase podatke
-                    Console.WriteLine($"Saljemo {FilteredData}");
-                    await writer.WriteAsync(FilteredData);
-
-                    SetUpdate(Peers, new Pair<IPAddress, Korisnik>(i, found));
+                        Korisnik found = await ClientHandshake(reader, writer);
+                        SetUpdate(Peers, new Pair<IPAddress, Korisnik>(i, found));
+                    }
                 }
-                client.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{i.ToString()}:{Port.ToString()}, {ex}");
-                //brisemo kontakt iz hashseta ako nije uspesna konekcija
-                Peers.Remove(new Pair<IPAddress, Korisnik>(i, new Korisnik()));
-                continue;
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{i.ToString()}:{Port.ToString()}, {ex}");
+                    //brisemo kontakt iz hashseta ako nije uspesna konekcija
+                    Peers.Remove(new Pair<IPAddress, Korisnik>(i, new Korisnik()));
+                }
+                finally
+                {
+                    client.Dispose();
+                }
         }
         return Peers;
     }
 
-    public async Task ConnectToPeer(Pair<IPAddress, Korisnik> Peer)
+    private async Task<Pair<StreamReader,StreamWriter>> GetClientSSL(TcpClient client)
     {
-        const int maxSize = 2 * 1024 * 1024;
-        X509Certificate2 clientCertificate = new X509Certificate2("P2PChatCert.pfx", "PeerToPeerChatCertificate");
-        X509CertificateCollection certs = new X509CertificateCollection { clientCertificate };
+        NetworkStream netStream = client.GetStream();
+        SslStream sslStream = new SslStream(netStream, false,
+            new RemoteCertificateValidationCallback((sender, cert, chain, sslPolicyErrors) => true));
+        //za sigurnost bi korektno bilo => return cert.GetCertHashString() == "...";
+        //ali necemo to da radimo
 
-        IPAddress ip = Peer.first;
         try
         {
-            TcpClient client = new TcpClient();
+            X509Certificate2 clientCertificate = new X509Certificate2("P2PChatCert.pfx",
+                                                 password: "PeerToPeerChatCertificate");
+            X509CertificateCollection certs = new X509CertificateCollection { clientCertificate };
+            await sslStream.AuthenticateAsClientAsync(
+                targetHost: "P2PChatCert", //mora da se podudara sa DNS name na generisan cert
+                clientCertificates: certs,
+                enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
+                checkCertificateRevocation: false);
+        }
+        catch
+        {
+            throw new Exception("Client se nije autentifikovao ili nije prihvatio nasu.");
+        }
+
+        StreamReader reader = new StreamReader(sslStream);
+        StreamWriter writer = new StreamWriter(sslStream) { AutoFlush = true };
+
+        return new Pair<StreamReader, StreamWriter>(reader, writer);
+    }
+
+    private async Task<Korisnik> ClientHandshake(StreamReader r, StreamWriter w)
+    {
+        //potvrdjujemo protokol
+        Console.WriteLine($"Saljemo {REQUEST_SCAN}");
+        await w.WriteLineAsync(REQUEST_SCAN);
+        //citamo njihove podatke
+
+        Korisnik found = await ReceiveAndSend(r, w);
+        return found;
+    }
+
+    private async Task<Korisnik> ReceiveAndSend(StreamReader r, StreamWriter w)
+    {
+        const int maxSize = 2 * 1024 * 1024; //ne prihvata vise od 2mb
+
+        //primamo
+        char[] buffer = new char[maxSize];
+        _ = await r.ReadAsync(buffer, 0, maxSize);
+        string full_response = new string(buffer);
+        string[] response = full_response.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
+        Korisnik found = new Korisnik(response);
+        Console.WriteLine($"Primljeno {full_response}");
+
+        //saljemo nase podatke
+        Console.WriteLine($"Saljemo {FilteredData}");
+        await w.WriteAsync(FilteredData);
+
+        return found;
+    }
+
+    public async Task ConnectToPeer(Pair<IPAddress, Korisnik> Peer)
+    {
+        IPAddress ip = Peer.first;
+        TcpClient client = new TcpClient();
+        try
+        {
             await client.ConnectAsync(ip, Port);
 
-            NetworkStream netStream = client.GetStream();
-            SslStream sslStream = new SslStream(netStream, false,
-                new RemoteCertificateValidationCallback((sender, cert, chain, sslPolicyErrors) => true));
-            await sslStream.AuthenticateAsClientAsync(
-            targetHost: "P2PChatCert",
-            clientCertificates: certs,
-            enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
-            checkCertificateRevocation: false);
+            Pair<StreamReader, StreamWriter> rw_ssl = await GetClientSSL(client);
+            StreamReader reader = rw_ssl.first;
+            StreamWriter writer = rw_ssl.second;
 
-            StreamWriter writer = new StreamWriter(sslStream) { AutoFlush = true };
-            StreamReader reader = new StreamReader(sslStream);
-
-            await writer.WriteLineAsync(REQUEST_CHAT_STRING);
-
-            char[] buffer = new char[maxSize];
-            int bytesRead = await reader.ReadAsync(buffer, 0, maxSize);
-            string full_response = new string(buffer, 0, bytesRead);
-            string[] response = full_response.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
-
-            Korisnik found = new Korisnik(response);
-            await writer.WriteAsync(FilteredData);
+            await writer.WriteLineAsync(REQUEST_CHAT);
+            Korisnik found = await ReceiveAndSend(reader, writer);
 
             Pair<IPAddress, Korisnik> peer = new Pair<IPAddress, Korisnik>(ip, found);
             SetUpdate(Peers, peer);
-            Form2 form2 = new Form2(reader, writer, this, peer);
-            form2.Show();
-            form2.BringToFront();
-            form2.Focus();
+            StartChat(reader, writer, this, peer);
         }
         catch
         {
             MessageBox.Show("Veza nije uspostavljena");
             return;
         }
+    }
+
+    private void StartChat(StreamReader r, StreamWriter w, Peer self, Pair<IPAddress, Korisnik> peer)
+    {
+        Form2 form2 = new Form2(r, w, this, peer);
+        form2.Show();
+        form2.BringToFront();
+        form2.Focus();
     }
 
     #region interface
