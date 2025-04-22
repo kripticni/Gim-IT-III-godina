@@ -68,6 +68,8 @@
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox15 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -371,7 +373,7 @@
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.button5.Location = new System.Drawing.Point(416, 376);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(485, 63);
+            this.button5.Size = new System.Drawing.Size(485, 88);
             this.button5.TabIndex = 7;
             this.button5.Text = "Zapocnite Dopisivanje";
             this.button5.UseVisualStyleBackColor = true;
@@ -380,6 +382,8 @@
             // groupBox7
             // 
             this.groupBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(86)))), ((int)(((byte)(106)))));
+            this.groupBox7.Controls.Add(this.textBox15);
+            this.groupBox7.Controls.Add(this.label10);
             this.groupBox7.Controls.Add(this.textBox14);
             this.groupBox7.Controls.Add(this.textBox13);
             this.groupBox7.Controls.Add(this.label9);
@@ -391,7 +395,7 @@
             this.groupBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.groupBox7.Location = new System.Drawing.Point(4, 339);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(406, 100);
+            this.groupBox7.Size = new System.Drawing.Size(406, 125);
             this.groupBox7.TabIndex = 8;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Submreza";
@@ -459,6 +463,22 @@
             this.label6.Size = new System.Drawing.Size(80, 18);
             this.label6.TabIndex = 0;
             this.label6.Text = "Broadcast:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(2, 94);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(146, 18);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Javna adresa mreze:";
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(155, 91);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(245, 24);
+            this.textBox15.TabIndex = 9;
             // 
             // UserControl1
             // 
@@ -536,5 +556,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox15;
     }
 }
