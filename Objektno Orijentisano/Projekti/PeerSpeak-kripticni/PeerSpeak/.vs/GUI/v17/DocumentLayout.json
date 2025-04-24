@@ -3,24 +3,48 @@
   "WorkspaceRootPath": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\class5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\usercontrol4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\netcalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:netcalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\peer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:peer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\mreza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:mreza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\osoba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:osoba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|d:\\desk\\gim-it-iii-godina\\objektno orijentisano\\projekti\\peerspeak-kripticni\\peerspeak\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,23 +59,11 @@
       "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\class6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|GUI||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC8D91AB-4CFB-4523-88A2-4148274E08C6}|GUI.csproj|solutionrelative:class3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -61,11 +73,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 2,
+              "Title": "UserControl4.cs [Design]",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl4.cs",
+              "RelativeDocumentMoniker": "UserControl4.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl4.cs [Design]",
+              "RelativeToolTip": "UserControl4.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T19:00:54.339Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserControl3.cs [Design]",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl3.cs",
+              "RelativeDocumentMoniker": "UserControl3.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl3.cs [Design]",
+              "RelativeToolTip": "UserControl3.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T19:00:53.339Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Osoba.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Osoba.cs",
+              "RelativeDocumentMoniker": "Osoba.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Osoba.cs",
+              "RelativeToolTip": "Osoba.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T18:56:54.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "GUI",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\GUI.csproj",
               "RelativeDocumentMoniker": "GUI.csproj",
@@ -76,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -88,12 +137,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Class5.cs",
-              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Class5.cs",
-              "RelativeDocumentMoniker": "Class5.cs",
-              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Class5.cs",
-              "RelativeToolTip": "Class5.cs",
+              "DocumentIndex": 5,
+              "Title": "Peer.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Peer.cs",
+              "RelativeDocumentMoniker": "Peer.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Peer.cs",
+              "RelativeToolTip": "Peer.cs",
               "ViewState": "AgIAAOEBAAAAAAAAAAAWwOoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T15:10:38.816Z",
@@ -101,12 +150,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form2.cs",
-              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form2.cs",
-              "RelativeDocumentMoniker": "Form2.cs",
-              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form2.cs",
-              "RelativeToolTip": "Form2.cs",
+              "DocumentIndex": 8,
+              "Title": "Chat.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Chat.cs",
+              "RelativeDocumentMoniker": "Chat.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Chat.cs",
+              "RelativeToolTip": "Chat.cs",
               "ViewState": "AgIAAGIAAAAAAAAAAAAIwH8AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T21:46:38.225Z",
@@ -114,43 +163,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "Form2.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form2.cs",
               "RelativeDocumentMoniker": "Form2.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form2.cs [Design]",
               "RelativeToolTip": "Form2.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T21:46:34.095Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-22T21:46:34.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NetCalc.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\NetCalc.cs",
+              "RelativeDocumentMoniker": "NetCalc.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\NetCalc.cs",
+              "RelativeToolTip": "NetCalc.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAowE4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T12:33:54.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Mreza.cs",
+              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Mreza.cs",
+              "RelativeDocumentMoniker": "Mreza.cs",
+              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Mreza.cs",
+              "RelativeToolTip": "Mreza.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAAApwMAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:35:03.467Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Class6.cs",
-              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Class6.cs",
-              "RelativeDocumentMoniker": "Class6.cs",
-              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Class6.cs",
-              "RelativeToolTip": "Class6.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAowE4AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T12:33:54.272Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Class3.cs",
-              "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Class3.cs",
-              "RelativeDocumentMoniker": "Class3.cs",
-              "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Class3.cs",
-              "RelativeToolTip": "Class3.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAApwMAAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T11:35:03.467Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "UserControl2.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl2.cs",
               "RelativeDocumentMoniker": "UserControl2.cs",
@@ -163,18 +213,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "UserControl2.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl2.cs",
               "RelativeDocumentMoniker": "UserControl2.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl2.cs [Design]",
               "RelativeToolTip": "UserControl2.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T16:04:21.48Z"
+              "WhenOpened": "2025-03-16T16:04:21.48Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "UserControl1.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl1.cs",
               "RelativeDocumentMoniker": "UserControl1.cs",
@@ -182,22 +233,24 @@
               "RelativeToolTip": "UserControl1.cs",
               "ViewState": "AgIAAJ0AAAAAAAAAAAAYwLYAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T13:16:57.497Z"
+              "WhenOpened": "2025-04-20T13:16:57.497Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "UserControl1.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl1.cs",
               "RelativeDocumentMoniker": "UserControl1.cs",
               "ToolTip": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\UserControl1.cs [Design]",
               "RelativeToolTip": "UserControl1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T16:04:14.042Z"
+              "WhenOpened": "2025-03-16T16:04:14.042Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -209,7 +262,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\desk\\Gim-IT-III-godina\\Objektno Orijentisano\\Projekti\\PeerSpeak-kripticni\\PeerSpeak\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",

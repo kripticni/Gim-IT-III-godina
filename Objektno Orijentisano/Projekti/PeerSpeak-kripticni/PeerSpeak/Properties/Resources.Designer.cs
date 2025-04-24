@@ -85,7 +85,7 @@ namespace GUI.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap chat_icon {
             get {
-                object obj = ResourceManager.GetObject("chat-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("chat_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,8 +95,38 @@ namespace GUI.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap config_icon {
             get {
-                object obj = ResourceManager.GetObject("config-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("config_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defaultfemalepfp {
+            get {
+                object obj = ResourceManager.GetObject("defaultfemalepfp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defaultmalepfp {
+            get {
+                object obj = ResourceManager.GetObject("defaultmalepfp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon PeerSpeakV1Icon1 {
+            get {
+                object obj = ResourceManager.GetObject("PeerSpeakV1Icon1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

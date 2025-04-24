@@ -36,7 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>PeerSpeakV1Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\PeerSpeakV1Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,27 +54,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
-    <Compile Include="Class3.cs" />
-    <Compile Include="Class4.cs" />
-    <Compile Include="Class5.cs" />
-    <Compile Include="Class6.cs" />
-    <Compile Include="Class7.cs" />
-    <Compile Include="Class8.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Datum.cs" />
+    <Compile Include="Osoba.cs" />
+    <Compile Include="Korisnik.cs" />
+    <Compile Include="Mreza.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Sistem.cs" />
+    <Compile Include="Peer.cs" />
+    <Compile Include="NetCalc.cs" />
+    <Compile Include="Pair.cs" />
+    <Compile Include="Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Form.Designer.cs">
+      <DependentUpon>Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Chat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Chat.Designer.cs">
+      <DependentUpon>Chat.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface1.cs" />
+    <Compile Include="IFajl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControl1.cs">
@@ -101,22 +106,17 @@
     <Compile Include="UserControl4.Designer.cs">
       <DependentUpon>UserControl4.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Form.resx">
+      <DependentUpon>Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="Chat.resx">
+      <DependentUpon>Chat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,19 +143,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="attachment_icon.png" />
-    <Content Include="attachment_icon_resized.png" />
-    <Content Include="PeerSpeakV1Icon.ico" />
-    <Content Include="send_message_icon.png" />
-    <Content Include="send_message_icon_resized.png" />
+    <Content Include="Resources\PeerSpeakV1Icon.ico" />
     <None Include="Resources\send_message_icon_resized.png" />
     <None Include="Resources\attachment_icon_resized.png" />
     <None Include="Resources\attachment_icon.png" />
     <None Include="Resources\send_message_icon.png" />
-    <None Include="chat-icon.png" />
-    <None Include="config-icon.png" />
-    <Content Include="defaultfemalepfp.jpg" />
-    <Content Include="defaultmalepfp.jpg" />
+    <None Include="Resources\chat-icon.png" />
+    <None Include="Resources\config-icon.png" />
+    <Content Include="Resources\defaultfemalepfp.jpg" />
+    <Content Include="Resources\defaultmalepfp.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
