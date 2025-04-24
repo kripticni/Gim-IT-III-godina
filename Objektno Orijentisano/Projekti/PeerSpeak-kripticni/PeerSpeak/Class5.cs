@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 using GUI;
 using System.Net.NetworkInformation;
+using System.Messaging;
 
 //sealed sprecava dalje nasledjivanje
 public sealed class Peer : IFajl
@@ -42,8 +43,11 @@ public sealed class Peer : IFajl
         Success,
         ProtocolUnconfirmed,
         DataExchanged,
-        ConnectionLost,
-        ChatRequest
+        ConnectionClosed,
+        ChatRequest,
+        MessageReceived,
+        FileReceived,
+        BadPacket
     }
 
     public Peer(Korisnik k, Mreza m, byte ps)
@@ -252,7 +256,7 @@ public sealed class Peer : IFajl
         }
         catch
         {
-            return new Pair<Status, Korisnik>(Status.ConnectionLost, null);
+            return new Pair<Status, Korisnik>(Status.ConnectionClosed, null);
         }
         if (received == REQUEST_CHAT)
             return new Pair<Status, Korisnik>(Status.ChatRequest, connected_profile);
@@ -417,6 +421,95 @@ public sealed class Peer : IFajl
         form2.BringToFront();
         form2.Focus();
     }
+
+    //sto se tice slanja, ne mozemo da cuvamo
+    //streamwriter-e, streamreader-e, netstreamove
+    //zajedno kao atribut klase jer zelimo da iz jednog
+    //objekta imamo vise uspostavljenih konekcija koje generisemo
+    //pa ce za funkcije za slanje i primanje preko uspostavljene
+    //veze biti static i zahteva argumente reader/writer
+
+    public static async Task SendFile(StreamWriter w, string path)
+    {
+        string b64_file = Convert.ToBase64String(File.ReadAllBytes(path));
+        await w.WriteLineAsync($"{Peer.FILE_HEADER}{Path.GetFileName(path)}:{b64_file}");
+    }
+
+    public static async Task SendMessage(StreamWriter w, string msg)
+    {
+        await w.WriteAsync($"{Peer.MESSAGE_HEADER}{msg}");
+        Console.Write($"Poslato: {Peer.MESSAGE_HEADER}{msg}");
+    }
+
+    public static async Task<Pair<Status,string>> PacketDispatcher(StreamReader r, Pair<IPAddress,Korisnik> peer)
+    {
+        string message = string.Empty;
+        try
+        {
+            message = await r.ReadLineAsync();
+            Console.WriteLine($"Primljeno: {message}");
+        }
+        catch { return new Pair<Status,string>(Status.ConnectionClosed, string.Empty); }
+
+        if (message == string.Empty) //ovo se prakticno nikad nece desiti ali ako se desi je okej
+            return new Pair<Status, string>(Status.Success, string.Empty);
+        if (message == null) //ovde se jedino desava null ako readlineasync dobije kraj konekcije, pa gasimo
+            return new Pair<Status, string>(Status.ConnectionClosed, string.Empty);
+
+        if (message.StartsWith(Peer.MESSAGE_HEADER))
+        {
+            string handled_msg = HandleMessage(peer.second, message);
+            return new Pair<Status, string>(Status.MessageReceived, handled_msg);
+        }
+        if (message.StartsWith(Peer.FILE_HEADER))
+        {
+            HandleFile(message);
+            return new Pair<Status, string>(Status.FileReceived, string.Empty);
+        }
+        return new Pair<Status, string>(Status.BadPacket, string.Empty);
+    }
+
+    public static string HandleMessage(Korisnik k, string msg)
+    {
+        msg = msg.Substring(Peer.MESSAGE_HEADER.Length);
+        return k.KorisnickoIme + ": " + msg + '\n';
+    }
+
+    public static void HandleFile(string msg)
+    {
+        string filename_b64file = msg.Substring(Peer.FILE_HEADER.Length);
+        //ako je put sa folderima, izbacujemo sve osim imena fajla, ako to ne uradimo
+        //dozvoljavamo da se sacuva i overwrite-uje fajl bilo gde na celom filesystem-u
+        int separator_index = filename_b64file.IndexOf(":"); //delimo na filename i b64file
+        string filename = Path.GetFileName(filename_b64file.Substring(0, separator_index));
+        string b64_file = filename_b64file.Substring(separator_index + 1);
+
+        MessageBox.Show($"Primljen fajl {filename}");
+        byte[] file_bytes = Convert.FromBase64String(b64_file);
+        string dirname = "PrimljeniFajlovi";
+        string destination = ResolveNameCollision(dirname,filename);
+
+        File.WriteAllBytes(destination, file_bytes);
+    }
+
+    public static string ResolveNameCollision(string dirname, string basename)
+    {
+        if (!File.Exists($"{dirname}/{basename}"))
+            return $"{dirname}/{basename}";
+        
+        string name = Path.GetFileNameWithoutExtension(basename);
+        string extension = Path.GetExtension(basename);
+        int counter = 1;
+        string new_filename = $"{dirname}/{name}({counter}){extension}";
+        while (File.Exists(new_filename))
+        {
+            ++counter;
+            new_filename = $"{dirname}/{name}({counter}){extension}";
+        }
+        return new_filename;
+    }
+
+
 
     #region interface
     public string podrazumevani_fajl { get; set; } = "peer-profil.txt";
