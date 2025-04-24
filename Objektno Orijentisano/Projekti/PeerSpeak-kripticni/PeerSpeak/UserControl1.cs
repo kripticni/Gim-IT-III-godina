@@ -168,27 +168,26 @@ namespace GUI
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedItem == null)
-            {
-                if (comboBox1.Text == string.Empty)
-                {
-                    MessageBox.Show("Izaberite iznad korisnika sa kojim zelite da se dopisujete");
-                    return;
-                }
-                try
-                {
-                    IPAddress ip = IPAddress.None;
-                    try { ip = IPAddress.Parse(comboBox1.Text); }
-                    catch { MessageBox.Show("Losa IP Adresa je uneta."); }
-                    Korisnik k = new Korisnik();
-                    Pair<IPAddress, Korisnik> peer = new Pair<IPAddress, Korisnik>(ip, k);
-                    _ = p.ConnectToPeer(peer);
-                }
-                catch { MessageBox.Show("Uneli ste adresu koja nije prihvatila caskanje."); }
-                return; //finally
+            if (comboBox1.Text == string.Empty) //koristimo samo comboBox1.Text jer se
+            {                                   //selected index resetuje od updatepeersui
+                MessageBox.Show("Izaberite iznad korisnika sa kojim zelite da se dopisujete");
+                return;
             }
-            Pair<IPAddress, Korisnik> receiver = GetPeer(comboBox1.SelectedItem.ToString());
-            _ = p.ConnectToPeer(receiver); //novi thread za chat gui
+            try
+            {
+                IPAddress ip = IPAddress.None;
+                string ipstr;
+                if(comboBox1.Text.IndexOf(':') != -1)
+                    ipstr = comboBox1.Text.Substring(0, comboBox1.Text.IndexOf(':')); //uzimamo sve pre ':'
+                else 
+                    ipstr = comboBox1.Text;
+                try { ip = IPAddress.Parse(ipstr); }
+                catch { MessageBox.Show("Losa IP Adresa je uneta."); }
+                Korisnik k = new Korisnik();
+                Pair<IPAddress, Korisnik> peer = new Pair<IPAddress, Korisnik>(ip, k);
+                _ = p.ConnectToPeer(peer);
+            }
+            catch { MessageBox.Show("Uneli ste adresu koja nije prihvatila caskanje."); }
         }
 
         bool UpdatePeersUILock;
