@@ -8,10 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Messaging;
 using System.Net;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI
 {
@@ -53,37 +54,40 @@ namespace GUI
             textBox10.Text = "Godine: " + peer.second.DatumRodjenja.Starost.ToString();
         }
 
+        CancellationTokenSource handler_cts;
         private void Form2_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon("PeerSpeakV1Icon.ico");
             fillTextBoxes();
             peer.second.postaviProfilnu(pictureBox1);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            MessageHandler();
+            handler_cts = new CancellationTokenSource();
+            MessageHandler(handler_cts.Token);
         }
 
+        //nema razloga da awaitujemo button1_click ni rtb2_textchanged
+        //jer se svakako metode zavrsavaju nakon poziva na posaljiPoruku
         private void button1_Click(object sender, EventArgs e)
         {
             if (richTextBox2.Text != string.Empty)
-                posaljiPoruku(richTextBox2.Text + '\n');
+                _ = posaljiPoruku(richTextBox2.Text + '\n');
         }
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
             if (richTextBox2.Text.EndsWith("\n") ||
                richTextBox2.Text.EndsWith("\r"))
-                posaljiPoruku(richTextBox2.Text);
+                _ = posaljiPoruku(richTextBox2.Text);
         }
 
-        private void posaljiPoruku(string poruka)
+        private async Task posaljiPoruku(string poruka)
         {
             string client_poruka = $"{p.Korisnik.KorisnickoIme}: {poruka}";
             richTextBox1.AppendText(client_poruka);
             richTextBox2.Clear();
             richTextBox1.ScrollToCaret();
-            try{ 
-                w.WriteAsync($"{Peer.MESSAGE_HEADER}{poruka}");
-                Console.Write($"Poslato: {Peer.MESSAGE_HEADER}{poruka}");
+            try{
+                await Peer.SendMessage(w, poruka);
             }
             catch { OnDisconnect(); }
         }
@@ -98,58 +102,30 @@ namespace GUI
             if (openFileDialog.ShowDialog() == DialogResult.OK)
                 filename = openFileDialog.FileName;
             else return;
-            byte[] bytes = File.ReadAllBytes(filename);
-            string b64_file = Convert.ToBase64String(bytes);
-            await w.WriteLineAsync($"{Peer.FILE_HEADER}{Path.GetFileName(filename)}:{b64_file}");
+            await Peer.SendFile(w, filename);
         }
 
-        private async void MessageHandler()
+        private async void MessageHandler(CancellationToken token)
         {
-            while (true)
+            while (!token.IsCancellationRequested)
             {
-                string message;
-                message = string.Empty;
-                try
+                Pair<Peer.Status, string> received = await Peer.PacketDispatcher(r, peer);
+                if(received.first == Peer.Status.ConnectionClosed || received.first == Peer.Status.BadPacket)
                 {
-                    message = await r.ReadLineAsync();
-                    Console.WriteLine($"Primljeno: {message}");
+                    OnDisconnect();
+                    return;
                 }
-                catch { if (OnDisconnect() == true) return; }
-                if (message == string.Empty)
-                    continue;
-                if (message == null)
-                    if (OnDisconnect() == true) return;
-                if (message.StartsWith(Peer.MESSAGE_HEADER))
-                {
-                    message = message.Substring(Peer.MESSAGE_HEADER.Length);
-                    richTextBox1.AppendText(peer.second.KorisnickoIme + ": " + message + '\n');
+                if (received.first == Peer.Status.MessageReceived) {
+                    richTextBox1.AppendText(received.second);
                     richTextBox1.ScrollToCaret();
                 }
-                if (message.StartsWith(Peer.FILE_HEADER))
+                if (received.first == Peer.Status.FileReceived)
                 {
-                    string filename_b64file = message.Substring(Peer.FILE_HEADER.Length);
-                    int separator_index = filename_b64file.IndexOf(":");
-                    string filename = filename_b64file.Substring(0, separator_index);
-                    string b64_file = filename_b64file.Substring(separator_index + 1);
-                    MessageBox.Show($"Primljen fajl {Path.GetFileName(filename)}");
-                    byte[] bytes = Convert.FromBase64String(b64_file);
-                    string dirname = "PrimljeniFajlovi";
-                    string destination = $"{dirname}/{Path.GetFileName(filename)}";
-                    if(!File.Exists(destination))
-                        File.WriteAllBytes(destination, bytes);
-                    else
-                    {
-                        string name = Path.GetFileNameWithoutExtension(destination);
-                        string extension = Path.GetExtension(destination);
-                        int counter = 1;
-                        string newpath = $"{dirname}/{name}({counter}){extension}";
-                        while (File.Exists(newpath))
-                        {
-                            ++counter;
-                            newpath = $"{dirname}/{name}({counter}){extension}";
-                        }
-                        File.WriteAllBytes(newpath, bytes);
-                    }
+                    continue;
+                }
+                if(received.first == Peer.Status.Success)
+                {
+                    continue;
                 }
             }
         }
@@ -176,6 +152,7 @@ namespace GUI
         {
             base.OnFormClosing(e);
             closed = true; //prakticno lock za OnDisconnect
+            handler_cts.Cancel(); //gasimo handler
             try
             {
                 r?.Close();
@@ -185,6 +162,16 @@ namespace GUI
             {
                 Console.WriteLine($"Form2 close: {ex.Message}");
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.ResetText();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
