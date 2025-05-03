@@ -14,7 +14,7 @@ the structure is:
 | **TIME**           | Format `00:00:00`                              |
 | **DATETIME(fsp)**  | `DATE + TIME` formats                          |
 Example of a table creation:
-```SQL
+```sql
 CREATE TABLE zaposljeni(
   id NUMBER(10) PRIMARY KEY,
   ime VARCHAR2(50) NOT NULL,
@@ -25,10 +25,20 @@ CREATE TABLE zaposljeni(
 );
 ```
 
+Creating a table with a composite key
+```sql
+CREATE TABLE proizvod_kategorija (
+    pib     INT,
+    id_kat  INT,
+    some_data TEXT,
+    PRIMARY KEY (pib, id_kat)
+);
+```
+
 INSERT INTO %(%,...), inserts new entities into a table % and inserts into % columns
 VALUES(%,...), defines which values to insert from an insert into statement
 Example:
-```SQL
+```sql
 INSERT INTO zaposljeni(id, ime, prezime, plata, pol, zaposljen)
 VALUES (1, 'Lazar', 'Lazarevic', 900000, 'M', TO_DATE('2025-03-08','YYYY-MM-DD'))
 INSERT INTO zaposljeni(id, ime, prezime, plata, pol, zaposljen)
@@ -52,7 +62,7 @@ VALUES (3, 'Mila', 'Milosavljevic', 700000, 'Z', TO_DATE('2025-03-08','YYYY-MM-D
 | **`;`**      | Denotes the end of the query                     |
 
 Examples:
-```SQL
+```sql
 SELECT ime,prezime,pol
 FROM zaposljeni;
 
@@ -81,7 +91,7 @@ in your SELECT part you can do any aggregate for a column
 | **SUM()**    | Sum of the values |
 
 Example:
-```SQL
+```sql
 SELECT SUM(plata), pol
 FROM zaposljeni
 GROUP BY pol
@@ -108,7 +118,7 @@ or even both.
 | **<=**       | Less than or equal             |
 
 Examples:
-```SQL
+```sql
 SELECT ime, prezime, plata
 FROM zaposljeni
 WHERE plata >= 50000
@@ -122,13 +132,13 @@ HAVING AVG(plata) < 100000
 **Keywords**:
 | **Keyword** | **Description**                                                       |
 |-------------|-----------------------------------------------------------------------|
-| **AND**     | Shows only where both conditions are true                            |
-| **OR**      | Shows where either condition is true                                 |
-| **LIKE %**  | Searches for a specific pattern (regular expression)                 |
+| **AND**     | Shows only where both conditions are true                             |
+| **OR**      | Shows where either condition is true                                  |
+| **LIKE %**  | Searches for a specific pattern (regular expression)                  |
 | **IN()**    | Checks if a value exists in a set. Example: `WHERE id IN (1,3,5,7)`   |
 | **NOT**     | Negates parameters. Example: `WHERE id NOT IN (2,4,6,8)`              |
-| **BETWEEN % AND %** | Creates a range. Example: `* >= % AND % <= *`                    |
-| **IS**      | Checks for set parameters like `NULL` or `NOT NULL`                  |
+| **BETWEEN % AND %** | Creates a range. Example: `* >= % AND % <= *`                 |
+| **IS**      | Checks for set parameters like `NULL` or `NOT NULL`                   |
 
 For string matching with LIKE you need wildcards,
 | **Wildcard** | **Description**                    |
@@ -137,7 +147,7 @@ For string matching with LIKE you need wildcards,
 | **_**        | Any single character              |
 
 Example:
-```SQL
+```sql
 SELECT ime, prezime, plata
 FROM zaposljeni
 WHERE plata >= 30000 AND ime LIKE '_____' AND prezime LIKE 'L%';
@@ -160,9 +170,46 @@ HAVING AVG(plata) BETWEEN 30000 AND 500000;
 | **DESC**        | Sorts in descending order                   |
 
 Example:
-```SQL
+```sql
 SELECT ime, prezime, id, plata
 FROM zaposljeni
 WHERE plata BETWEEN 30000 AND 500000 OR id IN(1,2,5,8,10) AND date IS NOT NULL;
 ORDER BY plata DESC
+```
+
+## **Joining**:
+| **Keyword** | **Description**                                 |
+|-------------|-------------------------------------------------|
+| **JOIN** | If not declared otherwise, is an inner join, returns fields that match in both tables (no nulls), usually primary to foreign key. |
+| **USING**| Specifies that we are joining the same named columns |
+| **ON**   | Sets the condition for joining the tables |
+
+**PROIZVODJACI(pib, mat_br, naz, adresa)
+KATEGORIJE(id_kat, naz, opis)
+MODELI(id_mod, ozn, jac_m, br_vr, tip_gor, [pib, id_kat])**
+
+```sql
+SELECT knjige.naz AS "Naziv Knjiga", izdavaci.naz AS "Naziv Izdavaca"
+FROM IZDAVACI JOIN KNJIGE ON (izdavaci.idizd = knjige.idizd)
+-- returns all books with a set publisher
+WHERE izdavaci.naz == 'CET'
+-- only with publisher CET
+ORDER BY knjige.naz;
+```
+
+```sql
+SELECT DISTINCT proizvodj.naz
+FROM MODELI JOIN PROIZVODJ ON (modeli.pib = proizvodj.pib)
+WHERE tip_gor = 'dizel'
+ORDER BY proizvodj.naz;
+-- finds all manifacturers that have diesel powered cars
+-- uses distinct to only show the name of manifacturers once
+-- instead of it repeating for each instance of their car being diesel
+```
+
+```sql
+SELECT ozn
+FROM MODELI JOIN PROIZVODJACI ON (modeli.pib = proizvodjaci.pib)
+            JOIN KATEGORIJE ON (modeli.id_kat = kategorija.id_kat)
+WHERE proizvodjaci.naz = 'Mercedes_Benz' AND kategorije.naz = 'limuzina';
 ```
