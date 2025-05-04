@@ -25,8 +25,8 @@ CREATE TABLE zaposljeni(
 );
 ```
 
-Creating a table with a composite key
-```sql
+Creating a table with a composite key: 
+```sql 
 CREATE TABLE proizvod_kategorija (
     pib     INT,
     id_kat  INT,
@@ -35,8 +35,28 @@ CREATE TABLE proizvod_kategorija (
 );
 ```
 
-INSERT INTO %(%,...), inserts new entities into a table % and inserts into % columns
-VALUES(%,...), defines which values to insert from an insert into statement
+Creating a table for joining 1-n:
+```sql
+CREATE TABLE knjiga(
+    id_knj NUMBER(20) PRIMARY KEY,
+    naz VARCHAR2(50) NOT NULL,
+    id_iz NUMBER(20) NOT NULL REFERENCES izdavaci(id_iz)
+)
+```
+
+Creating a table for joining n-n:
+```sql
+CREATE TABLE autor_knjiga(
+    id_knj NUMBER(20) NOT NULL REFERENCES knjiga(id_knj),
+    id_au  NUMBER(20) NOT NULL REFERENCES autori(id_au),
+    PRIMARY KEY(id_knj, id_au)
+)
+```
+
+Inserting elements:
+INSERT INTO %(%,...), inserts new entities into a table % and inserts into % columns  
+VALUES(%,...), defines which values to insert from an insert into statement  
+
 Example:
 ```sql
 INSERT INTO zaposljeni(id, ime, prezime, plata, pol, zaposljen)
@@ -177,6 +197,15 @@ WHERE plata BETWEEN 30000 AND 500000 OR id IN(1,2,5,8,10) AND date IS NOT NULL;
 ORDER BY plata DESC
 ```
 
+## **String Manipulations**:
+| **Keyword** | **Description**                                 |
+|-------------|-------------------------------------------------|
+| **CONCAT**  | Joins two strings together. |
+| **LENGTH**  | Returns length of string.   |
+| **SUBSTR(str,start,len)** | Returns the part of the string from index start with the length of len. |
+| **LOWER**   | Returns the same string in lowercase. |
+| **UPPER**   | Returns the same string in uppercase. |
+
 ## **Joining**:
 | **Keyword** | **Description**                                 |
 |-------------|-------------------------------------------------|
@@ -188,6 +217,8 @@ ORDER BY plata DESC
 KATEGORIJE(id_kat, naz, opis)
 MODELI(id_mod, ozn, jac_m, br_vr, tip_gor, [pib, id_kat])**
 
+
+Examples:
 ```sql
 SELECT knjige.naz AS "Naziv Knjiga", izdavaci.naz AS "Naziv Izdavaca"
 FROM IZDAVACI JOIN KNJIGE ON (izdavaci.idizd = knjige.idizd)
@@ -207,9 +238,30 @@ ORDER BY proizvodj.naz;
 -- instead of it repeating for each instance of their car being diesel
 ```
 
+For n-n:
 ```sql
 SELECT ozn
 FROM MODELI JOIN PROIZVODJACI ON (modeli.pib = proizvodjaci.pib)
             JOIN KATEGORIJE ON (modeli.id_kat = kategorija.id_kat)
-WHERE proizvodjaci.naz = 'Mercedes_Benz' AND kategorije.naz = 'limuzina';
+WHERE proizvodjaci.naz = 'Mercedes_Benz' AND kategorije.naz = 'limuzina'; 
+```
+
+```sql
+SELECT knjige.id_knj, knjige.naz, COUNT(autori_knjige.id_aut) AS broj
+FROM AUTORI_KNJIGE JOIN KNJIGE ON (autori_knjige.id_knj = knjige.id_knj)
+                   JOIN AUTORI ON (autori.id_aut = autori_knjige.id_aut)
+GROUP BY knjige.id_knj, knjige.naz
+HAVING COUNT(autori_knjige.id_aut) > 1;
+```
+
+## Subqueries
+
+A subquery is a query that calls another query within itself.  
+
+```sql
+SELECT DISTINCT ime, prez
+FROM IZDAVACI JOIN KNJIGE ON(izdavaci.id_izd = knjige.id_izd)
+WHERE knjige.id_izd = (SELECT id_izd
+                       FROM IZDAVACI
+                       WHERE izdavaci.naz = "CET");
 ```
