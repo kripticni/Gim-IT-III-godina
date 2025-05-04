@@ -1,5 +1,10 @@
 # SQL keywords and examples
 
+## **Prerequisites**:
+**1NF**: Svaki atribut treba da za jednu instancu ima jednu vrednost.  
+**2NF**: Svaki atribut koji nije deo jedinstvenog primarnog identifkatora mora da bude u direktnoj funkcionalnoj zavisnost od njega.  
+**3NF**: Medju atributima koji nisu deo jedinstvenog primarnog identifikatora ne sme da postoji direktna funkcionalna zavisnost.  
+
 ## **Creation**:
 CREATE TABLE %, creates a new table by name of %.
 the structure is:
@@ -265,3 +270,9 @@ WHERE knjige.id_izd = (SELECT id_izd
                        FROM IZDAVACI
                        WHERE izdavaci.naz = "CET");
 ```
+
+## Utility
+
+| **Keyword** | **Description**                                 |
+|-------------|-------------------------------------------------|
+| **ROUND(%,precision)** | Rounds the number/expression to said precision. |
