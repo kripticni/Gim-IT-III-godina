@@ -187,6 +187,73 @@ int postojiGrana(Graf *graf, int u, int v) {
   return 0;
 }
 
+#define MAX 128
+typedef struct red {
+  int podaci[MAX];
+  int front;
+  int rear;
+} Red;
+
+Red *noviRed() {
+  Red *q = (Red *)malloc(sizeof(Red));
+  q->front = -1;
+  q->rear = -1;
+  return q;
+}
+
+int jePrazanRed(Red *q) {
+  if (q->rear == -1)
+    return 1;
+  return 0;
+}
+
+void dodajNaRed(Red *q, int v) {
+  if (q->rear >= MAX - 1) {
+    printf("Red je pun");
+    return;
+  }
+
+  ++(q->rear);
+  q->podaci[q->rear] = v;
+  q->front = (q->front < 0) ? 0 : q->front; // uzimamo max
+}
+
+void stampajRed(Red *q) {
+  printf("Red:\n");
+  if (jePrazanRed(q)) {
+    printf("\tPrazan red");
+    return;
+  }
+
+  for (int i = q->front; i <= q->rear; ++i)
+    printf("\t%i\n", q->podaci[i]);
+}
+
+int stepenGrafa(int n, int g[n][n]) {
+  int i, j, br = 0;
+  for (i = 0; i < n; ++i)
+    for (j = 0; j < n; ++j)
+      if (g[i][j] == 1)
+        ++br;
+  return br;
+}
+
+int BrIzCvora(int n, int g[n][n], int u) {
+  int j, br = 0;
+  for (j = 0; j < n; ++j)
+    if (g[u][j] == 1)
+      ++br;
+  return br;
+}
+
+int BrUlCvora(int n, int g[n][n], int v) {
+  int i, br = 0;
+  for (i = 0; i < n; ++i)
+    if (g[i][v] == 1)
+      ++br;
+  return br;
+}
+
 int main() {
   const int n1 = 4;
   int matrica[4][4] = {{0, 1, 1, 1}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 1}};
