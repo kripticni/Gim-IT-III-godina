@@ -84,13 +84,107 @@ void dodajNovuGranu(Graf *graf, int u, int v) {
 void stampajGraf(Graf *graf) {
   for (int i = 0; i < graf->n; ++i) {
     printf("Lista za cvor %i:\n", i);
-    if (graf->g[i] == NULL) {
-      printf("\tnull\n");
-      continue;
-    }
     for (Cvor *it = graf->g[i]; it != NULL; it = it->sledeci)
       printf("\t%i\n", it->vrednost);
+    printf("\tnull\n");
   }
+}
+
+int BrIz(Cvor *cvor) {
+  int br = 0;
+  for (; cvor != NULL; cvor = cvor->sledeci)
+    ++br;
+  return br;
+}
+
+int BrUl(Graf *graf, int v) {
+  int i, br = 0;
+  for (i = 0; i < graf->n; ++i)
+    for (Cvor *it = graf->g[i]; it != NULL; it = it->sledeci)
+      if (it->vrednost == v) {
+        ++br;
+        break;
+      }
+  return br;
+}
+
+void stampajCvor(Cvor *cvor) {
+  printf("Cvor: \n");
+  for (; cvor != NULL; cvor = cvor->sledeci)
+    printf("\t%i\n", cvor->vrednost);
+  printf("\tnull\n");
+}
+
+// vraca broj ciklicnih cvorova u grafu (petlja)
+int BrPetlja(Graf *graf) {
+  int i, br = 0;
+  for (i = 0; i < graf->n; ++i)
+    for (Cvor *it = graf->g[i]; it != NULL; it = it->sledeci)
+      if (it->vrednost == i) { // ako je grana sa samim sobom
+        ++br;
+        break;
+      }
+  return br;
+}
+
+// brise granu (u,v), implementacija sa casa
+void saCasa_brise(Graf *graf, int u, int v) {
+  Cvor *pre = graf->g[u];
+
+  if (pre == NULL)
+    return;
+
+  // ispravljen i optimizovan slucaj za kad
+  // nam je grana zapravo prvi cvor
+  if (pre->vrednost == v) {
+    graf->g[u] = pre->sledeci; // odnosno tekuci
+    free(pre);
+    return;
+  }
+  // prosla implementacija je imala
+  // null pointer dereference segfault
+  // i suboptimalan redosled slucajeva
+
+  Cvor *tek = pre->sledeci; // pozivamo tek sad zbog null-deref
+
+  // ostali slucajevi
+  while (tek != NULL)
+    if (tek->vrednost == v) {
+      pre->sledeci = tek->sledeci;
+      free(tek);
+      return;
+    } else {
+      pre = tek;
+      tek = tek->sledeci;
+    }
+}
+
+void brise(Graf *graf, int u, int v) {
+  Cvor *it = graf->g[u]; // pocetak liste
+
+  // edge case kad je grana na prvom cvoru
+  if (it != NULL && it->vrednost == v) {
+    graf->g[u] = it->sledeci;
+    free(it);
+    return;
+  }
+
+  // svi ostali slucajevi
+  for (; it->sledeci != NULL; it = it->sledeci) {
+    if (it->sledeci->vrednost == v) {
+      Cvor *grana = it->sledeci;
+      it->sledeci = it->sledeci->sledeci;
+      free(grana);
+      return;
+    }
+  }
+}
+
+int postojiGrana(Graf *graf, int u, int v) {
+  for (Cvor *cvor = graf->g[u]; cvor != NULL; cvor = cvor->sledeci)
+    if (cvor->vrednost == v)
+      return 1;
+  return 0;
 }
 
 int main() {
@@ -108,4 +202,16 @@ int main() {
   dodajNovuGranu(graf, 1, 3);
   dodajNovuGranu(graf, 3, 2);
   stampajGraf(graf);
+  printf("Petlje u grafu: %i\n", BrPetlja(graf));
+
+  stampajCvor(graf->g[0]);
+  printf("Izlazni: %i\nUlazni: %i\n", BrIz(graf->g[0]), BrUl(graf, 0));
+
+  Red *red = noviRed();
+  dodajNaRed(red, 1);
+  dodajNaRed(red, 2);
+  dodajNaRed(red, 3);
+  dodajNaRed(red, 4);
+  dodajNaRed(red, 5);
+  stampajRed(red);
 }
