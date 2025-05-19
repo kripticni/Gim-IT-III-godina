@@ -289,7 +289,7 @@ void bfs(int n, int g[n][n], int u) {
 
   // ima da bude prazan tek kad obidjemo sve cvorove
   // do kojih mozemo doci
-  printf("BFS obilazak:\n");
+  printf("BFS obilazak matrice susedstva:\n");
   while (!jePrazanRed(q)) {
     cvor = uzmiSaRed(q); // nalazimo se na ovom cvoru
     for (j = 0; j < n; ++j)
@@ -305,10 +305,60 @@ void bfs(int n, int g[n][n], int u) {
     // i dodamo ga na red kako bi kasnije prosli
     // kroz njega
   }
+  free(q);
 }
 
-// zanemarite ova dva komentara
-#pragma clang diagnostic ignored "-Wgnu-folding-constant"
+// proverava da li postoji put izmedju cvora U i V
+int bfsPostojiPut(int n, int g[n][n], int u, int v) {
+  int j, cvor;
+  int vidjeno[n];
+  for (j = 0; j < n; ++j)
+    vidjeno[j] = 0;
+
+  Red *q = noviRed();
+  dodajNaRed(q, u);
+  vidjeno[u] = 1;
+
+  while (!jePrazanRed(q)) {
+    cvor = uzmiSaRed(q);
+    // ako od trenutnog cvora
+    // mozemo da dodjemo do V onda
+    // mozemo i od U da dodjemo do V
+    if (g[cvor][v])
+      return 1;
+    for (j = 0; j < n; ++j)
+      if (!vidjeno[j] && g[cvor][j]) {
+        dodajNaRed(q, j);
+        vidjeno[j] = 1;
+      }
+  }
+  free(q);
+  return 0;
+}
+
+void bfsGraf(Graf *graf, int u) {
+  Cvor *cvor;
+  int j, vidjeno[graf->n];
+  for (j = 0; j < graf->n; ++j)
+    vidjeno[j] = 0;
+
+  Red *q = noviRed();
+  dodajNaRed(q, u);
+  vidjeno[u] = 1;
+
+  printf("BFS obilazak liste susedstva:\n%i, ", u);
+  while (!jePrazanRed(q))
+    for (cvor = graf->g[uzmiSaRed(q)]; cvor != NULL; cvor = cvor->sledeci)
+      if (!vidjeno[cvor->vrednost]) {
+        dodajNaRed(q, cvor->vrednost);
+        vidjeno[cvor->vrednost] = 1;
+        printf("%i, ", cvor->vrednost);
+      }
+  printf("\b\b \n");
+  free(q);
+}
+
+// zanemarite ovaj komentar
 // clang-format off
 
 int main() {
@@ -352,8 +402,11 @@ int main() {
       {0, 0, 1, 1, 0, 0},
       {0, 0, 0, 1, 1, 0},
       {0, 0, 1, 0, 0, 0},
-      {1, 0, 0, 1, 0, 1}, 
+      {0, 0, 0, 1, 0, 1}, 
       {0, 1, 1, 0, 0, 0}};
 
   bfs(n2, matrica2, 0);
+  bfsGraf(graf, 0);
+  printf("Da li postoji put izmedju 0 i 5: %s\n", bfsPostojiPut(n2, matrica2, 0, 5)?"da":"ne");
+  printf("Da li postoji put izmedju 5 i 0: %s\n", bfsPostojiPut(n2, matrica2, 5, 0)?"da":"ne");
 }
