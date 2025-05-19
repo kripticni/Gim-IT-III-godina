@@ -1,67 +1,53 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// lista
 typedef struct cvor {
   int vrednost;
-  struct cvor *sledeci; // adresa sledeceg cvora
+  struct cvor *sledeci;
 } Cvor;
-Cvor *noviCvor(int vrednost);
-void stampajCvor(Cvor *cvor);
 
-// niz listi susedstva
 typedef struct graf {
-  int n; // broj cvorova
+  int n;
   Cvor **g;
-  // niz koji sadrzi cvorove koji su koreni, odnosno niz raznih lista
-  // struct Cvor* g[]; //je bolji opis
-  //
-  // lista izgleda ovako
-  // (Cvor[0].vrednost nek bude 1, znaci da 0 ima granu sa 1)
-  // (Cvor[0].sledeci je sledeca grana sa cvorom 0)
 } Graf;
-Graf *noviGraf(int n);
-void dodajNovuGranu(Graf *graf, int u, int v);
-void stampajGraf(Graf *graf);
-void saCasa_brise(Graf *graf, int u, int v);
-void brise(Graf *graf, int u, int v);
-int postojiGrana(Graf *graf, int u, int v);
 
-// red preko niza
 #define MAX 128
 typedef struct red {
   int podaci[MAX];
-  int front; // uzimamo od
-  int rear;  // stavljamo na
+  int front;
+  int rear;
 } Red;
-Red *noviRed();
-int jePrazanRed(Red *q);
-void dodajNaRed(Red *q, int v);
-int uzmiSaRed(Red *q);
-void stampajRed(Red *q);
 
 int jeNeusmeren(int n, int g[n][n]);
 int jeUsmeren(int n, int g[n][n]);
 int maxStepen(int n, int g[n][n]);
 int minStepen(int n, int g[n][n]);
+Cvor *noviCvor(int vrednost);
+void stampajCvor(Cvor *cvor);
+Graf *noviGraf(int n);
+void dodajNovuGranu(Graf *graf, int u, int v);
+void stampajGraf(Graf *graf);
 int BrIz(Cvor *cvor);
 int BrUl(Graf *graf, int v);
 int BrPetlja(Graf *graf);
+void saCasa_brise(Graf *graf, int u, int v);
+void brise(Graf *graf, int u, int v);
+int postojiGrana(Graf *graf, int u, int v);
+Red *noviRed();
+int jePrazanRed(Red *q);
+void dodajNaRed(Red *q, int v);
+int uzmiSaRed(Red *q);
+void stampajRed(Red *q);
 int stepen(int n, int g[n][n]);
-int BrIzMatrica(int n, int g[n][n], int u);
-int BrUlMatrica(int n, int g[n][n], int v);
-
+int BrIzCvora(int n, int g[n][n], int u);
+int BrUlCvora(int n, int g[n][n], int v);
 void bfs(int n, int g[n][n], int u);
-void bfsGraf(Graf *graf, int u);
 int bfsPostojiPut(int n, int g[n][n], int u, int v);
 
-// zanemarite ovaj komentar
 // clang-format off
 
 int main() {
 #define n1 4
-  // umesto define n1, mozete da imate int n1 = 4;
-  // ali ce to da zahteva da pisete int matrica[4][4] umesto n1 n1
   int matrica1[n1][n1] = {
     {0, 1, 1, 1},
     {1, 0, 0, 1},
@@ -103,7 +89,6 @@ int main() {
       {0, 1, 1, 0, 0, 0}};
 
   bfs(n2, matrica2, 0);
-  bfsGraf(graf, 0);
   printf("Da li postoji put izmedju 0 i 5: %s\n", bfsPostojiPut(n2, matrica2, 0, 5)?"da":"ne");
   printf("Da li postoji put izmedju 5 i 0: %s\n", bfsPostojiPut(n2, matrica2, 5, 0)?"da":"ne");
 }
@@ -112,11 +97,10 @@ int jeNeusmeren(int n, int g[n][n]) {
   int i, j;
   for (i = 0; i < n; ++i)
     for (j = i + 1; j < n; ++j)
-      if (g[i][i] == 1) // ako ciklican
+      if (g[i][i] == 1)
         return 0;
       else if (g[i][j] != g[j][i])
         return 0;
-  // ako je jedna grana usmerena
   return 1;
 }
 
@@ -152,6 +136,13 @@ Cvor *noviCvor(int vrednost) {
   return novi;
 }
 
+void stampajCvor(Cvor *cvor) {
+  printf("Cvor: \n");
+  for (; cvor != NULL; cvor = cvor->sledeci)
+    printf("\t%i\n", cvor->vrednost);
+  printf("\tnull\n");
+}
+
 Graf *noviGraf(int n) {
   Graf *graf = (Graf *)malloc(sizeof(Graf));
   graf->n = n;
@@ -164,8 +155,8 @@ void dodajNovuGranu(Graf *graf, int u, int v) {
     graf->g[u] = noviCvor(v);
     return;
   }
-  Cvor *it; // it za iterator, posto iterisemo kroz listu
-  // dolazimo do kraja liste (gde je sledeci null)
+
+  Cvor *it;
   for (it = graf->g[u]; it->sledeci != NULL; it = it->sledeci)
     ;
   it->sledeci = noviCvor(v); // dodajemo granu
@@ -198,14 +189,6 @@ int BrUl(Graf *graf, int v) {
   return br;
 }
 
-void stampajCvor(Cvor *cvor) {
-  printf("Cvor: \n");
-  for (; cvor != NULL; cvor = cvor->sledeci)
-    printf("\t%i\n", cvor->vrednost);
-  printf("\tnull\n");
-}
-
-// vraca broj ciklicnih cvorova u grafu (petlja)
 int BrPetlja(Graf *graf) {
   int i, br = 0;
   for (i = 0; i < graf->n; ++i)
@@ -217,27 +200,22 @@ int BrPetlja(Graf *graf) {
   return br;
 }
 
-// brise granu (u,v), implementacija sa casa
+
+
 void saCasa_brise(Graf *graf, int u, int v) {
   Cvor *pre = graf->g[u];
 
   if (pre == NULL)
     return;
 
-  // ispravljen i optimizovan slucaj za kad
-  // nam je grana zapravo prvi cvor
   if (pre->vrednost == v) {
-    graf->g[u] = pre->sledeci; // odnosno tekuci
+    graf->g[u] = pre->sledeci;
     free(pre);
     return;
   }
-  // prosla implementacija je imala
-  // null pointer dereference segfault
-  // i suboptimalan redosled slucajeva
 
-  Cvor *tek = pre->sledeci; // pozivamo tek sad zbog null-deref
+  Cvor *tek = pre->sledeci;
 
-  // ostali slucajevi
   while (tek != NULL)
     if (tek->vrednost == v) {
       pre->sledeci = tek->sledeci;
@@ -250,16 +228,14 @@ void saCasa_brise(Graf *graf, int u, int v) {
 }
 
 void brise(Graf *graf, int u, int v) {
-  Cvor *it = graf->g[u]; // pocetak liste
+  Cvor *it = graf->g[u];
 
-  // edge case kad je grana na prvom cvoru
   if (it != NULL && it->vrednost == v) {
     graf->g[u] = it->sledeci;
     free(it);
     return;
   }
 
-  // svi ostali slucajevi
   for (; it->sledeci != NULL; it = it->sledeci) {
     if (it->sledeci->vrednost == v) {
       Cvor *grana = it->sledeci;
@@ -276,6 +252,7 @@ int postojiGrana(Graf *graf, int u, int v) {
       return 1;
   return 0;
 }
+
 
 Red *noviRed() {
   Red *q = (Red *)malloc(sizeof(Red));
@@ -298,19 +275,20 @@ void dodajNaRed(Red *q, int v) {
 
   ++(q->rear);
   q->podaci[q->rear] = v;
-  q->front = (q->front < 0) ? 0 : q->front; // uzimamo max
+  q->front = (q->front < 0) ? 0 : q->front;
 }
+
 
 int uzmiSaRed(Red *q) {
   if (q->rear == -1) {
     printf("Red je prazan");
-    return -1; // ili exit, ili neki drugi error code
+    return -1;
   }
 
   int vrednost = q->podaci[q->front];
 
   if (q->front == q->rear)
-    q->front = q->rear = -1; // resetujemo red
+    q->front = q->rear = -1;
   else
     ++q->front;
 
@@ -337,7 +315,7 @@ int stepen(int n, int g[n][n]) {
   return br;
 }
 
-int BrIzMatrica(int n, int g[n][n], int u) {
+int BrIzCvora(int n, int g[n][n], int u) {
   int j, br = 0;
   for (j = 0; j < n; ++j)
     if (g[u][j] == 1)
@@ -345,7 +323,7 @@ int BrIzMatrica(int n, int g[n][n], int u) {
   return br;
 }
 
-int BrUlMatrica(int n, int g[n][n], int v) {
+int BrUlCvora(int n, int g[n][n], int v) {
   int i, br = 0;
   for (i = 0; i < n; ++i)
     if (g[i][v] == 1)
@@ -353,45 +331,29 @@ int BrUlMatrica(int n, int g[n][n], int v) {
   return br;
 }
 
-// bfs algoritmi
-// velicina matrice, matrica, u
-// mora int n, pa int g[n][n] jer je
-// to zapravo Variable Length Array C ekstenzija
-// #include <string.h> // za memset
 void bfs(int n, int g[n][n], int u) {
   int j, cvor;
-  int vidjeno[n]; // cuva vidjene elemente
+  int vidjeno[n];
   for (j = 0; j < n; ++j)
-    vidjeno[j] = 0; // inicializujemo VLA na 0
-  // alternativno, memset(vidjeno, 0, n*sizeof(int));
+    vidjeno[j] = 0;
 
   Red *q = noviRed();
   dodajNaRed(q, u);
   vidjeno[u] = 1;
-  //*konfigurisemo* pocetni cvor u red za pocetak bfs
 
-  // ima da bude prazan tek kad obidjemo sve cvorove
-  // do kojih mozemo doci
   printf("BFS obilazak matrice susedstva:\n");
   while (!jePrazanRed(q)) {
-    cvor = uzmiSaRed(q); // nalazimo se na ovom cvoru
+    cvor = uzmiSaRed(q);
     for (j = 0; j < n; ++j)
       if (!vidjeno[j] && g[cvor][j]) {
         dodajNaRed(q, j);
         vidjeno[j] = 1;
         printf("\t%i -> %i\n", cvor, j);
       }
-    // prolazimo kroz sve grane cvora
-    // ako neka nije posecena i postoji
-    // onda je to novi cvor koji cemo da posetimo
-    // markiramo taj cvor (sa grane) kao posecen
-    // i dodamo ga na red kako bi kasnije prosli
-    // kroz njega
   }
   free(q);
 }
 
-// proverava da li postoji put izmedju cvora U i V
 int bfsPostojiPut(int n, int g[n][n], int u, int v) {
   int j, cvor;
   int vidjeno[n];
@@ -404,9 +366,7 @@ int bfsPostojiPut(int n, int g[n][n], int u, int v) {
 
   while (!jePrazanRed(q)) {
     cvor = uzmiSaRed(q);
-    // ako od trenutnog cvora
-    // mozemo da dodjemo do V onda
-    // mozemo i od U da dodjemo do V
+
     if (g[cvor][v])
       return 1;
     for (j = 0; j < n; ++j)
@@ -419,24 +379,3 @@ int bfsPostojiPut(int n, int g[n][n], int u, int v) {
   return 0;
 }
 
-void bfsGraf(Graf *graf, int u) {
-  Cvor *cvor;
-  int j, vidjeno[graf->n];
-  for (j = 0; j < graf->n; ++j)
-    vidjeno[j] = 0;
-
-  Red *q = noviRed();
-  dodajNaRed(q, u);
-  vidjeno[u] = 1;
-
-  printf("BFS obilazak liste susedstva:\n%i, ", u);
-  while (!jePrazanRed(q))
-    for (cvor = graf->g[uzmiSaRed(q)]; cvor != NULL; cvor = cvor->sledeci)
-      if (!vidjeno[cvor->vrednost]) {
-        dodajNaRed(q, cvor->vrednost);
-        vidjeno[cvor->vrednost] = 1;
-        printf("%i, ", cvor->vrednost);
-      }
-  printf("\b\b \n");
-  free(q);
-}
