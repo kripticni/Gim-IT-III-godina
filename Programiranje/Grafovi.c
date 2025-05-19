@@ -218,6 +218,22 @@ void dodajNaRed(Red *q, int v) {
   q->front = (q->front < 0) ? 0 : q->front; // uzimamo max
 }
 
+int uzmiSaRed(Red *q) {
+  if (q->rear == -1) {
+    printf("Red je prazan");
+    return -1; // ili exit, ili neki drugi error code
+  }
+
+  int vrednost = q->podaci[q->front];
+
+  if (q->front == q->rear)
+    q->front = q->rear = -1; // resetujemo red
+  else
+    ++q->front;
+
+  return vrednost;
+}
+
 void stampajRed(Red *q) {
   printf("Red:\n");
   if (jePrazanRed(q)) {
@@ -254,13 +270,61 @@ int BrUlCvora(int n, int g[n][n], int v) {
   return br;
 }
 
+// bfs algoritmi
+// velicina matrice, matrica, u
+// mora int n, pa int g[n][n] jer je
+// to zapravo Variable Length Array C ekstenzija
+// #include <string.h> // za memset
+void bfs(int n, int g[n][n], int u) {
+  int j, cvor;
+  int vidjeno[n]; // cuva vidjene elemente
+  for (j = 0; j < n; ++j)
+    vidjeno[j] = 0; // inicializujemo VLA na 0
+  // alternativno, memset(vidjeno, 0, n*sizeof(int));
+
+  Red *q = noviRed();
+  dodajNaRed(q, u);
+  vidjeno[u] = 1;
+  //*konfigurisemo* pocetni cvor u red za pocetak bfs
+
+  // ima da bude prazan tek kad obidjemo sve cvorove
+  // do kojih mozemo doci
+  printf("BFS obilazak:\n");
+  while (!jePrazanRed(q)) {
+    cvor = uzmiSaRed(q); // nalazimo se na ovom cvoru
+    for (j = 0; j < n; ++j)
+      if (!vidjeno[j] && g[cvor][j]) {
+        dodajNaRed(q, j);
+        vidjeno[j] = 1;
+        printf("\t%i -> %i\n", cvor, j);
+      }
+    // prolazimo kroz sve grane cvora
+    // ako neka nije posecena i postoji
+    // onda je to novi cvor koji cemo da posetimo
+    // markiramo taj cvor (sa grane) kao posecen
+    // i dodamo ga na red kako bi kasnije prosli
+    // kroz njega
+  }
+}
+
+// zanemarite ova dva komentara
+#pragma clang diagnostic ignored "-Wgnu-folding-constant"
+// clang-format off
+
 int main() {
-  const int n1 = 4;
-  int matrica[4][4] = {{0, 1, 1, 1}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 1}};
-  printf("Prvi graf prikazan preko matrice susedstva je %s, i njegov max "
-         "stepen je %i\n",
-         (jeNeusmeren(n1, matrica)) ? "neusmeren" : "usmeren",
-         maxStepen(n1, matrica));
+#define n1 4
+  // umesto define n1, mozete da imate int n1 = 4;
+  // ali ce to da zahteva da pisete int matrica[4][4] umesto n1 n1
+  int matrica1[n1][n1] = {
+    {0, 1, 1, 1},
+    {1, 0, 0, 1},
+    {0, 0, 0, 1},
+    {0, 0, 0, 1}};
+
+  printf("Prvi graf prikazan preko matrice susedstva je %s, "
+         "i njegov max stepen je %i\n",
+         (jeNeusmeren(n1, matrica1)) ? "neusmeren" : "usmeren",
+         maxStepen(n1, matrica1));
 
   Graf *graf = noviGraf(4);
   dodajNovuGranu(graf, 0, 1);
@@ -281,4 +345,15 @@ int main() {
   dodajNaRed(red, 4);
   dodajNaRed(red, 5);
   stampajRed(red);
+
+#define n2 6
+  int matrica2[n2][n2] = {
+      {0, 1, 1, 0, 0, 0},
+      {0, 0, 1, 1, 0, 0},
+      {0, 0, 0, 1, 1, 0},
+      {0, 0, 1, 0, 0, 0},
+      {1, 0, 0, 1, 0, 1}, 
+      {0, 1, 1, 0, 0, 0}};
+
+  bfs(n2, matrica2, 0);
 }
