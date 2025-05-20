@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
-#include "catch2.hpp"
-#include "kryptos.hpp"
+#include "../lib/catch2.hpp"
+#include "../src/kryptos.hpp"
 #include <string>
 
 TEST_CASE("Caesar cipher encryption", "[caesar]") {

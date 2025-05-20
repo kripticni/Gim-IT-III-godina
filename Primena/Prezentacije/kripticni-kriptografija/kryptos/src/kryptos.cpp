@@ -1,3 +1,4 @@
+#include "kryptos.hpp"
 #include <cstdint>
 #include <string>
 
