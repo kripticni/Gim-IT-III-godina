@@ -1,4 +1,4 @@
-#include "kryptos/src/kryptos.hpp"
+#include "../lib/kryptos.hpp"
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
@@ -21,6 +21,7 @@ void interactive();
 
 [[gnu::noreturn]]
 int main(int argc, char *argv[]) {
+  std::cout << argc << std::endl;
   // std::ios::sync_with_stdio(false);
   //  std::cin.tie(nullptr);
   //   std::cout.tie(nullptr);
