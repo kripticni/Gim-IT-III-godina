@@ -1,18 +1,20 @@
 #include "../lib/kryptos.hpp"
 #include <cstdint>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <limits>
 #include <string>
 
 void printUsage(const char *progName) {
   std::cout << "Koriscenje:\n"
-            << progName << " <sifra> <e|d> <text> <key_or_shift_or_rotor>\n"
+            << progName
+            << " <sifra> <e|d|ef|df> <text> <key_or_shift_or_rotor>\n"
             << "Sifre:\n"
             << "  caesar\n"
             << "  vigenere\n"
             << "  hebern\n"
-            << "Example:\n"
+            << "Primer:\n"
             << progName << " caesar e HELLO 3\n";
 }
 
@@ -21,11 +23,11 @@ void interactive();
 
 [[gnu::noreturn]]
 int main(int argc, char *argv[]) {
-  std::cout << argc << std::endl;
-  // std::ios::sync_with_stdio(false);
-  //  std::cin.tie(nullptr);
-  //   std::cout.tie(nullptr);
-  //  std::cerr.tie(nullptr);
+  // std::cout << argc << std::endl;
+  //  std::ios::sync_with_stdio(false);
+  //   std::cin.tie(nullptr);
+  //    std::cout.tie(nullptr);
+  //   std::cerr.tie(nullptr);
 
   if (argc == 5)
     cmdline(argc, argv);
@@ -48,6 +50,8 @@ constexpr uint8_t CKSUM_HEBERN = cksum("hebern");
 void cmdline(int argc, char *argv[]) {
   std::string cipher = argv[1];
   uint8_t decision = cksum(cipher);
+  // std::cout << "Decided: " << (uint16_t)decision << '\n';
+  // std::cout << (uint16_t)CKSUM_CAESAR;
   if (decision != CKSUM_CAESAR && decision != CKSUM_VIGENERE &&
       decision != CKSUM_HEBERN) {
     std::cerr << "Nije validna sifra.\n";
@@ -56,18 +60,34 @@ void cmdline(int argc, char *argv[]) {
   }
 
   std::string action_arg = argv[2];
-  if (action_arg != "e" && action_arg != "d") {
+  if (action_arg != "e" && action_arg != "d" && action_arg != "ef" &&
+      action_arg != "df") {
     std::cerr << "Nije validan izbor za enkripciju/dekripciju: " << action_arg
               << "\n";
     printUsage(argv[0]);
     exit(1);
   }
 
-  bool action = action_arg == "e" ? true : false;
+  bool action = action_arg[0] == 'e' ? true : false;
+  bool isFile = action_arg[1] == 'f' ? true : false;
   constexpr bool ENC = true;
   constexpr bool DEC = false;
 
-  std::string text = argv[3];
+  std::string text;
+  if (!isFile)
+    std::string text = argv[3];
+  else {
+    std::ifstream file(argv[3]);
+    if (!file) {
+      std::cerr << "Greska pri otvaranju fajla";
+      exit(1);
+    }
+    text = std::string((std::istreambuf_iterator<char>(file)),
+                       std::istreambuf_iterator<char>());
+    // std::string contents((std::istreambuf_iterator<char>(file)),
+    //                      std::istreambuf_iterator<char>());
+    // text = std::move(contents);
+  }
   std::string key = argv[4];
   std::string result = "";
 
