@@ -7,7 +7,7 @@ decrypt_aes() {
 }
 
 gen_rsa_key() {
-  openssl genpkey -algorithm RSA -out rsa_private.pem -pkeyopt rsa_keygen_bits:2048
+  openssl genpkey -algorithm RSA -out rsa_private.pem -pkeyopt rsa_keygen_bits:4096
 }
 
 extract_rsa_pub() {
@@ -15,11 +15,11 @@ extract_rsa_pub() {
 }
 
 encrypt_rsa() {
-  openssl rsautl -encrypt -inkey rsa_public.pem -pubin -in "$1" -out "$2"
+  openssl pkeyutl -encrypt -inkey rsa_public.pem -pubin -in "$1" -out "$2"
 }
 
 decrypt_rsa() {
-  openssl rsautl -decrypt -inkey rsa_private.pem -in "$1" -out "$2"
+  openssl pkeyutl -decrypt -inkey rsa_private.pem -in "$1" -out "$2"
 }
 
 gen_dsa_params() {

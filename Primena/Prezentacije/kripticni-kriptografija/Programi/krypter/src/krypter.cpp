@@ -136,7 +136,7 @@ void interactive() {
   while (true) {
     std::cout << "Izaberite sifru:\n"
               << "1. Caesar\n"
-              << "2. Vigenerer\n"
+              << "2. Vigenere\n"
               << "3. Hebern\n"
               << "0. Izlaz\n"
               << "Izbor: ";

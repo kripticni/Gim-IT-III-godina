@@ -9,7 +9,7 @@ menu() {
   echo "3) Generisi RSA par kljuceva"
   echo "4) Ekstraktuj RSA javni kljuc"
   echo "5) RSA Enkriptuj"
-  echo "6) RSA Eekriptuj"
+  echo "6) RSA Dekriptuj"
   echo "7) Generisi DSA parametre"
   echo "8) Generisi DSA kljuc"
   echo "9) DSA Podpisi"
