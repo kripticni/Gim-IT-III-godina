@@ -5,3 +5,5 @@ g++ tests/test_kryptos.cpp src/kryptos.cpp -o bin/tests
 
 g++ -c src/kryptos.cpp -o build/kryptos.o
 ar rcs build/libkryptos.a build/kryptos.o
+
+g++ src/kryptos.cpp -shared -fPIC -Isrc -o build/libkryptos.so
