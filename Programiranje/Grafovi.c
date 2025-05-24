@@ -99,13 +99,15 @@ int main() {
       {0, 0, 1, 1, 0, 0},
       {0, 0, 0, 1, 1, 0},
       {0, 0, 1, 0, 0, 0},
-      {0, 0, 0, 1, 0, 1}, 
+      {0, 0, 0, 1, 0, 1},
       {0, 1, 1, 0, 0, 0}};
 
   bfs(n2, matrica2, 0);
   bfsGraf(graf, 0);
-  printf("Da li postoji put izmedju 0 i 5: %s\n", bfsPostojiPut(n2, matrica2, 0, 5)?"da":"ne");
-  printf("Da li postoji put izmedju 5 i 0: %s\n", bfsPostojiPut(n2, matrica2, 5, 0)?"da":"ne");
+  printf("Matrica2: Da li postoji put izmedju 0 i 5: %s\n", bfsPostojiPut(n2, matrica2, 0, 5)?"da":"ne");
+  printf("Matrica2: Da li postoji put izmedju 5 i 0: %s\n", bfsPostojiPut(n2, matrica2, 5, 0)?"da":"ne");
+  printf("Graf: Da li postoji put izmedju 0 i 3: %s\n", bfsPostojiPutGraf(graf, 0, 3)?"da":"ne");
+  printf("Graf: Da li postoji put izmedju 3 i 0: %s\n", bfsPostojiPutGraf(graf, 3, 0)?"da":"ne");
 }
 
 int jeNeusmeren(int n, int g[n][n]) {
@@ -439,4 +441,26 @@ void bfsGraf(Graf *graf, int u) {
       }
   printf("\b\b \n");
   free(q);
+}
+
+int bfsPostojiPutGraf(Graf *graf, int u, int v) {
+  Cvor *cvor;
+  int j, vidjeno[graf->n];
+  for (j = 0; j < graf->n; ++j)
+    vidjeno[j] = 0;
+
+  Red *q = noviRed();
+  dodajNaRed(q, u);
+  vidjeno[u] = 1;
+
+  while (!jePrazanRed(q))
+    for (cvor = graf->g[uzmiSaRed(q)]; cvor != NULL; cvor = cvor->sledeci)
+      if (cvor -> vrednost == v)
+        return 1;
+      else if (!vidjeno[cvor->vrednost]) {
+        dodajNaRed(q, cvor->vrednost);
+        vidjeno[cvor->vrednost] = 1;
+      }
+  free(q);
+  return 0;
 }
