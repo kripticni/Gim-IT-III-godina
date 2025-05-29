@@ -21,11 +21,20 @@ typedef struct graf {
   // (Cvor[0].sledeci je sledeca grana sa cvorom 0)
 } Graf;
 Graf *noviGraf(int n);
-void dodajNovuGranu(Graf *graf, int u, int v);
+void dodajNaGraf(Graf *graf, int u, int v);
 void stampajGraf(Graf *graf);
 void saCasa_brise(Graf *graf, int u, int v);
 void brise(Graf *graf, int u, int v);
 int postojiGrana(Graf *graf, int u, int v);
+
+typedef struct grafx {
+  int n;
+  Cvor **g;
+  int* vidjeno;
+} Grafx;
+Grafx *noviGrafx(int n);
+void dodajNaGrafx(Grafx *graf, int u, int v);
+Grafx *noviGrafx(int n);
 
 // red preko niza
 #define MAX 128
@@ -55,6 +64,8 @@ void bfs(int n, int g[n][n], int u);
 void bfsGraf(Graf *graf, int u);
 int bfsPostojiPut(int n, int g[n][n], int u, int v);
 
+void dfs(Grafx* graf, int u);
+
 // zanemarite ovaj komentar
 // clang-format off
 
@@ -74,11 +85,11 @@ int main() {
          maxStepen(n1, matrica1));
 
   Graf *graf = noviGraf(4);
-  dodajNovuGranu(graf, 0, 1);
-  dodajNovuGranu(graf, 0, 2);
-  dodajNovuGranu(graf, 1, 2);
-  dodajNovuGranu(graf, 1, 3);
-  dodajNovuGranu(graf, 3, 2);
+  dodajNaGraf(graf, 0, 1);
+  dodajNaGraf(graf, 0, 2);
+  dodajNaGraf(graf, 1, 2);
+  dodajNaGraf(graf, 1, 3);
+  dodajNaGraf(graf, 3, 2);
   stampajGraf(graf);
   printf("Petlje u grafu: %i\n", BrPetlja(graf));
 
@@ -108,6 +119,17 @@ int main() {
   printf("Matrica2: Da li postoji put izmedju 5 i 0: %s\n", bfsPostojiPut(n2, matrica2, 5, 0)?"da":"ne");
   printf("Graf: Da li postoji put izmedju 0 i 3: %s\n", bfsPostojiPutGraf(graf, 0, 3)?"da":"ne");
   printf("Graf: Da li postoji put izmedju 3 i 0: %s\n", bfsPostojiPutGraf(graf, 3, 0)?"da":"ne");
+
+  Grafx *grafx = noviGrafx(4);
+  dodajNaGrafx(grafx, 0, 1);
+  dodajNaGrafx(grafx, 0, 2);
+  dodajNaGrafx(grafx, 1, 2);
+  dodajNaGrafx(grafx, 1, 3);
+  dodajNaGrafx(grafx, 3, 2);
+  printf("DFS obilazak grafa:\n");
+  dfs(grafx,0);
+
+  return 0;
 }
 
 int jeNeusmeren(int n, int g[n][n]) {
@@ -157,11 +179,11 @@ Cvor *noviCvor(int vrednost) {
 Graf *noviGraf(int n) {
   Graf *graf = (Graf *)malloc(sizeof(Graf));
   graf->n = n;
-  graf->g = (Cvor **)calloc(n, sizeof(Cvor));
+  graf->g = (Cvor **)calloc(n, sizeof(Cvor*));
   return graf;
 }
 
-void dodajNovuGranu(Graf *graf, int u, int v) {
+void dodajNaGraf(Graf *graf, int u, int v) {
   if (graf->g[u] == NULL) {
     graf->g[u] = noviCvor(v);
     return;
@@ -463,4 +485,32 @@ int bfsPostojiPutGraf(Graf *graf, int u, int v) {
       }
   free(q);
   return 0;
+}
+
+Grafx *noviGrafx(int n) {
+  Grafx *graf = (Grafx *)malloc(sizeof(Grafx));
+  graf->n = n;
+  graf->g = (Cvor **)calloc(n, sizeof(Cvor*));
+  graf->vidjeno = (int*)calloc(n, sizeof(int));
+  return graf;
+}
+
+void dodajNaGrafx(Grafx *graf, int u, int v) {
+  if (graf->g[u] == NULL) {
+    graf->g[u] = noviCvor(v);
+    return;
+  }
+  Cvor *it; // it za iterator, posto iterisemo kroz listu
+  // dolazimo do kraja liste (gde je sledeci null)
+  for (it = graf->g[u]; it->sledeci != NULL; it = it->sledeci)
+    ;
+  it->sledeci = noviCvor(v); // dodajemo granu
+}
+
+void dfs(Grafx* graf, int u){
+    graf->vidjeno[u] = 1;
+    printf("\t%i\n", u);
+    for(Cvor* cvor = graf->g[u]; cvor != NULL; cvor = cvor -> sledeci)
+        if(!graf->vidjeno[cvor->vrednost])
+            dfs(graf,cvor->vrednost);
 }
