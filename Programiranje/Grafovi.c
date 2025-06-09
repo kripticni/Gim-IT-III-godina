@@ -63,6 +63,7 @@ int BrUlMatrica(int n, int g[n][n], int v);
 void bfs(int n, int g[n][n], int u);
 void bfsGraf(Graf *graf, int u);
 int bfsPostojiPut(int n, int g[n][n], int u, int v);
+int bfsPostojiPutGraf(Graf *graf, int u, int v);
 
 void dfs(Grafx* graf, int u);
 
@@ -129,6 +130,16 @@ int main() {
   printf("DFS obilazak grafa:\n");
   dfs(grafx,0);
 
+  #define maxt 5
+  #define INF 2000000000 //max 32 int ali zaokruzen na najvecu jedinicu
+  int tezinska_matrica[maxt][maxt] = {
+    {0,6,INF,1,INF},
+    {6,0,5,2,2},
+    {INF,5,0,2,2},
+    {1,2,INF,0,1},
+    {INF,2,6,1,0}
+  };
+  dajkstra(tezinska_matrica, maxt, 0);
   return 0;
 }
 
@@ -513,4 +524,39 @@ void dfs(Grafx* graf, int u){
     for(Cvor* cvor = graf->g[u]; cvor != NULL; cvor = cvor -> sledeci)
         if(!graf->vidjeno[cvor->vrednost])
             dfs(graf,cvor->vrednost);
+}
+
+void dajkstra(int t[maxt][maxt], int n, int start){
+    int i, j, k, min, next, u[maxt], d[maxt];
+    int vidjeno[maxt] = {0};
+    vidjeno[start] = 1;
+    for(i = 0; i < n; ++i){
+        d[i] = t[start][i];
+        u[i] = start;
+    }
+    for(k = 0; k < n; ++k){
+        min = INF;
+        for(i = 0; i < n; ++i){
+            if(!vidjeno[i] && d[i] < min){
+                min = d[i];
+                next = i;
+            }
+        }
+
+        vidjeno[next] = 1;
+        //next je sada minimum index
+        for(i = 0; i < n; ++i){
+            if(!vidjeno[i] && d[i] > d[next]+t[next][i]){
+                d[i] = d[next] + t[next][i];
+                u[i] = next;
+            }
+        }
+    }
+
+        printf("Nizovi D i U\n");
+        for(i = 0; i < n; ++i)
+            printf("%d ", d[i]);
+        printf("\n");
+        for(i = 0; i < n; ++i)
+            printf("%d ", u[i]);
 }
