@@ -67,6 +67,8 @@ int bfsPostojiPutGraf(Graf *graf, int u, int v);
 
 void dfs(Grafx* graf, int u);
 
+void dajkstra(int n, int g[n][n], int u);
+
 // zanemarite ovaj komentar
 // clang-format off
 
@@ -139,9 +141,12 @@ int main() {
     {1,2,INF,0,1},
     {INF,2,6,1,0}
   };
-  dajkstra(tezinska_matrica, maxt, 0);
+  dajkstra(maxt, tezinska_matrica, 0);
   return 0;
 }
+
+// zanemarite ovaj komentar
+// clang-format
 
 int jeNeusmeren(int n, int g[n][n]) {
   int i, j;
@@ -526,37 +531,51 @@ void dfs(Grafx* graf, int u){
             dfs(graf,cvor->vrednost);
 }
 
-void dajkstra(int t[maxt][maxt], int n, int start){
-    int i, j, k, min, next, u[maxt], d[maxt];
-    int vidjeno[maxt] = {0};
-    vidjeno[start] = 1;
-    for(i = 0; i < n; ++i){
-        d[i] = t[start][i];
-        u[i] = start;
-    }
-    for(k = 0; k < n; ++k){
-        min = INF;
-        for(i = 0; i < n; ++i){
-            if(!vidjeno[i] && d[i] < min){
-                min = d[i];
-                next = i;
-            }
-        }
+void dajkstra(int n, int t[n][n], int start){
+  int i, j, k, min, next, prev[n], dist[n];
+  int visited[n];
 
-        vidjeno[next] = 1;
-        //next je sada minimum index
-        for(i = 0; i < n; ++i){
-            if(!vidjeno[i] && d[i] > d[next]+t[next][i]){
-                d[i] = d[next] + t[next][i];
-                u[i] = next;
-            }
-        }
-    }
+  // inicializujemo Variable Length Arrays
+  for(i = 0; i < n; ++i){
+    dist[i] = t[start][i];
+    prev[i] = start;
+    visited[i] = 0;
+  }
 
-        printf("Nizovi D i U\n");
-        for(i = 0; i < n; ++i)
-            printf("%d ", d[i]);
-        printf("\n");
-        for(i = 0; i < n; ++i)
-            printf("%d ", u[i]);
+  // distanca od pocetnog cvora do njega je 0, i vidjen je
+  dist[start] = 0;
+  visited[start] = 1;
+
+  // krecemo od 1 jer smo odredili distancu za 
+  // pocetni cvor, pa nam ostaju n-1 cvorova
+  for(k = 1; k < n; ++k){
+    min = INF;
+
+    // trazimo sledeci cvor sa najmanjom distancom
+    // koji nije posecen
+    for(i = 0; i < n; ++i)
+      if(!visited[i] && dist[i] < min){
+        min = dist[i];
+        next = i;
+      }
+
+    // ako je najmanja distanca beskonacno
+    // to znaci da nemamo ni jos jedan cvor koji
+    // mozemo da posetimo, pa izlazimo iz ciklusa
+    if(min == INF) break;
+
+    visited[next] = 1;
+    for(i = 0; i < n; ++i)
+      if(!visited[i] && dist[i] > dist[next]+t[next][i]){
+        dist[i] = dist[next] + t[next][i];
+        prev[i] = next;
+      }
+  }
+
+  printf("Nizovi dist i prev\ndist: ");
+  for(i = 0; i < n; ++i)
+    printf("%d ", dist[i]);
+  printf("\nprev: ");
+  for(i = 0; i < n; ++i)
+    printf("%d ", prev[i]);
 }
