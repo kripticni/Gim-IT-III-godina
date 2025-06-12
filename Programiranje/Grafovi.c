@@ -239,8 +239,11 @@ void saCasaBriseGranuGraf(Graf *graf, int u, int v) {
 void briseGranuGraf(Graf *graf, int u, int v) {
   Cvor *it = graf->g[u]; // pocetak liste
 
+  if (it == NULL)
+    return;
+
   // edge case kad je grana na prvom cvoru
-  if (it != NULL && it->vrednost == v) {
+  if (it->vrednost == v) {
     graf->g[u] = it->sledeci;
     free(it);
     return;
