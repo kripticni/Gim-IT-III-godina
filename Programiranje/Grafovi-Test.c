@@ -151,9 +151,6 @@ Graf *noviGraf(int n) {
 }
 
 void dodajNovuGranu(Graf *graf, int u, int v) {
-    if (it == NULL)
-    return;
-  
   if (graf->g[u] == NULL) {
     graf->g[u] = noviCvor(v);
     return;
@@ -233,6 +230,9 @@ void saCasa_brise(Graf *graf, int u, int v) {
 void brise(Graf *graf, int u, int v) {
   Cvor *it = graf->g[u];
 
+  if (it == NULL)
+    return;
+  
   if (it != NULL && it->vrednost == v) {
     graf->g[u] = it->sledeci;
     free(it);
