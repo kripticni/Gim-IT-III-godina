@@ -214,6 +214,9 @@ void saCasaBriseGranuGraf(Graf *graf, int u, int v) {
 }
 
 void briseGranuGraf(Graf *graf, int u, int v) {
+  if (it == NULL)
+    return;
+  
   Cvor *it = graf->g[u]; 
 
   if (it != NULL && it->vrednost == v) {
