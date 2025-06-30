@@ -1,0 +1,9 @@
+Memoization
+1. Have a base solution that works
+- visualize the problem as a tree
+- see the recurrence relation
+- implement the recursive tree to test it
+2. Make it efficient
+- create the memo table
+- base case to return memo
+
